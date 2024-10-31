@@ -22,9 +22,11 @@ def query_gpt_4(prompt: str) -> Stream[ChatCompletionChunk]:
     # return response.choices[0].message.content
     return response
 
-# Check if the user query is a GPT with database query or not
+
 def is_database_query(query: str) -> bool:
-    gpt_keywords = ["new", "random", "recommend", "suggest", "find", "search", "provide", "create", "discover"]
+    '''Check if the user query is a GPT with database query or not'''
+    gpt_keywords = ["new", "random", "recommend", "suggest",
+                    "find", "search", "provide", "create", "discover"]
     if any(keyword in query.lower() for keyword in gpt_keywords):
         return False
     db_keywords = ["recipe", "recipes",
