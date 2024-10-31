@@ -1,10 +1,10 @@
 from ultralytics import YOLO
 
-# Load the YOLOv8 model
-model = YOLO('yolov8x.pt')
+# Load the YOLOv8 models
+model = YOLO('yolov11n.pt')
 
 # Load the image
-image_path = './fruits2.jpg' #whatever the path is for your picture
+image_path = './fruits.jpg' #whatever the path is for your picture
 
 # Perform inference
 results = model(image_path)
