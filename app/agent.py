@@ -1,29 +1,23 @@
-from huggingface_hub import InferenceClient
-from myKey import return_key
-import requests
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-11B-Vision-Instruct"
-headers = {"Authorization": "Bearer hf_***"}
+load_dotenv()
 
-# In myKey.py define a function return_key() that returns the API key
-client = InferenceClient(api_key=return_key())
+client = OpenAI(api_key=os.getenv("GPT_API_KEY"))
 
-image_url = "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg"
 
-for message in client.chat_completion(
-        model="meta-llama/Llama-3.2-11B-Vision-Instruct",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "image_url", "image_url": {
-                        "url": image_url}},
-                    {"type": "text",
-                     "text": "Describe this image in one sentence."},
-                ],
-            }
-        ],
-        max_tokens=500,
-        stream=True,
-):
-    print(message.choices[0].delta.content, end="")
+def query_gpt_4(prompt: str):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        stream=True
+    )
+    # return response.choices[0].message.content
+    return response
+
+# Example usage
+user_query = "How can I make a recipe with chicken and pasta?"
+response = query_gpt_4(user_query)
+for chunk in response:
+    print(chunk.choices[0].delta.content or "", end="")
