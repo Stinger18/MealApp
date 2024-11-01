@@ -22,6 +22,25 @@ def query_gpt_4(prompt: str) -> Stream[ChatCompletionChunk]:
     # return response.choices[0].message.content
     return response
 
+def query_gpt_image() -> Stream[ChatCompletionChunk]:
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user",
+                   "content": [
+                        {"type": "text", "text": "What food is in this image and how much?"},
+                        {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": "http://www.paleopantry.org/wp-content/uploads/2017/03/20170323-Preserving-Cooling.jpg",
+                        },
+                        },
+                    ],
+                }],
+        stream=True,
+        max_tokens=300
+    )
+    # return response.choices[0].message.content
+    return response
 
 def is_database_query(query: str) -> bool:
     '''Check if the user query is a GPT with database query or not'''
@@ -34,7 +53,7 @@ def is_database_query(query: str) -> bool:
     return any(keyword in query.lower() for keyword in db_keywords)
 
 
-user_query = "I want recipes with chicken"
+user_query = ""
 use_db = is_database_query(user_query)
 
 response = None
@@ -46,7 +65,10 @@ if use_db:
 else:
     print("Using GPT-4")
     # response = query_gpt_4(user_query)
+    # response = query_gpt_image()
 
 if response:
     for chunk in response:
         print(chunk.choices[0].delta.content or "", end="")
+
+# 16,857
