@@ -5,4 +5,3 @@ that takes in an image and spits out every ingredient in a list it thinks are in
 '''
 
 
-
