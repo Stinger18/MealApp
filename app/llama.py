@@ -17,7 +17,7 @@ for message in client.chat_completion(
                     {"type": "image_url", "image_url": {
                         "url": image_url}},
                     {"type": "text",
-                     "text": "Identify the food items and quantity from this image and return in a python dict."},
+                     "text": "Identify the food items and quantity from this image."},
                 ],
             }
         ],

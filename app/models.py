@@ -4,7 +4,8 @@ from .database import Base
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
+    userid = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, index=True)
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
@@ -12,7 +13,8 @@ class User(Base):
 class Recipe(Base):
     __tablename__ = "recipes"
 
-    id = Column(Integer, primary_key=True, index=True)
+    userid = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, index=True)
     title = Column(String, index=True)
     ingredients = Column(String)
     instructions = Column(String)
