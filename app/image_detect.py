@@ -39,10 +39,7 @@ prompts = [
         'Identify the food items and quantity froms this image and return in a python dict.'
         ]
 
-#This is for using the .env file from Ethan if you have it
-load_dotenv()
-
-#if you want to run you need an api key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
+#if you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
 #if you don't want to sign up ask me or ethan to send you one 
 client = InferenceClient(api_key="API_KEY_GOES_HERE")
 
