@@ -86,16 +86,31 @@ def searchWeb(query: str): # Travily Search
     return search.invoke(query)
 
 @tool
-def query_recipes(): # Database Search
+def get_recipes(): # Database Search
     '''Query recipes the human already has'''
     return {'name': 'Creamy Tuscan Chicken', 'ingredients': 'chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese', 'instructions': '1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.'}
 
 @tool
-def query_pantry(): # Pantry Search
+def add_recipe_to_db(recipe: dict):
+    '''Add the recipe the human likes to the database'''
+    return f'Recipe was added to the database.'
+
+@tool
+def get_pantry(): # Pantry Search
     '''Query pantry for ingredients the human already has'''
     return ['chicken', 'garlic', 'spinach', 'sun-dried tomatoes', 'heavy cream', 'parmesan cheese']
 
-tools = [searchWeb, query_recipes, query_pantry]
+@tool
+def add_to_pantry(ingredients: list):
+    '''Add ingredients to the pantry'''
+    return f'{ingredients} were added to the pantry.'
+
+@tool
+def remove_from_pantry(ingredients: list):
+    '''Remove ingredients from the pantry'''
+    return f'{ingredients} were removed from the pantry.'
+
+tools = [searchWeb, get_recipes, add_recipe_to_db, get_pantry, add_to_pantry, remove_from_pantry]
 
 # Can build with these tools or call SousChef(tools) outside of this file to make a new agent with different tools
 def buildSousChef():
