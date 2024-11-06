@@ -113,7 +113,7 @@ def main():
             {"messages": [HumanMessage(content=query)]},
             config={"configurable": {"thread_id": 42}}
         )
-        print(final_state["messages"][-1].content)
+        print(Fore.LIGHTBLUE_EX + final_state["messages"][-1].content + Style.RESET_ALL)
 
 if __name__ == "__main__":
     main()
