@@ -8,11 +8,15 @@ class User(Base):
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
+    recipeId = Column(Integer) # ownerID on each recipe
+    pantryId = Column(Integer) # ownerID on each pantry item
+    shoppingListId = Column(Integer) # ownerID on each shopping list
 
 class Recipe(Base):
     __tablename__ = "recipes"
 
     id = Column(Integer, primary_key=True, index=True)
+    ownerId = Column(Integer, index=True)
     title = Column(String, index=True)
     ingredients = Column(String)
     instructions = Column(String)
