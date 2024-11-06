@@ -7,12 +7,15 @@ from langchain.tools import tool, BaseTool
 from langgraph.prebuilt import ToolNode
 from langgraph.graph import END, START, StateGraph, MessagesState
 from langgraph.checkpoint.memory import MemorySaver
+# Project file imports
+from . import crud
 
+from colorama import Fore, Style
 from dotenv import load_dotenv
 import os
 import time
 import sys
-from colorama import Fore, Style
+
 
 # Load environment variables
 load_dotenv()
@@ -88,6 +91,7 @@ def searchWeb(query: str): # Travily Search
 @tool
 def get_recipes(): # Database Search
     '''Query recipes the human already has'''
+    returnedRecipe = crud.get_recipe()
     return {'name': 'Creamy Tuscan Chicken', 'ingredients': 'chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese', 'instructions': '1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.'}
 
 @tool
@@ -114,6 +118,7 @@ tools = [searchWeb, get_recipes, add_recipe_to_db, get_pantry, add_to_pantry, re
 
 # Can build with these tools or call SousChef(tools) outside of this file to make a new agent with different tools
 def buildSousChef():
+    ## Need to figure out how to get the current user for their database info
     sousChef = SousChef(tools).ceate_agent()
     return sousChef
 
