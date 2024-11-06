@@ -1,74 +1,110 @@
-from openai import OpenAI, Stream
-from openai.types.chat.chat_completion_chunk import ChatCompletionChunk
+from typing import Annotated, Literal, TypedDict
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage
+from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain.tools import tool
+# Langgraph imports
+from langgraph.prebuilt import create_react_agent, ToolNode
+from langgraph.graph import END, START, StateGraph, MessagesState
+from langgraph.checkpoint.memory import MemorySaver
+
 from dotenv import load_dotenv
 import os
 
+# Load environment variables
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("GPT_API_KEY"))
+# Get tavily search api key
+if not os.environ.get("TAVILY_API_KEY"):
+    os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
+
+## Build the Agents tools
+@tool
+def searchWeb(query: str): # Travily Search
+    '''Search the web for the query'''
+    search = TavilySearchResults(max_results=3)
+    return search.invoke(query)
+
+@tool
+def query_database(): # Database Search
+    '''Query database for recipes the human already has'''
+    return {'name': 'Creamy Tuscan Chicken', 'ingredients': 'chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese', 'instructions': '1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.'}
+
+@tool
+def query_pantry(): # Pantry Search
+    '''Query pantry for ingredients the human already has'''
+    return ['chicken', 'garlic', 'spinach', 'sun-dried tomatoes', 'heavy cream', 'parmesan cheese']
+
+tools = [searchWeb, query_database]
+tool_node = ToolNode(tools)
+
+model = ChatOpenAI(model="gpt-4o-mini", api_key=os.getenv("GPT_API_KEY")).bind_tools(tools)
+
+# Define the function that determines whether to continue or not
+def should_continue(state: MessagesState) -> Literal["tools", END]: # type: ignore
+    messages = state['messages']
+    last_message = messages[-1]
+    # If the LLM makes a tool call, then we route to the "tools" node
+    if last_message.tool_calls:
+        return "tools"
+    # Otherwise, we stop (reply to the user)
+    return END
 
 
-def query_gpt_4(prompt: str) -> Stream[ChatCompletionChunk]:
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user",
-                   "content": [{
-                       "text": "text",
-                       "text": prompt
-                   }]
-                   }],
-        stream=True
+# Define the function that calls the model
+def call_model(state: MessagesState):
+    messages = state['messages']
+    response = model.invoke(messages)
+    # We return a list, because this will get added to the existing list
+    return {"messages": [response]}
+
+def ceate_agent():
+    # Define a new graph
+    workflow = StateGraph(MessagesState)
+    # Add the nodes
+    workflow.add_node('agent', call_model)
+    workflow.add_node('tools', tool_node)
+
+    # Set the entrypoint as `agent`
+    # This means that this node is the first one called
+    workflow.add_edge(START, 'agent')
+
+    # We now add a conditional edge
+    workflow.add_conditional_edges(
+        # First, we define the start node. We use `agent`.
+        # This means these are the edges taken after the `agent` node is called.
+        "agent",
+        # Next, we pass in the function that will determine which node is called next.
+        should_continue,
     )
-    # return response.choices[0].message.content
-    return response
 
-def query_gpt_image() -> Stream[ChatCompletionChunk]:
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user",
-                   "content": [
-                        {"type": "text", "text": "What food is in this image and how much?"},
-                        {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": "http://www.paleopantry.org/wp-content/uploads/2017/03/20170323-Preserving-Cooling.jpg",
-                        },
-                        },
-                    ],
-                }],
-        stream=True,
-        max_tokens=300
-    )
-    # return response.choices[0].message.content
-    return response
+    # We now add a normal edge from `tools` to `agent`.
+    # This means that after `tools` is called, `agent` node is called next.
+    workflow.add_edge("tools", 'agent')
 
-def is_database_query(query: str) -> bool:
-    '''Check if the user query is a GPT with database query or not'''
-    gpt_keywords = ["new", "random", "recommend", "suggest",
-                    "find", "search", "provide", "create", "discover"]
-    if any(keyword in query.lower() for keyword in gpt_keywords):
-        return False
-    db_keywords = ["recipe", "recipes",
-                   "ingredient", "ingredients", "meal plan"]
-    return any(keyword in query.lower() for keyword in db_keywords)
+    # Initialize memory to persist state between graph runs
+    checkpointer = MemorySaver()
 
+    # Finally, we compile it!
+    # This compiles it into a LangChain Runnable,
+    # meaning you can use it as you would any other runnable.
+    # Note that we're (optionally) passing the memory when compiling the graph
+    sousChef = workflow.compile(checkpointer=checkpointer)
+    return sousChef
 
-user_query = ""
-use_db = is_database_query(user_query)
+def main():
+    sousChef = ceate_agent()
+    while True:
+        print('Enter "q" to quit.')
+        query = input("Sous-Chef here! What can I help you with today? ")
+        if query == 'q':
+            break
+        # Use the Runnable
+        final_state = sousChef.invoke(
+            {"messages": [HumanMessage(content=query)]},
+            config={"configurable": {"thread_id": 42}}
+        )
+        print(final_state["messages"][-1].content)
 
-response = None
-if use_db:
-    print("Using database")
-    # db_query = extract_query_params(user_query)
-    # db_data = get_data_from_db(db_query)
-    # print(db_data)
-else:
-    print("Using GPT-4")
-    # response = query_gpt_4(user_query)
-    # response = query_gpt_image()
-
-if response:
-    for chunk in response:
-        print(chunk.choices[0].delta.content or "", end="")
-
-# 16,857
+if __name__ == "__main__":
+    main()
