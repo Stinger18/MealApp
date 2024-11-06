@@ -10,6 +10,8 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from dotenv import load_dotenv
 import os
+import time
+import sys
 from colorama import Fore, Style
 
 # Load environment variables
@@ -100,6 +102,14 @@ def buildSousChef():
     sousChef = SousChef(tools).ceate_agent()
     return sousChef
 
+# Function to print text with typing effect
+def typing_effect(text, delay=0.01):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()  # Move to the next line after the text is printed
+
 def main():
     sousChef = buildSousChef()
     print(Fore.GREEN + "Sous-Chef here! What can I help you with today? ")
@@ -113,7 +123,9 @@ def main():
             {"messages": [HumanMessage(content=query)]},
             config={"configurable": {"thread_id": 42}}
         )
-        print(Fore.LIGHTBLUE_EX + final_state["messages"][-1].content + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX, end=" ")
+        typing_effect(final_state["messages"][-1].content)
+        print(Style.RESET_ALL)
 
 if __name__ == "__main__":
     main()
