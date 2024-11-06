@@ -77,12 +77,13 @@ def detect_ingredients(image_url: str, prompt: str):
 
 #-----Testing functions-----
 
-def test_prompts(urls: list, prompts: str):
+def test_prompts(urls: list[str], prompts: list[str]):
     print("***** Testing Prompts *****")
-    for url in urls:
-        detect_ingredients(url, prompts[0])
-        print("\n******************************************\n")
-        print("\n", url, "\n")
+    for prompt in prompts:
+        for url in urls:
+            detect_ingredients(url, prompt)
+            print("\n******************************************\n")
+            print("\n", url, "\n")
 
 test_prompts(urls, prompts)
     
