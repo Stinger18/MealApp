@@ -6,10 +6,11 @@ from langchain.tools import tool, BaseTool
 # Langgraph imports
 from langgraph.prebuilt import ToolNode
 from langgraph.graph import END, START, StateGraph, MessagesState
+from langgraph.graph.state import CompiledStateGraph # Used for typing
 from langgraph.checkpoint.memory import MemorySaver
 # Project file imports
-from . import crud
-from .models import User
+import crud
+from models import User
 
 from colorama import Fore, Style
 from dotenv import load_dotenv
@@ -26,10 +27,11 @@ if not os.environ.get("TAVILY_API_KEY"):
     os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
 
 class SousChef:
-    def __init__(self, tools: list[BaseTool]):
+    def __init__(self, tools: list[BaseTool], user: (User | None) = None):
         self.tools = tools
         self.tool_node = ToolNode(self.tools)
         self.model = ChatOpenAI(model="gpt-4o-mini", api_key=os.getenv("GPT_API_KEY")).bind_tools(self.tools)
+        self.user = user
 
     # Define the function that determines whether to continue or not
     def should_continue(self, state: MessagesState) -> Literal["tools", END]: # type: ignore
@@ -47,6 +49,11 @@ class SousChef:
         response = self.model.invoke(messages)
         # We return a list, because this will get added to the existing list
         return {"messages": [response]}
+    
+    def process_user_info(self):
+        '''Get the user info from the database and passes it into the agent'''
+        pass
+
     
     def ceate_agent(self):
         # Define a new graph
@@ -90,9 +97,9 @@ def searchWeb(query: str): # Travily Search
     return search.invoke(query)
 
 @tool
-def get_recipes(user: (User | None)): # Database Search
+def get_recipes(): # Database Search
     '''Query recipes the human already has'''
-    returnedRecipe = crud.get_all_recipes(userRecipeId=user.recipeId)
+    # returnedRecipe = crud.get_all_recipes(userRecipeId=)
     return {'name': 'Creamy Tuscan Chicken', 'ingredients': 'chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese', 'instructions': '1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.'}
 
 @tool
@@ -118,9 +125,11 @@ def remove_from_pantry(ingredients: list):
 tools = [searchWeb, get_recipes, add_recipe_to_db, get_pantry, add_to_pantry, remove_from_pantry]
 
 # Can build with these tools or call SousChef(tools) outside of this file to make a new agent with different tools
-def buildSousChef(user: (User | None)):
+def buildSousChef(userId: int = None) -> CompiledStateGraph:
     ## Need to figure out how to get the current user for their database info
-    sousChef = SousChef(tools).ceate_agent()
+    if userId:
+        user: (User | None) = crud.get_user()
+    sousChef = SousChef(tools, user).ceate_agent()
     return sousChef
 
 # Function to print text with typing effect
@@ -132,7 +141,7 @@ def typing_effect(text, delay=0.01):
     print()  # Move to the next line after the text is printed
 
 def main():
-    sousChef = buildSousChef()
+    sousChef: CompiledStateGraph = buildSousChef()
     print(Fore.GREEN + "Sous-Chef here! What can I help you with today? ")
     while True:
         print(Fore.RED + 'Enter "q" to quit.')

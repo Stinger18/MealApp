@@ -1,17 +1,19 @@
 from sqlalchemy import Column, Integer, String
-from .database import Base
+from database import Base
 
 class User(Base):
     __tablename__ = "users"
 
-    userid = Column(Integer, primary_key=True, index=True)
-    id = Column(Integer, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
     recipeId = Column(Integer) # ownerID on each recipe
     pantryId = Column(Integer) # ownerID on each pantry item
     shoppingListId = Column(Integer) # ownerID on each shopping list
+
+    def __repr__(self):
+        return f'<User: {self.id}, {self.name}, {self.email}, {self.password}, {self.recipeId}, {self.pantryId}, {self.shoppingListId}>'
 
 class Recipe(Base):
     __tablename__ = "recipes"
@@ -44,6 +46,6 @@ class Shopping_list(Base):
     __tablename__ = 'shopping list'
 
     shoppingListId = Column(Integer, primary_key=True, index=True)
-    ownerId = Column(Integer, Index=True)
+    ownerId = Column(Integer, index=True)
     item = Column(String)
     quantity = Column(Integer)

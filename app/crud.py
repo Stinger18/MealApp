@@ -4,22 +4,22 @@ This file contains the functions that interact with the database.
 '''
 
 from sqlalchemy.orm import Session
-from . import models
+import models
 from passlib.context import CryptContext
 
 ''' User Operations '''
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-def get_user(db: Session, user_id: int):
+def get_user(db: Session, user_id: int) -> (models.User | None):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
-def create_user(db: Session, name: str, email:str, password: str):
+def create_user(db: Session, id: int, name: str, email:str, password: str, recipeId: int, pantryId: int, shoppingListId: int):
     hashed_password = pwd_context.hash(password)
-    dbUser = models.User(name=name, email=email, password=hashed_password)
+    dbUser = models.User(id=id, name=name, email=email, password=hashed_password, recipeId=recipeId, pantryId=pantryId, shoppingListId=shoppingListId)
     db.add(dbUser)
     db.commit()
     db.refresh(dbUser)
