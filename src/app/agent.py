@@ -9,8 +9,10 @@ from langgraph.graph import END, START, StateGraph, MessagesState
 from langgraph.graph.state import CompiledStateGraph # Used for typing
 from langgraph.checkpoint.memory import MemorySaver
 # Project file imports
-import crud
-from models import User
+try:
+    from app import crud, models
+except ImportError:
+    import crud, models
 
 from colorama import Fore, Style
 from dotenv import load_dotenv
@@ -27,11 +29,11 @@ if not os.environ.get("TAVILY_API_KEY"):
     os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
 
 class SousChef:
-    def __init__(self, tools: list[BaseTool], user: (User | None) = None):
+    def __init__(self, tools: list[BaseTool], userInfo: (models.User | None) = None):
         self.tools = tools
         self.tool_node = ToolNode(self.tools)
         self.model = ChatOpenAI(model="gpt-4o-mini", api_key=os.getenv("GPT_API_KEY")).bind_tools(self.tools)
-        self.user = user
+        self.user = userInfo
 
     # Define the function that determines whether to continue or not
     def should_continue(self, state: MessagesState) -> Literal["tools", END]: # type: ignore
@@ -125,11 +127,8 @@ def remove_from_pantry(ingredients: list):
 tools = [searchWeb, get_recipes, add_recipe_to_db, get_pantry, add_to_pantry, remove_from_pantry]
 
 # Can build with these tools or call SousChef(tools) outside of this file to make a new agent with different tools
-def buildSousChef(userId: int = None) -> CompiledStateGraph:
-    ## Need to figure out how to get the current user for their database info
-    if userId:
-        user: (User | None) = crud.get_user()
-    sousChef = SousChef(tools, user).ceate_agent()
+def buildSousChef(userInfo: models.User = None) -> CompiledStateGraph:
+    sousChef = SousChef(tools, userInfo).ceate_agent()
     return sousChef
 
 # Function to print text with typing effect
@@ -141,6 +140,7 @@ def typing_effect(text, delay=0.01):
     print()  # Move to the next line after the text is printed
 
 def main():
+    user: (models.User | None) = crud.get_user()
     sousChef: CompiledStateGraph = buildSousChef()
     print(Fore.GREEN + "Sous-Chef here! What can I help you with today? ")
     while True:

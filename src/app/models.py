@@ -1,5 +1,8 @@
 from sqlalchemy import Column, Integer, String
-from database import Base
+try:
+    from app.database import Base
+except ImportError:
+    from database import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -14,6 +17,9 @@ class User(Base):
 
     def __repr__(self):
         return f'<User: {self.id}, {self.name}, {self.email}, {self.password}, {self.recipeId}, {self.pantryId}, {self.shoppingListId}>'
+    
+    def __str__(self):
+        return f'<User: ID: {self.id}, Name: {self.name}, Email: {self.email}, Password: {self.password}, Recipe Id: {self.recipeId}, Pantry Id: {self.pantryId}, Shopping List Id: {self.shoppingListId}>'
 
 class Recipe(Base):
     __tablename__ = "recipes"
@@ -36,7 +42,7 @@ class Recipe(Base):
 class Pantry(Base):
     __tablename__ = 'pantry'
 
-    pantry_id = Column(Integer, primary_key=True, index=True) 
+    pantryId = Column(Integer, primary_key=True, index=True) 
     ownerId = Column(Integer, index=True)
     item = Column(String)
     quantity = Column(Integer)
