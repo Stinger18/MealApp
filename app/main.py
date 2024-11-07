@@ -57,6 +57,7 @@ def get_all_recipes(userRecipeId: int, db:Session = Depends(get_db)):
 def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_db)):
     return crud.create_recipe(db=db, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions)
 
+''' Use this to create a test user from here '''
 # crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
-print(read_user(1, db=SessionLocal()))
+print(repr(read_user(1, db=SessionLocal())))
 SessionLocal().close()
