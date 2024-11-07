@@ -12,6 +12,11 @@ class UserCreate(BaseModel):
     email: str
     password: str
 
+class RecipeCreate(BaseModel):
+    title: str
+    ingredients: str
+    instructions: str
+
 # app.add_middleware(
 #     CORSMiddleware,
 #     allow_origins=["*"],
@@ -40,5 +45,5 @@ def get_recipe(userRecipeId: int, recipeId: int, db:Session = Depends(get_db)):
 def get_all_recipes(userRecipeId: int, db:Session = Depends(get_db)):
     return crud.get_all_recipes(db, userRecipeId=userRecipeId)
 
-def create_recipe():
-    pass
+def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_db)):
+    return crud.create_recipe(db=db, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions)
