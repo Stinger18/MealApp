@@ -29,3 +29,20 @@ class Recipe(Base):
     created_at and updated_at: Timestamps for when the recipe was created or last updated, useful for sorting or tracking recipe edits.
     img_url: A URL to an image of the finished dish, if you want to display images in the app.
     '''
+
+class Pantry(Base):
+    __table___name = 'pantry'
+
+    pantry_id = Column(Integer, primary_key=True, index=True) 
+    ownerId = Column(Integer, index=True)
+    item = Column(String)
+    quantity = Column(Integer)
+    date_added = Column(String)
+
+class Shopping_list(Base):
+    __table__name = 'shopping list'
+
+    shoppingListId = Column(Integer, primary_key=True, index=True)
+    ownerId = Column(Integer, Index=True)
+    item = Column(String)
+    quantity = Column(Integer)
