@@ -30,14 +30,14 @@ def create_user(db: Session, id: int, name: str, email:str, password: str, recip
     return dbUser
 
 ''' Recipe Operations '''
-def get_recipe(db: Session, userRecipeId: int, recipeId: int):
+def get_recipe(db: Session, userRecipeId: int, recipeId: int) -> (models.Recipe | None):
     return db.query(models.Recipe).filter(models.Recipe.id == recipeId, models.Recipe.ownerId == userRecipeId).first()
 
 def get_all_recipes(db: Session, userRecipeId: int):
     return db.query(models.Recipe).filter(models.Recipe.ownerId == userRecipeId).all()
 
-def create_recipe(db: Session, ownerId: int, title: str, ingredients: str, instructions: str):
-    dbRecipe = models.Recipe(ownerId=ownerId, title=title, ingredients=ingredients, instructions=instructions)
+def create_recipe(db: Session, id:int, ownerId: int, title: str, ingredients: str, instructions: str) -> (models.Recipe | None):
+    dbRecipe = models.Recipe(id=id, ownerId=ownerId, title=title, ingredients=ingredients, instructions=instructions)
     db.add(dbRecipe)
     db.commit()
     db.refresh(dbRecipe)

@@ -1,14 +1,14 @@
-'''
-main.py \n
+"""
+main.py
 
 This file is mainly used to run the FastAPI server.
 To run the server:
 1) Navigate to the website directory and use the command `python -m http.server 8000`
 to start the test frontend. Otherwise, follow the steps for the frontend.
-2) In a new terminal, use the command `uvicorn app.main:app --reload` form Whats-for-Dinner\src. This will stay running.
+2) In a new terminal, use the command `uvicorn app.main:app --reload` form Whats-for-Dinner\\src. This will stay running.
 You can stop it with ctrl+c.
 3) Navigate to `http://localhost:8000` or whatever the url will be in a web browser to see the frontend.
-'''
+"""
 
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -80,10 +80,13 @@ def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_
 
 
 if __name__ == "__main__":
-    import crud
-    from database import SessionLocal
-    ''' Use this to create a test user from here '''
+    ''' Use this to create a test data from here '''
     # crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
-    testUser = get_user(1, db=SessionLocal())
-    print(testUser.name)
+    # testUser = get_user(1, db=SessionLocal())
+    # print(testUser.name)
+
+    # crud.create_recipe(db=SessionLocal(), id=1, ownerId=1, title="Creamy Tuscan Chicken", ingredients="chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese", instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.")
+    testRecipe = get_recipe(1, 1, db=SessionLocal())
+    print(testRecipe.title)
+
     SessionLocal().close()

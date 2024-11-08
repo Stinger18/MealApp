@@ -19,7 +19,7 @@ class User(Base):
         return f'<User: {self.id}, {self.name}, {self.email}, {self.password}, {self.recipeId}, {self.pantryId}, {self.shoppingListId}>'
     
     def __str__(self):
-        return f'<User: ID: {self.id}, Name: {self.name}, Email: {self.email}, Password: {self.password}, Recipe Id: {self.recipeId}, Pantry Id: {self.pantryId}, Shopping List Id: {self.shoppingListId}>'
+        return f'<User: ID: {self.id}, Name: {self.name}, Recipe Id: {self.recipeId}, Pantry Id: {self.pantryId}, Shopping List Id: {self.shoppingListId}>'
 
 class Recipe(Base):
     __tablename__ = "recipes"
@@ -38,6 +38,11 @@ class Recipe(Base):
     created_at and updated_at: Timestamps for when the recipe was created or last updated, useful for sorting or tracking recipe edits.
     img_url: A URL to an image of the finished dish, if you want to display images in the app.
     '''
+    def __repr__(self):
+        return f'<Recipe: {self.id}, {self.ownerId}, {self.title}, {self.ingredients}, {self.instructions}>'
+    
+    def __str__(self):
+        return f'<Recipe: ID: {self.id}, Owner ID: {self.ownerId}, Title: {self.title}, Ingredients: {self.ingredients}, Instructions: {self.instructions}>'
 
 class Pantry(Base):
     __tablename__ = 'pantry'

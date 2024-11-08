@@ -1,8 +1,8 @@
 from typing import Annotated, Literal, TypedDict
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain.tools import tool, BaseTool
+from langchain_core.tools import tool, BaseTool
 # Langgraph imports
 from langgraph.prebuilt import ToolNode
 from langgraph.graph import END, START, StateGraph, MessagesState
@@ -13,6 +13,7 @@ try:
     from app import crud, models
 except ImportError:
     import crud, models
+    from database import SessionLocal
 
 from colorama import Fore, Style
 from dotenv import load_dotenv
@@ -39,6 +40,7 @@ class SousChef:
     def should_continue(self, state: MessagesState) -> Literal["tools", END]: # type: ignore
         messages = state['messages']
         last_message = messages[-1]
+        # print(last_message)
         # If the LLM makes a tool call, then we route to the "tools" node
         if last_message.tool_calls:
             return "tools"
@@ -52,27 +54,42 @@ class SousChef:
         # We return a list, because this will get added to the existing list
         return {"messages": [response]}
     
-    def process_user_info(self):
-        '''Get the user info from the database and passes it into the agent'''
-        pass
+    def process_user_info(self, state: MessagesState):
+        '''Pass initial user data and instructions into the agent'''
+        message = state['messages'][-1].content
+        if self.user:
+            initial_message = [SystemMessage(content=f"You are a personal sous-chef assistant named Sous-Chef."
+                                                    f"Use the user's information below to recommend recipes, manage their pantry, and answer any cooking questions. "
+                                                    f"My Info: {self.user}"),
+                                HumanMessage(content=message)]
+        else:
+            initial_message = [SystemMessage(content="You are a personal sous-chef assistant named Sous-Chef. Help users find recipes, manage their pantry, and answer cooking questions."),
+                                HumanMessage(content=message)]
+        
+        # Invoke model with the initial system message
+        response = self.model.invoke(initial_message)
+        return {"messages": [response]}
 
     
     def ceate_agent(self):
         # Define a new graph
         workflow = StateGraph(MessagesState)
         # Add the nodes
+        workflow.add_node('process_user_info', self.process_user_info)
         workflow.add_node('agent', self.call_model)
         workflow.add_node('tools', self.tool_node)
 
-        # Set the entrypoint as `agent`
+        # Set the entrypoint as `process_user_info`
         # This means that this node is the first one called
-        workflow.add_edge(START, 'agent')
+        workflow.add_edge(START, 'process_user_info')
+        # Next call the agent and get ready
+        # workflow.add_edge('process_user_info', 'agent')
 
         # We now add a conditional edge
         workflow.add_conditional_edges(
             # First, we define the start node. We use `agent`.
             # This means these are the edges taken after the `agent` node is called.
-            "agent",
+            "process_user_info",
             # Next, we pass in the function that will determine which node is called next.
             self.should_continue,
         )
@@ -99,32 +116,47 @@ def searchWeb(query: str): # Travily Search
     return search.invoke(query)
 
 @tool
-def get_recipes(): # Database Search
-    '''Query recipes the human already has'''
-    # returnedRecipe = crud.get_all_recipes(userRecipeId=)
-    return {'name': 'Creamy Tuscan Chicken', 'ingredients': 'chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese', 'instructions': '1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.'}
+def get_all_recipes(recipeID: str) -> list[dict]: # Database Search
+    '''Return all the recipe titles the human already has by using recipeID'''
+    # print('tool called')
+    # print(recipeID)
+    try:
+        recipes: models.Recipe = crud.get_all_recipes(db=SessionLocal(), userRecipeId=recipeID)
+        # Format the recipes for the agent
+        formatted_recipes = [
+            {"name": recipe.title}
+            for recipe in recipes
+        ]
+        return formatted_recipes
+    except Exception as e:
+        print('error happend:', e)
+        return {
+            "error": f"An error occurred while retrieving the recipes: {e}"
+        }
+    # return [{'name': 'Creamy Tuscan Chicken', 'ingredients': 'chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese', 'instructions': '1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.'}]
 
-@tool
-def add_recipe_to_db():
-    '''Add the recipe the human likes to the database'''
-    return f'Recipe was added to the database.'
+# @tool
+# def add_recipe_to_db():
+#     '''Add the recipe the human likes to the database'''
+#     return f'Recipe was added to the database.'
 
-@tool
-def get_pantry(): # Pantry Search
-    '''Query pantry for ingredients the human already has'''
-    return ['chicken', 'garlic', 'spinach', 'sun-dried tomatoes', 'heavy cream', 'parmesan cheese']
+# @tool
+# def get_pantry(): # Pantry Search
+#     '''Query pantry for ingredients the human already has'''
+#     return ['chicken', 'garlic', 'spinach', 'sun-dried tomatoes', 'heavy cream', 'parmesan cheese']
 
-@tool
-def add_to_pantry(ingredients: list):
-    '''Add ingredients to the pantry'''
-    return f'{ingredients} were added to the pantry.'
+# @tool
+# def add_to_pantry(ingredients: list):
+#     '''Add ingredients to the pantry'''
+#     return f'{ingredients} were added to the pantry.'
 
-@tool
-def remove_from_pantry(ingredients: list):
-    '''Remove ingredients from the pantry'''
-    return f'{ingredients} were removed from the pantry.'
+# @tool
+# def remove_from_pantry(ingredients: list):
+#     '''Remove ingredients from the pantry'''
+#     return f'{ingredients} were removed from the pantry.'
 
-tools = [searchWeb, get_recipes, add_recipe_to_db, get_pantry, add_to_pantry, remove_from_pantry]
+tools = [searchWeb, get_all_recipes]
+# add_recipe_to_db, get_pantry, add_to_pantry, remove_from_pantry
 
 # Can build with these tools or call SousChef(tools) outside of this file to make a new agent with different tools
 def buildSousChef(userInfo: models.User = None) -> CompiledStateGraph:
@@ -140,8 +172,11 @@ def typing_effect(text, delay=0.01):
     print()  # Move to the next line after the text is printed
 
 def main():
-    user: (models.User | None) = crud.get_user()
-    sousChef: CompiledStateGraph = buildSousChef()
+    ''' Setup the agent when ran locally '''
+    db = SessionLocal()
+    user: (models.User | None) = crud.get_user(db=db, userId=1)
+    print(user)
+    sousChef: CompiledStateGraph = buildSousChef(userInfo=user)
     print(Fore.GREEN + "Sous-Chef here! What can I help you with today? ")
     while True:
         print(Fore.RED + 'Enter "q" to quit.')
