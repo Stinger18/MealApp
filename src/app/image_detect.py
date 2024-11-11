@@ -36,7 +36,7 @@ prompts = ["Identify the food items and quantities from this image in json forma
 # load_dotenv()
 # client = InferenceClient(api_key=os.getenv(""))
 
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="HUGGINGFACE_API_KEY")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(image_url: str, prompt: str):
