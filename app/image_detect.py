@@ -33,14 +33,14 @@ urls = [
         ]
 
 prompts = [
-        'Identify the food items and quantity froms this image and return in a python dict.'
+        'Identify the food items and quantities froms this'
         ]
 
 
 # load_dotenv()
 # client = InferenceClient(api_key=os.getenv("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"))
 
-client = InferenceClient(api_key="HUGGINGFACE_API_KEY")
+client = InferenceClient(api_key="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")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(image_url: str, prompt: str):
@@ -75,9 +75,16 @@ def test_prompts(urls: list[str], prompts: list[str]):
     print("***** Testing Prompts *****")
     for prompt in prompts:
         for url in urls:
-            detect_ingredients(url, prompt)
-            print("\n******************************************\n")
-            print("\n", url, "\n")
+            test_prompt(url, prompt)
 
-test_prompts(urls, prompts)
+def test_prompt(url: str, prompt: str):
+    print("\n******************************************\n")
+    print("URL: ", url, "\n")
+    print("Prompt: ", prompt)
+    print("\n\"")
+    detect_ingredients(url, prompt)
+    print("\n\"\n")
+
+# test_prompts(urls, prompts)
+test_prompt(urls[0], prompts[0])
     
