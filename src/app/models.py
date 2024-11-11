@@ -4,6 +4,16 @@ try:
 except ImportError:
     from database import Base
 
+''' These classes define the structure of the tables in the database.
+    Each class represents a table, and each instance of the class represents a row in the table.
+    The __tablename__ attribute specifies the name of the table in the database.
+    Each class should inherit from the Base class, which is the declarative base class from SQLAlchemy.
+    Each class should define attributes that are instances of Column, which represent columns in the table.
+    The Column constructor takes the data type of the column as the first argument, and any additional options as keyword arguments.
+    The __repr__ method should return a string representation of the object, which is useful for debugging.
+    The __str__ method should return a human-readable string representation of the object, which is useful for displaying the object in the API response.
+    The __str__ method is also need for the agent to understand the object and the relationship between information from the object.
+'''
 class User(Base):
     __tablename__ = "users"
 
@@ -47,11 +57,17 @@ class Recipe(Base):
 class Pantry(Base):
     __tablename__ = 'pantry'
 
-    pantryId = Column(Integer, primary_key=True, index=True) 
+    id = Column(Integer, primary_key=True, index=True) 
     ownerId = Column(Integer, index=True)
     item = Column(String)
     quantity = Column(Integer)
     date_added = Column(String)
+
+    def __repr__(self):
+        return f'<Pantry: {self.id}, {self.ownerId}, {self.item}, {self.quantity}, {self.date_added}>'
+    
+    def __str__(self):
+        return f'<Pantry: ID: {self.id}, Owner ID: {self.ownerId}, Item: {self.item}, Quantity: {self.quantity}, Date Added: {self.date_added}>'
 
 class Shopping_list(Base):
     __tablename__ = 'shopping list'

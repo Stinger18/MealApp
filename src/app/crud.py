@@ -44,6 +44,26 @@ def create_recipe(db: Session, id:int, ownerId: int, title: str, ingredients: st
     return dbRecipe
 
 def delete_recipe(db: Session, userRecipeId: int, recipeId: int):
+    ''' Deletes a recipe with the given recipe ID '''
     db.query(models.Recipe).filter(models.Recipe.id == recipeId, models.Recipe.ownerId == userRecipeId).delete()
+    db.commit()
+    return
+
+''' Pantry Operations '''
+def get_pantry(db: Session, userPantryId: int) -> (models.Pantry | None):
+    ''' Returns each item in the users pantry '''
+    return db.query(models.Pantry).filter(models.Pantry.ownerId == userPantryId).all()
+
+def add_to_pantry(db: Session, id: int, ownerId: int, item: str, quantity: int, date_added: str) -> (models.Pantry | None):
+    ''' Adds a item to the users pantry '''
+    dbPantry = models.Pantry(id=id, ownerId=ownerId, item=item, quantity=quantity, date_added=date_added)
+    db.add(dbPantry)
+    db.commit()
+    db.refresh(dbPantry)
+    return dbPantry
+
+def remove_from_pantry(db: Session, userPantryId: int, itemId: int):
+    ''' Remove an item of the given item ID from the users pantry '''
+    db.query(models.Pantry).filter(models.Pantry.id == itemId, models.Pantry.ownerId == userPantryId).delete()
     db.commit()
     return

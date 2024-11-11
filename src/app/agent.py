@@ -111,7 +111,7 @@ class SousChef:
 ## Build the Agents tools
 @tool
 def searchWeb(query: str): # Travily Search
-    '''Search the web for the query'''
+    '''Search the web to return new recipes to the human '''
     search = TavilySearchResults(max_results=3)
     return search.invoke(query)
 
@@ -140,10 +140,22 @@ def get_all_recipes(recipeID: str) -> list[dict]: # Database Search
 #     '''Add the recipe the human likes to the database'''
 #     return f'Recipe was added to the database.'
 
-# @tool
-# def get_pantry(): # Pantry Search
-#     '''Query pantry for ingredients the human already has'''
-#     return ['chicken', 'garlic', 'spinach', 'sun-dried tomatoes', 'heavy cream', 'parmesan cheese']
+@tool
+def get_pantry(pantryID: str) -> list[dict]: # Pantry Search
+    '''Return pantry for ingredients the human already has by using pantryID'''
+    try:
+        pantry: models.Pantry = crud.get_pantry(db=SessionLocal(), userPantryId=pantryID)
+        # Format the pantry for the agent
+        formatted_pantry = [
+            {"item": ingredient.item, "quantity": ingredient.quantity}
+            for ingredient in pantry
+        ]
+        return formatted_pantry
+    except Exception as e:
+        print('error happend:', e)
+        return {
+            "error": f"An error occurred while retrieving the pantry: {e}"
+        }
 
 # @tool
 # def add_to_pantry(ingredients: list):
