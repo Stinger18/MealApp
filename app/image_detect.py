@@ -3,6 +3,10 @@ from huggingface_hub import InferenceClient
 from dotenv import load_dotenv
 import os
 ''' 
+USAGE
+if you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
+if you don't want to sign up ask james or ethan to send you one 
+
 What I think would be great for this file is to just have a class (or just function?)
 that takes in an image and spits out every ingredient in a list it thinks are in the image. 
 (Maybe the function also takes in a confidence interval?)
@@ -11,17 +15,10 @@ output as nested lists
 [[ingredient, amount], [ingredient, amount]]
 or
 [[ingredient1, ingredient2...], [amount1, amount2...]]
-'''
+
 
 '''
-Netlify website I made with bunch of test images
-https://stalwart-blancmange-7f715f.netlify.app/
 
-all images are found at
-url/pic1.png
-url/pic2.png
-etc...
-'''
 urls = [
         'https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s1.qwant.com/thumbr/474x316/2/b/6227a4c72e9145fbb6a2307f162e4c68d55852c7e372a00707f6f6e0d28538/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.GU6SQ77Cyb7DBMcvu9j6KgHaE8%26pid%3DApi&q=0&b=1&p=0&a=0',
@@ -39,14 +36,11 @@ prompts = [
         'Identify the food items and quantity froms this image and return in a python dict.'
         ]
 
-#if you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
-#if you don't want to sign up ask james or ethan to send you one 
-load_dotenv()
-client = InferenceClient(api_key=os.getenv("HUGGINGFACE_API_KEY"))
 
-# client = InferenceClient(api_key="API_KEY_GOES_HERE")
+# load_dotenv()
+# client = InferenceClient(api_key=os.getenv("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"))
 
-
+client = InferenceClient(api_key="HUGGINGFACE_API_KEY")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(image_url: str, prompt: str):
