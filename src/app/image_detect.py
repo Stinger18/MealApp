@@ -20,7 +20,7 @@ or
 '''
 
 urls = [
-        'https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0',
+            'https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s1.qwant.com/thumbr/474x316/2/b/6227a4c72e9145fbb6a2307f162e4c68d55852c7e372a00707f6f6e0d28538/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.GU6SQ77Cyb7DBMcvu9j6KgHaE8%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s1.qwant.com/thumbr/474x316/9/6/d72896c72955e1ae2291077d29d97818bf997a63428f8e10ac0f275150d626/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.h_GjdVuPrZ89d4lOTlWBfAHaE8%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s1.qwant.com/thumbr/474x675/0/9/5fc821586b0b8cc9b2f6e8be20ea8936e9fa77f3da80e9ee33d1585ab3f441/th.jpg?u=https://tse3.explicit.bing.net/th?id%3DOIP.5gA4kIfw9vNxyKkCgE2D8QHaKj%26pid%3DApi&q=0&b=1&p=0&a=0',
@@ -33,12 +33,19 @@ urls = [
         ]
 
 prompts = [
-        'Identify the food items and quantities froms this'
+            """
+Identify the food items and quantities from this image. For each item, include a confidence score (0-100).
+Return the output **strictly** in the following format: [[ingredient, amount, confidence], [ingredient, amount, confidence], ...].
+Example:
+[[ "milk", "2 jugs", 90 ], [ "apples", "3", 85 ], [ "lettuce", "1 head", 80 ]].
+If you are unsure, use 'unknown' for the amount or a default confidence of 70.
+Avoid listing duplicate items.
+"""
         ]
 
 
 # load_dotenv()
-# client = InferenceClient(api_key=os.getenv("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"))
+# client = InferenceClient(api_key=os.getenv(""))
 
 client = InferenceClient(api_key="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")
 
@@ -61,6 +68,7 @@ def detect_ingredients(image_url: str, prompt: str):
             ],
             max_tokens=500,
             stream=True,
+            temperature=0.2
     ):
         print(message.choices[0].delta.content, end="") #prints directly to console
 
@@ -86,5 +94,5 @@ def test_prompt(url: str, prompt: str):
     print("\n\"\n")
 
 # test_prompts(urls, prompts)
-test_prompt(urls[0], prompts[0])
+test_prompt('https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0', prompts[0])
     
