@@ -25,7 +25,6 @@
 .logo {
   width: 100px; /* Set logo size */
   height: auto;
-  margin-right: 20px; /* Space between logo and title */
 }
 
 /* Title styles */
@@ -36,7 +35,7 @@
   flex: 1; /* Ensure the title takes up remaining space */
 }
 
-/* RecipeBox.css & MainContainer.cc */
+/* RecipeBox.css & MainContainer.css */
 
 /* Main container  */
 .main-container {

@@ -8,8 +8,9 @@ function App() {
   return (
     <div className="background">
       <TitleBar
-        logoUrl="https://via.placeholder.com/100"
+        logoURL="https://via.placeholder.com/100"
         title="What's For Dinner?"
+        chefURL="https://via.placeholder.com/100"
       />
       <div className="main-container">
         <Sidebar title="Pantry" />

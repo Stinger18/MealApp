@@ -1,8 +1,9 @@
-function TitleBar({ logoUrl, title }) {
+function TitleBar({ logoURL, title, chefURL }) {
   return (
     <div className="banner-container">
-      <img src={logoUrl} alt="Logo" className="logo" />
+      <img src={logoURL} alt="Logo" className="logo" />
       <h1 className="title">{title}</h1>
+      <img src={chefURL} alt="ChefHat" className="logo" />
     </div>
   );
 }
