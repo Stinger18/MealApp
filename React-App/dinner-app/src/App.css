@@ -4,7 +4,7 @@
   padding: 10px;
   height: 100vh;
   box-sizing: border-box;
-  background-color: #ecdfcc;
+  background-color: #fcfaee;
 }
 
 /* HomePageBanner.css */
@@ -49,7 +49,7 @@
   flex-grow: 1; /* Make the main content area grow to fill available space */
   padding: 20px;
   margin: 5px;
-  background-color: #ecf0f1; /* Light background for the main content */
+  background-color: #fff; /* Light background for the main content */
   color: #2c3e50; /* Text color */
   box-sizing: border-box; /* Ensure padding is included in width */
   border-radius: 16px;
@@ -60,7 +60,7 @@
 /* Sidebar container styles */
 .sidebar-container {
   width: fit-content;
-  background-color: #fd8b51; /* Default dark background */
+  background-color: #ecdfcc; /* Default dark background */
   margin: 5px;
   color: #fff;
   display: flex;
@@ -82,7 +82,7 @@
 /* Body styles */
 .sidebar-body {
   font-size: 1rem;
-  color: #fd8b51;
+  color: #ecdfcc;
   flex-grow: 1; /* Ensure the body takes up remaining space */
 }
 
