@@ -1,8 +1,8 @@
 // import React, { useState } from "react";
 import "./App.css";
-import TitleBar from "./TitleBar";
-import Sidebar from "./Sidebar";
-import RecipeBox from "./RecipeBox";
+import TitleBar from "./components/TitleBar";
+import Sidebar from "./components/Sidebar";
+import RecipeBox from "./components/RecipeBox";
 
 function App() {
   return (

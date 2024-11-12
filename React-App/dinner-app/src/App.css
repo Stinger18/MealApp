@@ -60,9 +60,8 @@
 
 /* Sidebar container styles */
 .sidebar-container {
-  width: 100px;
+  width: fit-content;
   background-color: #fd8b51; /* Default dark background */
-  padding: 20px;
   margin: 5px;
   color: #fff;
   display: flex;
@@ -75,6 +74,8 @@
 .sidebar-title {
   font-size: 1.5rem;
   margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 16px 16px 0 0; /* Rounded top corners */
   font-weight: bold;
   background-color: #cb6040;
 }
@@ -84,4 +85,24 @@
   font-size: 1rem;
   color: #fd8b51;
   flex-grow: 1; /* Ensure the body takes up remaining space */
+}
+
+/* RecipeItem.css */
+
+/* Recipe Item */
+.recipe-item {
+  padding: 10px;
+  margin: 5px;
+  background-color: #f9f9f9; /* Light background for recipe items */
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Recipe Img */
+.recipe-img {
+  width: 50px; /* Set image size */
+  height: auto;
+  border-radius: 16px;
 }
