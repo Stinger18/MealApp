@@ -3,9 +3,7 @@ from huggingface_hub import InferenceClient
 from dotenv import load_dotenv
 from PIL import Image
 import requests
-from fpdf import FPDF
 import os 
-import io
 ''' 
 This Program runs a testing suite on combinations of urls and prompts. It will make a folder in cwd called 
 test_results with results of each combination. Deletes previous run if you re run it
@@ -95,13 +93,15 @@ def test_prompts(urls: list[str], prompts: list[str]):
             cnt += 1
 
 def test_prompt(url: str, prompt: str, num: int):
+    
+    #Make file
     try:
         f = open(f"test_results/{num}.txt", "x")
     except: 
         os.remove(f"test_results/{num}.txt")
         f = open(f"test_results/{num}.txt", "x")
 
-
+     #Write data to file
     f.write(f"\n****************** {num}.txt ***********************\n")
     f.write(f"~~~ Prompt:\n\n{prompt}\n")
     f.write(f"~~~ URL:\n\n{url}\n")
@@ -111,6 +111,17 @@ def test_prompt(url: str, prompt: str, num: int):
     f.write(detect_ingredients(url, prompt))
     f.write("\n\"\"\"\n") 
 
+    f.close()
+
+    #Make file to put image in
+    try:
+        f = open(f'test_results/{num}.jpg','wb')
+    except: 
+        os.remove(f"test_results/{num}.jpg")
+    #Download and save image from url to file
+
+    data = requests.get(url).content 
+    f.write(data) 
     f.close()
 
 test_prompts(urls, prompts)
