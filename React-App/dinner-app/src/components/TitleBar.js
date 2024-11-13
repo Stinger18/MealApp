@@ -1,3 +1,4 @@
+import "./TitleBar.css";
 function TitleBar({ logoURL, title, chefURL }) {
   return (
     <div className="banner-container">

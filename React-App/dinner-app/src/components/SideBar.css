@@ -1,0 +1,30 @@
+/* Sidebar.css */
+
+/* Sidebar container styles */
+.sidebar-container {
+  width: fit-content;
+  background-color: #ecdfcc; /* Default dark background */
+  margin: 5px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 75dvh; /* Full viewport height */
+  border-radius: 16px;
+}
+
+/* Title styles */
+.sidebar-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 16px 16px 0 0; /* Rounded top corners */
+  font-weight: bold;
+  background-color: #cb6040;
+}
+
+/* Body styles */
+.sidebar-body {
+  font-size: 1rem;
+  color: #ecdfcc;
+  flex-grow: 1; /* Ensure the body takes up remaining space */
+}

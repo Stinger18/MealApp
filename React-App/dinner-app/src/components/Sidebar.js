@@ -1,3 +1,5 @@
+import "./SideBar.css";
+
 function Sidebar({ title, body, styles }) {
   return (
     <div className="sidebar-container" style={styles?.container}>

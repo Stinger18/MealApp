@@ -1,0 +1,27 @@
+/* TitleBar.css */
+
+/* Container styles */
+.banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a5b68d; /* Green background */
+  padding: 20px;
+  border-radius: 16px;
+  height: 10%; /* Adjust the height as needed */
+  min-height: 100px; /* Minimum height  because of logo size*/
+}
+
+/* Logo styles */
+.logo {
+  width: 100px; /* Set logo size */
+  height: auto;
+}
+
+/* Title styles */
+.title {
+  font-size: 2rem;
+  color: #000; /* Black Title */
+  text-align: center;
+  flex: 1; /* Ensure the title takes up remaining space */
+}
