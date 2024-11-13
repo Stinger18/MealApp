@@ -30,11 +30,7 @@ urls = [
         'https://s1.qwant.com/thumbr/474x500/a/9/50e07b729e6273180a44bc94c1bfaec329aef3f6097efacc0edfe81b0cf5a8/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.2oD8uxGIpiAQlCTGgdBCcwHaH0%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s1.qwant.com/thumbr/474x710/3/4/be8c2baa1de6beac3e6e5f880f532b5aff716f9ce904d0b5d3f8c0b525ac59/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.-XtKmAjjhJbDwq5y1UyHaQHaLG%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s2.qwant.com/thumbr/474x760/c/d/f08f2f2516c8fa9c238318f1b13722eab8ef93abd23331f04818d5924405a0/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP._Sc1ybWIZaV-DYW0A__iewHaL4%26pid%3DApi&q=0&b=1&p=0&a=0',
-        'https://realcreativerealorganized.com/wp-content/uploads/2016/03/09-8670-post/Organized-Pantry-15-of-22-500x750.jpg',
-        'https://www.mom4real.com/wp-content/uploads/2017/09/canned-goods-organization.jpg.webp',
-        'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/at%2Forganize-clean%2Fbefore-after%2FBianca%20Delatorre%20Pantry%2FBiancaDelatorre_111372791_AA28B69A500F444297020BABFE06D6FC',
-        'https://designthusiasm.com/wp-content/uploads/2020/01/pantry-organization-02-1.jpg',
-        'https://eu-images.contentstack.com/v3/assets/blt517884d3ef6fd53e/bltdd50c3f93c3cf12b/66d97facb324612634a05a43/food-pantry-stocked-with-goods-shutterstockjpg.jpg?width=1280&auto=webp&quality=95&format=jpg&disable=upscale'
+        'https://realcreativerealorganized.com/wp-content/uploads/2016/03/09-8670-post/Organized-Pantry-15-of-22-500x750.jpg'
         ]
 
 prompts = [
@@ -53,7 +49,7 @@ prompts = [
 
 TEMPERATURE = 0.1
 
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="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")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(url: str, prompt: str):
