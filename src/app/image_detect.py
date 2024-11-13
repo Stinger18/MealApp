@@ -118,7 +118,7 @@ def test_prompt(url: str, prompt: str, num: int):
     f.write(f"URL:\n{url}\n")
     f.write("\n\"")
     f.write(detect_ingredients(url, prompt))
-    f.write("\n\"\n")
+    f.write("\n\"\n") 
     # download_image(url, str(num))
 
     f.close()
