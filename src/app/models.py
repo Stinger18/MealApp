@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+<<<<<<< HEAD
 try:
     from app.database import Base
 except ImportError:
@@ -14,6 +15,10 @@ except ImportError:
     The __str__ method should return a human-readable string representation of the object, which is useful for displaying the object in the API response.
     The __str__ method is also need for the agent to understand the object and the relationship between information from the object.
 '''
+=======
+from .database import Base
+
+>>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 class User(Base):
     __tablename__ = "users"
 
@@ -25,12 +30,15 @@ class User(Base):
     pantryId = Column(Integer) # ownerID on each pantry item
     shoppingListId = Column(Integer) # ownerID on each shopping list
 
+<<<<<<< HEAD
     def __repr__(self):
         return f'<User: {self.id}, {self.name}, {self.email}, {self.password}, {self.recipeId}, {self.pantryId}, {self.shoppingListId}>'
     
     def __str__(self):
         return f'<User: ID: {self.id}, Name: {self.name}, Recipe Id: {self.recipeId}, Pantry Id: {self.pantryId}, Shopping List Id: {self.shoppingListId}>'
 
+=======
+>>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 class Recipe(Base):
     __tablename__ = "recipes"
 
@@ -48,6 +56,7 @@ class Recipe(Base):
     created_at and updated_at: Timestamps for when the recipe was created or last updated, useful for sorting or tracking recipe edits.
     img_url: A URL to an image of the finished dish, if you want to display images in the app.
     '''
+<<<<<<< HEAD
     def __repr__(self):
         return f'<Recipe: {self.id}, {self.ownerId}, {self.title}, {self.ingredients}, {self.instructions}>'
     
@@ -58,11 +67,19 @@ class Pantry(Base):
     __tablename__ = 'pantry'
 
     id = Column(Integer, primary_key=True, index=True) 
+=======
+
+class Pantry(Base):
+    __table___name = 'pantry'
+
+    pantry_id = Column(Integer, primary_key=True, index=True) 
+>>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
     ownerId = Column(Integer, index=True)
     item = Column(String)
     quantity = Column(Integer)
     date_added = Column(String)
 
+<<<<<<< HEAD
     def __repr__(self):
         return f'<Pantry: {self.id}, {self.ownerId}, {self.item}, {self.quantity}, {self.date_added}>'
     
@@ -76,3 +93,12 @@ class Shopping_list(Base):
     ownerId = Column(Integer, index=True)
     item = Column(String)
     quantity = Column(Integer)
+=======
+class Shopping_list(Base):
+    __table__name = 'shopping list'
+
+    shoppingListId = Column(Integer, primary_key=True, index=True)
+    ownerId = Column(Integer, Index=True)
+    item = Column(String)
+    quantity = Column(Integer)
+>>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
