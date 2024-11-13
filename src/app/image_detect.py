@@ -7,15 +7,15 @@ from fpdf import FPDF
 import os 
 import io
 ''' 
-USAGE
-if you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
-if you don't want to sign up ask james or ethan to send you one 
+This Program runs a testing suite on combinations of urls and prompts. It will make a folder in cwd called 
+test_results with results of each combination
 
-What I think would be great for this file is to just have a class (or just function?)
-that takes in an image and spits out every ingredient in a list it thinks are in the image. 
-(Maybe the function also takes in a confidence interval?)
+NOTE:
+If you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
 
-output as nested lists
+NOTE:
+ethan wants final output as nested lists
+ex: 
 [[ingredient, amount], [ingredient, amount]]
 or
 [[ingredient1, ingredient2...], [amount1, amount2...]]
@@ -48,14 +48,9 @@ prompts = [
 """
 ]
 
-# prompts = ["Identify each food item once in json format with no other text"]
-
 TEMPERATURE = 0.1
 
-# load_dotenv()
-# client = InferenceClient(api_key=os.getenv(""))
-
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="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")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(url: str, prompt: str):
@@ -87,7 +82,6 @@ def detect_ingredients(url: str, prompt: str):
     print("\n***************\n")
     return response_text
 
-
 def test_prompts(urls: list[str], prompts: list[str]):
     try:
         os.mkdir("test_results")
@@ -114,7 +108,6 @@ def test_prompt(url: str, prompt: str, num: int):
     f.write("\n\"\"\"\n") 
 
     f.close()
-
 
 test_prompts(urls, prompts)
     
