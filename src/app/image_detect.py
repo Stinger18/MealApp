@@ -30,7 +30,6 @@ urls = [
         'https://s1.qwant.com/thumbr/474x500/a/9/50e07b729e6273180a44bc94c1bfaec329aef3f6097efacc0edfe81b0cf5a8/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.2oD8uxGIpiAQlCTGgdBCcwHaH0%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s1.qwant.com/thumbr/474x710/3/4/be8c2baa1de6beac3e6e5f880f532b5aff716f9ce904d0b5d3f8c0b525ac59/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.-XtKmAjjhJbDwq5y1UyHaQHaLG%26pid%3DApi&q=0&b=1&p=0&a=0',
         'https://s2.qwant.com/thumbr/474x760/c/d/f08f2f2516c8fa9c238318f1b13722eab8ef93abd23331f04818d5924405a0/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP._Sc1ybWIZaV-DYW0A__iewHaL4%26pid%3DApi&q=0&b=1&p=0&a=0',
-        'https://realcreativerealorganized.com/wp-content/uploads/2016/03/09-8670-post/Organized-Pantry-15-of-22-500x750.jpg'
         ]
 
 prompts = [
@@ -49,7 +48,7 @@ prompts = [
 
 TEMPERATURE = 0.1
 
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="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")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(url: str, prompt: str):
