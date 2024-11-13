@@ -102,10 +102,10 @@ def test_prompt(url: str, prompt: str, num: int):
         f = open(f"test_results/{num}.txt", "x")
 
 
-    f.write("\n******************************************\n")
-    f.write(f"Prompt:\n{prompt}")
-    f.write(f"URL:\n{url}\n")
-    f.write(f"Temperature: {TEMPERATURE}\n")
+    f.write(f"\n****************** {num}.txt ***********************\n")
+    f.write(f"~~~ Prompt:\n\n{prompt}\n")
+    f.write(f"~~~ URL:\n\n{url}\n")
+    f.write(f"\n~~~ Temperature: {TEMPERATURE}\n")
 
     f.write("\n\"\"\"\n")
     f.write(detect_ingredients(url, prompt))
