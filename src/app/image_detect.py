@@ -8,7 +8,7 @@ import os
 import io
 ''' 
 This Program runs a testing suite on combinations of urls and prompts. It will make a folder in cwd called 
-test_results with results of each combination
+test_results with results of each combination. Deletes previous run if you re run it
 
 NOTE:
 If you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
@@ -50,7 +50,7 @@ prompts = [
 
 TEMPERATURE = 0.1
 
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="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")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(url: str, prompt: str):
@@ -95,8 +95,12 @@ def test_prompts(urls: list[str], prompts: list[str]):
             cnt += 1
 
 def test_prompt(url: str, prompt: str, num: int):
-    
-    f = open(f"test_results/{num}.txt", "x")
+    try:
+        f = open(f"test_results/{num}.txt", "x")
+    except: 
+        os.remove(f"test_results/{num}.txt")
+        f = open(f"test_results/{num}.txt", "x")
+
 
     f.write("\n******************************************\n")
     f.write(f"Prompt:\n{prompt}")
