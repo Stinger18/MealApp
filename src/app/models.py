@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Text
 try:
     from app.database import Base
 except ImportError:
@@ -37,8 +37,8 @@ class Recipe(Base):
     id = Column(Integer, primary_key=True, index=True)
     ownerId = Column(Integer, index=True)
     title = Column(String, index=True)
-    ingredients = Column(String)
-    instructions = Column(String)
+    ingredients = Column(Text)
+    instructions = Column(Text)
     '''
     Other column ideas: 
     category: Categorizes recipes (like “breakfast” or “dinner”) to make filtering easier.

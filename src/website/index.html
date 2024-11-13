@@ -13,6 +13,12 @@
         <input type="password" id="password" placeholder="Password" required />
         <button type="submit">Create User</button>
     </form>
+    <form id="findUser">
+        <input type="text" id="userName" placeholder="Name" required />
+        <button type="submit" onclick="fetchUserData()">Find User</button>
+    </form>
+    <div id="user-details"></div>
+
     <button id="usersData" onclick="fetchUsers()">Get Users</button>
     <div id="users-list"></div> <!--This div will display the list of users-->
 
@@ -46,6 +52,17 @@
                 alert(error.message)
             });
         });
+
+        async function fetchUserData(name) {
+            fetch(`${backendUrl}/users/${name}`)
+            .then(response => response.json())
+            .then(user => {
+                const userDiv = document.getElementById('user-details');
+                userDiv.innerHTML = ''; // clear previous entries
+                userDiv.textContent = `ID: ${user.id}, Name: ${user.name}, Email: ${user.email}, Password: ${user.password}, Recipe Id: ${user.recipeId}, Pantry Id: ${user.pantryId}, Shopping List Id: ${user.shoppingListId}`;
+            })
+            .catch(error => console.error('Error fetching user: ', error));
+        };
 
         async function fetchUsers() {
             fetch(`${backendUrl}/users`)

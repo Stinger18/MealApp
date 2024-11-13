@@ -51,8 +51,12 @@ app.add_middleware(
 
 ''' User Commands '''
 @app.get("/users/{userId}")
-def get_user(userId: int, db: Session = Depends(get_db)):
-    return crud.get_user(db, userId=userId)
+def get_user_by_id(userId: int, db: Session = Depends(get_db)):
+    return crud.get_user_by_id(db, userId=userId)
+
+@app.get("/users/{userName}")
+def get_user_by_name(userName: str, db: Session = Depends(get_db)):
+    return crud.get_user_by_name(db, userName=userName)
 
 @app.get("/users")
 def get_all_users(db: Session = Depends(get_db)):
@@ -69,6 +73,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db=db, id=len(db.query(models.User).all())+1, name=user.name, email=user.email, password=user.password, recipeId=userDBID, pantryId=userDBID, shoppingListId=userDBID) #TODO: Update for the new structure
 
 ''' Recipe Commands '''
+# @app.get("/users/{userId}/recipes")
 def get_recipe(userRecipeId: int, recipeId: int, db:Session = Depends(get_db)):
     return crud.get_recipe(db, userRecipeId=userRecipeId, recipeId=recipeId)
 

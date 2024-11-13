@@ -186,7 +186,7 @@ def typing_effect(text, delay=0.01):
 def main():
     ''' Setup the agent when ran locally '''
     db = SessionLocal()
-    user: (models.User | None) = crud.get_user(db=db, userId=1)
+    user: (models.User | None) = crud.get_user_by_id(db=db, userId=1)
     print(user)
     sousChef: CompiledStateGraph = buildSousChef(userInfo=user)
     print(Fore.GREEN + "Sous-Chef here! What can I help you with today? ")
