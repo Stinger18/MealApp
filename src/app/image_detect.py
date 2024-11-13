@@ -1,13 +1,11 @@
 
 from huggingface_hub import InferenceClient
 from dotenv import load_dotenv
-import os
 from PIL import Image
 import requests
 from fpdf import FPDF
 import os 
 import io
-import csv
 ''' 
 USAGE
 if you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
@@ -52,15 +50,19 @@ prompts = [
 
 # prompts = ["Identify each food item once in json format with no other text"]
 
+TEMPERATURE = 0.1
 
 # load_dotenv()
 # client = InferenceClient(api_key=os.getenv(""))
 
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key="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")
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
-def detect_ingredients(image_url: str, prompt: str):
+def detect_ingredients(url: str, prompt: str):
+    print("\n***** Detecting Image *****\n")
+
     response_text = ""
+    # print("URL: ", url)
     for message in client.chat_completion(
             model="meta-llama/Llama-3.2-11B-Vision-Instruct",
             messages=[
@@ -68,42 +70,30 @@ def detect_ingredients(image_url: str, prompt: str):
                     "role": "user",
                     "content": [
                         {"type": "image_url", "image_url": {
-                            "url": image_url}},
+                            "url": url}},
                         {"type": "text",
                         "text": prompt},
                     ],
                 }
             ],
-            max_tokens=10000,
+            max_tokens=1000,
             stream=True,
-            temperature=0.2
+            temperature=TEMPERATURE
     ):
-        # print(message.choices[0].delta.content, end="") #prints directly to console
+        print(message.choices[0].delta.content, end="") #prints directly to console
 
     # This code helps you return a string instead of printing
         response_text += message.choices[0].delta.content #add new tokens to string
+    print("\n***************\n")
     return response_text
-
-#-----Testing functions-----
-def download_image(image_url: str, filename: str) -> str:
-    # Send a request to download the image
-    response = requests.get(image_url)
-
-    # Open the image from the response content
-    image = Image.open(io.BytesIO(response.content))
-
-    # Ensure the image is saved in the current working directory
-    save_path = os.path.join(os.getcwd(), filename)
-
-    # Save the image with the given filename
-    image.save(save_path)
-
-    print(f"Image saved to: {save_path}")   
-    return save_path
 
 
 def test_prompts(urls: list[str], prompts: list[str]):
-    print("***** Testing Prompts *****")
+    try:
+        os.mkdir("test_results")
+    except:
+        print("")
+        
     cnt = 0
     for prompt in prompts:
         for url in urls:
@@ -111,18 +101,20 @@ def test_prompts(urls: list[str], prompts: list[str]):
             cnt += 1
 
 def test_prompt(url: str, prompt: str, num: int):
-    f = open(f"{num}.txt", "x")
+    
+    f = open(f"test_results/{num}.txt", "x")
 
     f.write("\n******************************************\n")
     f.write(f"Prompt:\n{prompt}")
     f.write(f"URL:\n{url}\n")
-    f.write("\n\"")
+    f.write(f"Temperature: {TEMPERATURE}\n")
+
+    f.write("\n\"\"\"\n")
     f.write(detect_ingredients(url, prompt))
-    f.write("\n\"\n") 
-    # download_image(url, str(num))
+    f.write("\n\"\"\"\n") 
 
     f.close()
 
-# test_prompts(urls, prompts)
+
 test_prompts(urls, prompts)
     
