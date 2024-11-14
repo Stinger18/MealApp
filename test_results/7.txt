@@ -2,7 +2,7 @@
 ****************** 7.txt ***********************
 ~~~ Prompt:
 
-Identify the food items and quantities from this image in json format with no other text. EX: [{
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
     "item": "Orange juice",
     "quantity": 1
 }, {
@@ -38,6 +38,10 @@ https://s1.qwant.com/thumbr/474x500/a/9/50e07b729e6273180a44bc94c1bfaec329aef3f6
         "quantity": 2
     },
     {
+        "item": "Bottled water",
+        "quantity": 1
+    },
+    {
         "item": "Butter",
         "quantity": 1
     },
@@ -46,182 +50,170 @@ https://s1.qwant.com/thumbr/474x500/a/9/50e07b729e6273180a44bc94c1bfaec329aef3f6
         "quantity": 1
     },
     {
-        "item": "Bread",
+        "item": "Canned tuna",
+        "quantity": 2
+    },
+    {
+        "item": "Canned beans",
         "quantity": 1
     },
     {
-        "item": "Cheese",
+        "item": "Canned corn",
         "quantity": 1
     },
     {
-        "item": "Tomatoes",
+        "item": "Canned peaches",
         "quantity": 1
     },
     {
-        "item": "Onions",
+        "item": "Canned pineapple",
         "quantity": 1
     },
     {
-        "item": "Carrots",
+        "item": "Canned tomatoes",
         "quantity": 1
     },
     {
-        "item": "Potatoes",
+        "item": "Canned soup",
         "quantity": 1
     },
     {
-        "item": "Cucumbers",
+        "item": "Canned vegetables",
         "quantity": 1
     },
     {
-        "item": "Bell peppers",
+        "item": "Canned fruit",
         "quantity": 1
     },
     {
-        "item": "Mushrooms",
+        "item": "Canned meat",
         "quantity": 1
     },
     {
-        "item": "Spinach",
+        "item": "Canned fish",
         "quantity": 1
     },
     {
-        "item": "Broccoli",
+        "item": "Canned poultry",
         "quantity": 1
     },
     {
-        "item": "Cauliflower",
+        "item": "Canned seafood",
         "quantity": 1
     },
     {
-        "item": "Corn",
+        "item": "Canned legumes",
         "quantity": 1
     },
     {
-        "item": "Green beans",
+        "item": "Canned grains",
         "quantity": 1
     },
     {
-        "item": "Peas",
+        "item": "Canned pasta",
         "quantity": 1
     },
     {
-        "item": "Peanut butter",
+        "item": "Canned rice",
         "quantity": 1
     },
     {
-        "item": "Jam",
+        "item": "Canned noodles",
         "quantity": 1
     },
     {
-        "item": "Honey",
+        "item": "Canned potatoes",
         "quantity": 1
     },
     {
-        "item": "Maple syrup",
+        "item": "Canned yams",
         "quantity": 1
     },
     {
-        "item": "Ketchup",
+        "item": "Canned squash",
         "quantity": 1
     },
     {
-        "item": "Mustard",
+        "item": "Canned carrots",
         "quantity": 1
     },
     {
-        "item": "Mayonnaise",
+        "item": "Canned peas",
         "quantity": 1
     },
     {
-        "item": "Relish",
+        "item": "Canned green beans",
         "quantity": 1
     },
     {
-        "item": "Pickles",
+        "item": "Canned corn",
         "quantity": 1
     },
     {
-        "item": "Olives",
+        "item": "Canned lima beans",
         "quantity": 1
     },
     {
-        "item": "Pickled onions",
+        "item": "Canned kidney beans",
         "quantity": 1
     },
     {
-        "item": "Pickled cucumbers",
+        "item": "Canned black beans",
         "quantity": 1
     },
     {
-        "item": "Pickled peppers",
+        "item": "Canned pinto beans",
         "quantity": 1
     },
     {
-        "item": "Pickled carrots",
+        "item": "Canned garbanzo beans",
         "quantity": 1
     },
     {
-        "item": "Pickled beets",
+        "item": "Canned chickpeas",
         "quantity": 1
     },
     {
-        "item": "Pickled cauliflower",
+        "item": "Canned lentils",
         "quantity": 1
     },
     {
-        "item": "Pickled broccoli",
+        "item": "Canned split peas",
         "quantity": 1
     },
     {
-        "item": "Pickled green beans",
+        "item": "Canned navy beans",
         "quantity": 1
     },
     {
-        "item": "Pickled peas",
+        "item": "Canned cannellini beans",
         "quantity": 1
     },
     {
-        "item": "Pickled corn",
+        "item": "Canned Great Northern beans",
         "quantity": 1
     },
     {
-        "item": "Pickled mushrooms",
+        "item": "Canned red beans",
         "quantity": 1
     },
     {
-        "item": "Pickled spinach",
+        "item": "Canned white beans",
         "quantity": 1
     },
     {
-        "item": "Pickled tomatoes",
+        "item": "Canned black-eyed peas",
         "quantity": 1
     },
     {
-        "item": "Pickled onions",
+        "item": "Canned kidney beans",
         "quantity": 1
     },
     {
-        "item": "Pickled cucumbers",
+        "item": "Canned pinto beans",
         "quantity": 1
     },
     {
-        "item": "Pickled peppers",
-        "quantity": 1
-    },
-    {
-        "item": "Pickled carrots",
-        "quantity": 1
-    },
-    {
-        "item": "Pickled beets",
-        "quantity": 1
-    },
-    {
-        "item": "Pickled cauliflower",
-        "quantity": 1
-    },
-    {
-        "item": "Pickled broccoli",
-        "quantity": 1
+        "item": "Canned black beans",
+        "
 """

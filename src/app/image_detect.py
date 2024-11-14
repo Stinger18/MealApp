@@ -32,8 +32,22 @@ urls = [
         'https://s2.qwant.com/thumbr/474x760/c/d/f08f2f2516c8fa9c238318f1b13722eab8ef93abd23331f04818d5924405a0/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP._Sc1ybWIZaV-DYW0A__iewHaL4%26pid%3DApi&q=0&b=1&p=0&a=0',
         ]
 
+# prompts = [
+#     """Identify the food items and quantities from this image in json format with no other text. EX: [{
+#     "item": "Orange juice",
+#     "quantity": 1
+# }, {
+#     "item": "Apple",
+#     "quantity": 2
+# }, {
+#     "item": "Lemons",
+#     "quantity": 3"
+#     ...
+# """
+# ]
+
 prompts = [
-    """Identify the food items and quantities from this image in json format with no other text. EX: [{
+    """Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
     "item": "Orange juice",
     "quantity": 1
 }, {

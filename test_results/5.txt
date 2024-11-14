@@ -2,7 +2,7 @@
 ****************** 5.txt ***********************
 ~~~ Prompt:
 
-Identify the food items and quantities from this image in json format with no other text. EX: [{
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
     "item": "Orange juice",
     "quantity": 1
 }, {
@@ -20,211 +20,162 @@ https://s2.qwant.com/thumbr/474x711/6/d/4045f69b7f9ccac2ec0abf1cf999dd4da7970517
 ~~~ Temperature: 0.1
 
 """
-[
-    {
-        "item": "Orange juice",
-        "quantity": 1
-    },
-    {
-        "item": "Apple",
-        "quantity": 2
-    },
-    {
-        "item": "Lemons",
-        "quantity": 3
-    },
-    {
-        "item": "Tomatoes",
-        "quantity": 4
-    },
-    {
-        "item": "Cucumber",
-        "quantity": 5
-    },
-    {
-        "item": "Carrots",
-        "quantity": 6
-    },
-    {
-        "item": "Strawberries",
-        "quantity": 7
-    },
-    {
-        "item": "Bananas",
-        "quantity": 8
-    },
-    {
-        "item": "Grapes",
-        "quantity": 9
-    },
-    {
-        "item": "Watermelon",
-        "quantity": 10
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 11
-    },
-    {
-        "item": "Mango",
-        "quantity": 12
-    },
-    {
-        "item": "Peaches",
-        "quantity": 13
-    },
-    {
-        "item": "Plums",
-        "quantity": 14
-    },
-    {
-        "item": "Pears",
-        "quantity": 15
-    },
-    {
-        "item": "Peaches",
-        "quantity": 16
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 17
-    },
-    {
-        "item": "Grapes",
-        "quantity": 18
-    },
-    {
-        "item": "Strawberries",
-        "quantity": 19
-    },
-    {
-        "item": "Blueberries",
-        "quantity": 20
-    },
-    {
-        "item": "Raspberries",
-        "quantity": 21
-    },
-    {
-        "item": "Blackberries",
-        "quantity": 22
-    },
-    {
-        "item": "Kiwi",
-        "quantity": 23
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 24
-    },
-    {
-        "item": "Mango",
-        "quantity": 25
-    },
-    {
-        "item": "Peaches",
-        "quantity": 26
-    },
-    {
-        "item": "Plums",
-        "quantity": 27
-    },
-    {
-        "item": "Pears",
-        "quantity": 28
-    },
-    {
-        "item": "Peaches",
-        "quantity": 29
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 30
-    },
-    {
-        "item": "Grapes",
-        "quantity": 31
-    },
-    {
-        "item": "Strawberries",
-        "quantity": 32
-    },
-    {
-        "item": "Blueberries",
-        "quantity": 33
-    },
-    {
-        "item": "Raspberries",
-        "quantity": 34
-    },
-    {
-        "item": "Blackberries",
-        "quantity": 35
-    },
-    {
-        "item": "Kiwi",
-        "quantity": 36
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 37
-    },
-    {
-        "item": "Mango",
-        "quantity": 38
-    },
-    {
-        "item": "Peaches",
-        "quantity": 39
-    },
-    {
-        "item": "Plums",
-        "quantity": 40
-    },
-    {
-        "item": "Pears",
-        "quantity": 41
-    },
-    {
-        "item": "Peaches",
-        "quantity": 42
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 43
-    },
-    {
-        "item": "Grapes",
-        "quantity": 44
-    },
-    {
-        "item": "Strawberries",
-        "quantity": 45
-    },
-    {
-        "item": "Blueberries",
-        "quantity": 46
-    },
-    {
-        "item": "Raspberries",
-        "quantity": 47
-    },
-    {
-        "item": "Blackberries",
-        "quantity": 48
-    },
-    {
-        "item": "Kiwi",
-        "quantity": 49
-    },
-    {
-        "item": "Pineapple",
-        "quantity": 50
-    },
-    {
-        "item": "Mango",
-        "quantity": 51
-    },
-    {
-        "item": "
+{
+    "item": "Water bottles",
+    "quantity": 6
+}, {
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3
+}, {
+    "item": "Tomatoes",
+    "quantity": 2
+}, {
+    "item": "Cucumbers",
+    "quantity": 1
+}, {
+    "item": "Cheese",
+    "quantity": 1
+}, {
+    "item": "Crackers",
+    "quantity": 1
+}, {
+    "item": "Cookies",
+    "quantity": 1
+}, {
+    "item": "Salami",
+    "quantity": 1
+}, {
+    "item": "Bottles of hot sauce",
+    "quantity": 2
+}, {
+    "item": "Bottles of ketchup",
+    "quantity": 2
+}, {
+    "item": "Bottles of mustard",
+    "quantity": 2
+}, {
+    "item": "Bottles of relish",
+    "quantity": 2
+}, {
+    "item": "Bottles of mayonnaise",
+    "quantity": 2
+}, {
+    "item": "Bottles of salad dressing",
+    "quantity": 2
+}, {
+    "item": "Bottles of oil",
+    "quantity": 2
+}, {
+    "item": "Bottles of vinegar",
+    "quantity": 2
+}, {
+    "item": "Bottles of soda",
+    "quantity": 2
+}, {
+    "item": "Cans of soda",
+    "quantity": 2
+}, {
+    "item": "Cans of beer",
+    "quantity": 2
+}, {
+    "item": "Cans of soup",
+    "quantity": 2
+}, {
+    "item": "Cans of vegetables",
+    "quantity": 2
+}, {
+    "item": "Cans of fruits",
+    "quantity": 2
+}, {
+    "item": "Cans of meat",
+    "quantity": 2
+}, {
+    "item": "Cans of fish",
+    "quantity": 2
+}, {
+    "item": "Cans of beans",
+    "quantity": 2
+}, {
+    "item": "Cans of legumes",
+    "quantity": 2
+}, {
+    "item": "Cans of grains",
+    "quantity": 2
+}, {
+    "item": "Cans of pasta",
+    "quantity": 2
+}, {
+    "item": "Cans of rice",
+    "quantity": 2
+}, {
+    "item": "Cans of cereal",
+    "quantity": 2
+}, {
+    "item": "Cans of snacks",
+    "quantity": 2
+}, {
+    "item": "Cans of nuts",
+    "quantity": 2
+}, {
+    "item": "Cans of seeds",
+    "quantity": 2
+}, {
+    "item": "Cans of spices",
+    "quantity": 2
+}, {
+    "item": "Cans of herbs",
+    "quantity": 2
+}, {
+    "item": "Cans of seasonings",
+    "quantity": 2
+}, {
+    "item": "Cans of condiments",
+    "quantity": 2
+}, {
+    "item": "Cans of sauces",
+    "quantity": 2
+}, {
+    "item": "Cans of marinades",
+    "quantity": 2
+}, {
+    "item": "Cans of dressings",
+    "quantity": 2
+}, {
+    "item": "Cans of toppings",
+    "quantity": 2
+}, {
+    "item": "Cans of fillings",
+    "quantity": 2
+}, {
+    "item": "Cans of spreads",
+    "quantity": 2
+}, {
+    "item": "Cans of dips",
+    "quantity": 2
+}, {
+    "item": "Cans of salsas",
+    "quantity": 2
+}, {
+    "item": "Cans of guacamole",
+    "quantity": 2
+}, {
+    "item": "Cans of hummus",
+    "quantity": 2
+}, {
+    "item": "Cans of falafel",
+    "quantity": 2
+}, {
+    "item": "Cans of tabbouleh",
+    "quantity": 2
+}, {
+    "item": "Cans of quinoa",
+    "quantity": 2
+}, {
+
 """

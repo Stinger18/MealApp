@@ -2,7 +2,7 @@
 ****************** 3.txt ***********************
 ~~~ Prompt:
 
-Identify the food items and quantities from this image in json format with no other text. EX: [{
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
     "item": "Orange juice",
     "quantity": 1
 }, {
@@ -21,183 +21,170 @@ https://s1.qwant.com/thumbr/474x675/0/9/5fc821586b0b8cc9b2f6e8be20ea8936e9fa77f3
 
 """
 [{
-    "item": "Grapes",
+    "item": "Bottles of water",
+    "quantity": 4
+}, {
+    "item": "Bottles of orange juice",
+    "quantity": 2
+}, {
+    "item": "Bottles of milk",
+    "quantity": 2
+}, {
+    "item": "Eggs",
     "quantity": 1
 }, {
-    "item": "Potatoes",
+    "item": "Apples",
+    "quantity": 3
+}, {
+    "item": "Bananas",
+    "quantity": 4
+}, {
+    "item": "Carrots",
     "quantity": 1
 }, {
-    "item": "Tomato sauce",
+    "item": "Cucumber",
     "quantity": 1
 }, {
     "item": "Tomatoes",
-    "quantity": 3
-}, {
-    "item": "Milk",
-    "quantity": 1
-}, {
-    "item": "Orange juice",
     "quantity": 2
 }, {
-    "item": "Beer",
-    "quantity": 2
-}, {
-    "item": "Cantaloupe",
+    "item": "Bread",
     "quantity": 1
 }, {
-    "item": "Watermelon",
-    "quantity": 1
-}, {
-    "item": "Fruit salad",
-    "quantity": 1
-}, {
-    "item": "Bacon",
-    "quantity": 1
-}, {
-    "item": "Chocolate",
+    "item": "Cheese",
     "quantity": 1
 }, {
     "item": "Ham",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Yogurt",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Peanut butter",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Honey",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Coffee",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Tea",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Sugar",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Salt",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Olive oil",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Butter",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Mayonnaise",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Ketchup",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Mustard",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Pickles",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Salsa",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Guacamole",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Sour cream",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Shredded cheese",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Shredded lettuce",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Shredded carrots",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped onions",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped bell peppers",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped tomatoes",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped mushrooms",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped bacon",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped ham",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped chicken",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped beef",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped pork",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped turkey",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped sausage",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped pepperoni",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped salami",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped capicola",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped prosciutto",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped pancetta",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped bacon bits",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped ham bits",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped chicken bits",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped beef bits",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped pork bits",
     "quantity": 1
 }, {
-    "item": "Orange juice",
+    "item": "Chopped turkey bits",
     "quantity": 1
 }, {
-    "item": "Beer",
+    "item": "Chopped sausage bits",
     "quantity": 1
 }, {
-    "item": "Milk",
+    "item": "Chopped pepperoni bits",
     "quantity": 1
 }, {
-    "item": "Orange juice",
-    "quantity": 1
-}, {
-    "item": "Beer",
-    "quantity": 1
-}, {
-    "item": "Milk",
-    "quantity": 1
-}, {
-    "item": "Orange juice",
-
+    "
 """

@@ -2,7 +2,7 @@
 ****************** 4.txt ***********************
 ~~~ Prompt:
 
-Identify the food items and quantities from this image in json format with no other text. EX: [{
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
     "item": "Orange juice",
     "quantity": 1
 }, {
@@ -20,196 +20,210 @@ https://s2.qwant.com/thumbr/474x684/5/5/26f1fb9dcb52c2b90518496c9421645f6041ebad
 ~~~ Temperature: 0.1
 
 """
-[
-    {
-        "item": "Tomatoes",
-        "quantity": 2
-    },
-    {
-        "item": "Red Onion",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Tomatoes",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Beans",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Corn",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Peas",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Carrots",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Green Beans",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Potatoes",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Pumpkin",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Sweet Potatoes",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Yams",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Asparagus",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Broccoli",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Cauliflower",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Brussels Sprouts",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Cabbage",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Kale",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Spinach",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Mushrooms",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Onions",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Garlic",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Ginger",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Lemons",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Limes",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Oranges",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Grapefruit",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Pineapple",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Peaches",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Pears",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Apples",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Cherries",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Plums",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Apricots",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Prunes",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Raisins",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Currants",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Cranberries",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Blueberries",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Strawberries",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Raspberries",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Blackberries",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Kiwi",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Mango",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Papaya",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Guava",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Passion Fruit",
-        "quantity": 1
-    },
-    {
-        "item": "Canned Starfruit",
-        "quantity": 
+{
+    "item": "Tomatoes",
+    "quantity": 2
+},
+{
+    "item": "Red Pepper",
+    "quantity": 1
+},
+{
+    "item": "Lettuce",
+    "quantity": 1
+},
+{
+    "item": "Cheese",
+    "quantity": 1
+},
+{
+    "item": "Bread",
+    "quantity": 1
+},
+{
+    "item": "Milk",
+    "quantity": 1
+},
+{
+    "item": "Orange Juice",
+    "quantity": 1
+},
+{
+    "item": "Lemons",
+    "quantity": 2
+},
+{
+    "item": "Apples",
+    "quantity": 2
+},
+{
+    "item": "Potatoes",
+    "quantity": 1
+},
+{
+    "item": "Onions",
+    "quantity": 1
+},
+{
+    "item": "Carrots",
+    "quantity": 1
+},
+{
+    "item": "Canned Goods",
+    "quantity": 3
+},
+{
+    "item": "Jars of Sauce",
+    "quantity": 3
+},
+{
+    "item": "Jars of Pickles",
+    "quantity": 2
+},
+{
+    "item": "Jars of Jam",
+    "quantity": 2
+},
+{
+    "item": "Jars of Honey",
+    "quantity": 1
+},
+{
+    "item": "Jars of Peanut Butter",
+    "quantity": 1
+},
+{
+    "item": "Jars of Jelly",
+    "quantity": 1
+},
+{
+    "item": "Jars of Mayonnaise",
+    "quantity": 1
+},
+{
+    "item": "Jars of Relish",
+    "quantity": 1
+},
+{
+    "item": "Jars of Mustard",
+    "quantity": 1
+},
+{
+    "item": "Jars of Ketchup",
+    "quantity": 1
+},
+{
+    "item": "Jars of Hot Sauce",
+    "quantity": 1
+},
+{
+    "item": "Jars of BBQ Sauce",
+    "quantity": 1
+},
+{
+    "item": "Jars of Salsa",
+    "quantity": 1
+},
+{
+    "item": "Jars of Guacamole",
+    "quantity": 1
+},
+{
+    "item": "Jars of Hummus",
+    "quantity": 1
+},
+{
+    "item": "Jars of Tzatziki",
+    "quantity": 1
+},
+{
+    "item": "Jars of Pesto",
+    "quantity": 1
+},
+{
+    "item": "Jars of Alfredo Sauce",
+    "quantity": 1
+},
+{
+    "item": "Jars of Marinara Sauce",
+    "quantity": 1
+},
+{
+    "item": "Jars of Ranch Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of Caesar Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of Blue Cheese Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of Thousand Island Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of French Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of Italian Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of Vinaigrette",
+    "quantity": 1
+},
+{
+    "item": "Jars of Salad Dressing",
+    "quantity": 1
+},
+{
+    "item": "Jars of Dip",
+    "quantity": 1
+},
+{
+    "item": "Jars of Spread",
+    "quantity": 1
+},
+{
+    "item": "Jars of Relish",
+    "quantity": 1
+},
+{
+    "item": "Jars of Mustard",
+    "quantity": 1
+},
+{
+    "item": "Jars of Ketchup",
+    "quantity": 1
+},
+{
+    "item": "Jars of Hot Sauce",
+    "quantity": 1
+},
+{
+    "item": "Jars of BBQ Sauce",
+    "quantity": 1
+},
+{
+    "item": "Jars of Salsa",
+    "quantity": 1
+},
+{
+    "item": "Jars of Guacamole",
+    "quantity": 1
+},
+{
+    "item": "Jars of Hummus",
+    "quantity": 1
+},
+{
+    "item": "Jars of Tzatziki",
+    "quantity": 1
+},
+{
+    "
 """

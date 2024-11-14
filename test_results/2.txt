@@ -2,7 +2,7 @@
 ****************** 2.txt ***********************
 ~~~ Prompt:
 
-Identify the food items and quantities from this image in json format with no other text. EX: [{
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
     "item": "Orange juice",
     "quantity": 1
 }, {
@@ -36,22 +36,55 @@ https://s1.qwant.com/thumbr/474x316/9/6/d72896c72955e1ae2291077d29d97818bf997a63
     "item": "Butter",
     "quantity": 2
 }, {
-    "item": "Eggs",
+    "item": "Bottled water",
+    "quantity": 3
+}, {
+    "item": "Soda",
+    "quantity": 4
+}, {
+    "item": "Hot sauce",
+    "quantity": 3
+}, {
+    "item": "Mayonnaise",
+    "quantity": 2
+}, {
+    "item": "Mustard",
+    "quantity": 2
+}, {
+    "item": "Ketchup",
     "quantity": 1
 }, {
-    "item": "Bread",
+    "item": "Relish",
+    "quantity": 1
+}, {
+    "item": "Pickles",
+    "quantity": 1
+}, {
+    "item": "Jelly",
+    "quantity": 2
+}, {
+    "item": "Jam",
+    "quantity": 2
+}, {
+    "item": "Honey",
+    "quantity": 1
+}, {
+    "item": "Yogurt",
     "quantity": 1
 }, {
     "item": "Cheese",
     "quantity": 1
 }, {
-    "item": "Tomatoes",
-    "quantity": 1
-}, {
-    "item": "Cucumbers",
+    "item": "Eggs",
     "quantity": 1
 }, {
     "item": "Carrots",
+    "quantity": 1
+}, {
+    "item": "Lettuce",
+    "quantity": 1
+}, {
+    "item": "Tomatoes",
     "quantity": 1
 }, {
     "item": "Onions",
@@ -60,135 +93,104 @@ https://s1.qwant.com/thumbr/474x316/9/6/d72896c72955e1ae2291077d29d97818bf997a63
     "item": "Potatoes",
     "quantity": 1
 }, {
-    "item": "Hot sauce",
-    "quantity": 3
-}, {
-    "item": "Ketchup",
+    "item": "Cucumbers",
     "quantity": 1
 }, {
-    "item": "Mustard",
+    "item": "Bell peppers",
     "quantity": 1
 }, {
-    "item": "Mayonnaise",
+    "item": "Cabbage",
     "quantity": 1
 }, {
-    "item": "Pickles",
+    "item": "Broccoli",
     "quantity": 1
 }, {
-    "item": "Relish",
+    "item": "Corn",
     "quantity": 1
 }, {
-    "item": "Salsa",
+    "item": "Green beans",
     "quantity": 1
 }, {
-    "item": "Jelly",
+    "item": "Peas",
     "quantity": 1
 }, {
-    "item": "Jam",
+    "item": "Spinach",
     "quantity": 1
 }, {
-    "item": "Honey",
+    "item": "Asparagus",
     "quantity": 1
 }, {
-    "item": "Maple syrup",
+    "item": "Mushrooms",
     "quantity": 1
 }, {
-    "item": "Coffee",
+    "item": "Zucchini",
     "quantity": 1
 }, {
-    "item": "Tea",
+    "item": "Yellow squash",
     "quantity": 1
 }, {
-    "item": "Sugar",
+    "item": "Red bell pepper",
     "quantity": 1
 }, {
-    "item": "Flour",
+    "item": "Orange bell pepper",
     "quantity": 1
 }, {
-    "item": "Baking powder",
+    "item": "Yellow bell pepper",
     "quantity": 1
 }, {
-    "item": "Baking soda",
+    "item": "Green bell pepper",
     "quantity": 1
 }, {
-    "item": "Salt",
+    "item": "Purple bell pepper",
     "quantity": 1
 }, {
-    "item": "Pepper",
+    "item": "Banana",
     "quantity": 1
 }, {
-    "item": "Olive oil",
+    "item": "Apple",
     "quantity": 1
 }, {
-    "item": "Vegetable oil",
+    "item": "Grapes",
     "quantity": 1
 }, {
-    "item": "Butter",
+    "item": "Strawberries",
     "quantity": 1
 }, {
-    "item": "Cream cheese",
+    "item": "Blueberries",
     "quantity": 1
 }, {
-    "item": "Yogurt",
+    "item": "Raspberries",
     "quantity": 1
 }, {
-    "item": "Cottage cheese",
+    "item": "Blackberries",
     "quantity": 1
 }, {
-    "item": "Rice",
+    "item": "Pineapple",
     "quantity": 1
 }, {
-    "item": "Pasta",
+    "item": "Peaches",
     "quantity": 1
 }, {
-    "item": "Canned beans",
+    "item": "Plums",
     "quantity": 1
 }, {
-    "item": "Canned tomatoes",
+    "item": "Nectarines",
     "quantity": 1
 }, {
-    "item": "Canned corn",
+    "item": "Apricots",
     "quantity": 1
 }, {
-    "item": "Canned peas",
+    "item": "Pears",
     "quantity": 1
 }, {
-    "item": "Canned tuna",
+    "item": "Pomegranate",
     "quantity": 1
 }, {
-    "item": "Canned salmon",
+    "item": "Watermelon",
     "quantity": 1
 }, {
-    "item": "Canned chicken",
+    "item": "Cantaloupe",
     "quantity": 1
 }, {
-    "item": "Canned beef",
-    "quantity": 1
-}, {
-    "item": "Canned pork",
-    "quantity": 1
-}, {
-    "item": "Canned ham",
-    "quantity": 1
-}, {
-    "item": "Canned turkey",
-    "quantity": 1
-}, {
-    "item": "Canned roast beef",
-    "quantity": 1
-}, {
-    "item": "Canned chicken noodle soup",
-    "quantity": 1
-}, {
-    "item": "Canned vegetable soup",
-    "quantity": 1
-}, {
-    "item": "Canned tomato soup",
-    "quantity": 1
-}, {
-    "item": "Canned cream of mushroom soup",
-    "quantity": 1
-}, {
-    "item": "Canned cream of chicken soup",
-    "
+    "item": "Honeyd
 """
