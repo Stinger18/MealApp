@@ -1,15 +1,17 @@
 import "./SideBar.css";
 
-function Sidebar({ title, body, styles }) {
+function Sidebar({ title, isActive = true, body, styles }) {
   return (
-    <div className="sidebar-container" style={styles?.container}>
-      <div className="sidebar-title" style={styles?.title}>
-        {title}
+    isActive && (
+      <div className="sidebar-container" style={styles?.container}>
+        <div className="sidebar-title" style={styles?.title}>
+          {title}
+        </div>
+        <div className="sidebar-body" style={styles?.body}>
+          {body}
+        </div>
       </div>
-      <div className="sidebar-body" style={styles?.body}>
-        {body}
-      </div>
-    </div>
+    )
   );
 }
 
