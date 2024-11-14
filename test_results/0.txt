@@ -1,0 +1,196 @@
+
+****************** 0.txt ***********************
+~~~ Prompt:
+
+Identify the food items and quantities from this image in json format with no other text. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3
+}, {
+    "item": "Grapes",
+    "quantity": 1
+}, {
+    "item": "Strawberries",
+    "quantity": 1
+}, {
+    "item": "Milk",
+    "quantity": 1
+}, {
+    "item": "Cheese",
+    "quantity": 1
+}, {
+    "item": "Ham",
+    "quantity": 1
+}, {
+    "item": "Potatoes",
+    "quantity": 1
+}, {
+    "item": "Onions",
+    "quantity": 1
+}, {
+    "item": "Garlic",
+    "quantity": 1
+}, {
+    "item": "Tomatoes",
+    "quantity": 1
+}, {
+    "item": "Cabbage",
+    "quantity": 1
+}, {
+    "item": "Peppers",
+    "quantity": 1
+}, {
+    "item": "Cucumber",
+    "quantity": 1
+}, {
+    "item": "Carrots",
+    "quantity": 1
+}, {
+    "item": "Bottled water",
+    "quantity": 1
+}, {
+    "item": "Blue Gatorade",
+    "quantity": 1
+}, {
+    "item": "Red Gatorade",
+    "quantity": 1
+}, {
+    "item": "Yellow Gatorade",
+    "quantity": 1
+}, {
+    "item": "Pink Gatorade",
+    "quantity": 1
+}, {
+    "item": "Ketchup",
+    "quantity": 1
+}, {
+    "item": "Mustard",
+    "quantity": 1
+}, {
+    "item": "Mayonnaise",
+    "quantity": 1
+}, {
+    "item": "Jam",
+    "quantity": 1
+}, {
+    "item": "Butter",
+    "quantity": 1
+}, {
+    "item": "Bread",
+    "quantity": 1
+}, {
+    "item": "Champagne",
+    "quantity": 1
+}, {
+    "item": "Green soda",
+    "quantity": 1
+}, {
+    "item": "Yellow soda",
+    "quantity": 1
+}, {
+    "item": "Red soda",
+    "quantity": 1
+}, {
+    "item": "White milk",
+    "quantity": 1
+}, {
+    "item": "Chocolate milk",
+    "quantity": 1
+}, {
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple juice",
+    "quantity": 1
+}, {
+    "item": "Grape juice",
+    "quantity": 1
+}, {
+    "item": "Pineapple juice",
+    "quantity": 1
+}, {
+    "item": "Orange",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 1
+}, {
+    "item": "Lemon",
+    "quantity": 1
+}, {
+    "item": "Grapefruit",
+    "quantity": 1
+}, {
+    "item": "Strawberry",
+    "quantity": 1
+}, {
+    "item": "Blueberry",
+    "quantity": 1
+}, {
+    "item": "Raspberry",
+    "quantity": 1
+}, {
+    "item": "Blackberry",
+    "quantity": 1
+}, {
+    "item": "Kiwi",
+    "quantity": 1
+}, {
+    "item": "Peach",
+    "quantity": 1
+}, {
+    "item": "Pineapple",
+    "quantity": 1
+}, {
+    "item": "Watermelon",
+    "quantity": 1
+}, {
+    "item": "Cantaloupe",
+    "quantity": 1
+}, {
+    "item": "Honeydew",
+    "quantity": 1
+}, {
+    "item": "Mango",
+    "quantity": 1
+}, {
+    "item": "Papaya",
+    "quantity": 1
+}, {
+    "item": "Pomegranate",
+    "quantity": 1
+}, {
+    "item": "Guava",
+    "quantity": 1
+}, {
+    "item": "Passionfruit",
+    "quantity": 1
+}, {
+    "item": "Starfruit",
+    "quantity": 1
+}, {
+    "item": "Dragon
+"""

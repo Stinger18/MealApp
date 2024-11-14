@@ -12,12 +12,12 @@ NOTE:
 If you want to run you need a hugging face key and permission to use meta-llama/Llama-3.2-11B-Vision-Instruct from hugging face
 
 NOTE:
-ethan wants final output as nested lists
-ex: 
-[[ingredient, amount], [ingredient, amount]]
-or
-[[ingredient1, ingredient2...], [amount1, amount2...]]
+ethan wants final output as dictionary
+{item: qty}
 '''
+
+load_dotenv()
+
 
 urls = [
         'https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0',
@@ -46,9 +46,10 @@ prompts = [
 """
 ]
 
+#Anything above 0.1 makes it suck );
 TEMPERATURE = 0.1
 
-client = InferenceClient(api_key="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")
+client = InferenceClient(api_key=os.getenv("hfKey"))
 
 # This uses the hugging face api to access llama3.2. Also loads image from url 
 def detect_ingredients(url: str, prompt: str):
@@ -101,7 +102,7 @@ def test_prompt(url: str, prompt: str, num: int):
         os.remove(f"test_results/{num}.txt")
         f = open(f"test_results/{num}.txt", "x")
 
-     #Write data to file
+    #Write data to file
     f.write(f"\n****************** {num}.txt ***********************\n")
     f.write(f"~~~ Prompt:\n\n{prompt}\n")
     f.write(f"~~~ URL:\n\n{url}\n")

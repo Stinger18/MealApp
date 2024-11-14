@@ -1,0 +1,215 @@
+
+****************** 4.txt ***********************
+~~~ Prompt:
+
+Identify the food items and quantities from this image in json format with no other text. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s2.qwant.com/thumbr/474x684/5/5/26f1fb9dcb52c2b90518496c9421645f6041ebad64773fd6c9a08524e657f4/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.o2tNBjbfk60KrYA00oP_XwHaKs%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[
+    {
+        "item": "Tomatoes",
+        "quantity": 2
+    },
+    {
+        "item": "Red Onion",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Tomatoes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Corn",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Peas",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Carrots",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Green Beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Potatoes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Pumpkin",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Sweet Potatoes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Yams",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Asparagus",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Broccoli",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Cauliflower",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Brussels Sprouts",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Cabbage",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Kale",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Spinach",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Mushrooms",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Onions",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Garlic",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Ginger",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Lemons",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Limes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Oranges",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Grapefruit",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Pineapple",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Peaches",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Pears",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Apples",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Cherries",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Plums",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Apricots",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Prunes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Raisins",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Currants",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Cranberries",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Blueberries",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Strawberries",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Raspberries",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Blackberries",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Kiwi",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Mango",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Papaya",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Guava",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Passion Fruit",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Starfruit",
+        "quantity": 
+"""

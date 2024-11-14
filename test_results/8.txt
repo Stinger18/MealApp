@@ -1,0 +1,231 @@
+
+****************** 8.txt ***********************
+~~~ Prompt:
+
+Identify the food items and quantities from this image in json format with no other text. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x710/3/4/be8c2baa1de6beac3e6e5f880f532b5aff716f9ce904d0b5d3f8c0b525ac59/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.-XtKmAjjhJbDwq5y1UyHaQHaLG%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[
+    {
+        "item": "Beer",
+        "quantity": 4
+    },
+    {
+        "item": "Soda",
+        "quantity": 2
+    },
+    {
+        "item": "Coffee",
+        "quantity": 1
+    },
+    {
+        "item": "Yogurt",
+        "quantity": 2
+    },
+    {
+        "item": "Milk",
+        "quantity": 1
+    },
+    {
+        "item": "Cheese",
+        "quantity": 1
+    },
+    {
+        "item": "Eggs",
+        "quantity": 1
+    },
+    {
+        "item": "Bread",
+        "quantity": 1
+    },
+    {
+        "item": "Butter",
+        "quantity": 1
+    },
+    {
+        "item": "Jam",
+        "quantity": 1
+    },
+    {
+        "item": "Honey",
+        "quantity": 1
+    },
+    {
+        "item": "Sugar",
+        "quantity": 1
+    },
+    {
+        "item": "Flour",
+        "quantity": 1
+    },
+    {
+        "item": "Olive oil",
+        "quantity": 1
+    },
+    {
+        "item": "Salt",
+        "quantity": 1
+    },
+    {
+        "item": "Pepper",
+        "quantity": 1
+    },
+    {
+        "item": "Tomato sauce",
+        "quantity": 1
+    },
+    {
+        "item": "Pasta",
+        "quantity": 1
+    },
+    {
+        "item": "Rice",
+        "quantity": 1
+    },
+    {
+        "item": "Chicken",
+        "quantity": 1
+    },
+    {
+        "item": "Beef",
+        "quantity": 1
+    },
+    {
+        "item": "Vegetables",
+        "quantity": 1
+    },
+    {
+        "item": "Fruits",
+        "quantity": 1
+    },
+    {
+        "item": "Nuts",
+        "quantity": 1
+    },
+    {
+        "item": "Dried fruits",
+        "quantity": 1
+    },
+    {
+        "item": "Canned goods",
+        "quantity": 1
+    },
+    {
+        "item": "Snacks",
+        "quantity": 1
+    },
+    {
+        "item": "Beverages",
+        "quantity": 1
+    },
+    {
+        "item": "Condiments",
+        "quantity": 1
+    },
+    {
+        "item": "Spices",
+        "quantity": 1
+    },
+    {
+        "item": "Herbs",
+        "quantity": 1
+    },
+    {
+        "item": "Sauces",
+        "quantity": 1
+    },
+    {
+        "item": "Dressings",
+        "quantity": 1
+    },
+    {
+        "item": "Baking supplies",
+        "quantity": 1
+    },
+    {
+        "item": "Pantry staples",
+        "quantity": 1
+    },
+    {
+        "item": "Pet food",
+        "quantity": 1
+    },
+    {
+        "item": "Baby food",
+        "quantity": 1
+    },
+    {
+        "item": "Special dietary foods",
+        "quantity": 1
+    },
+    {
+        "item": "Leftovers",
+        "quantity": 1
+    },
+    {
+        "item": "Expired food",
+        "quantity": 1
+    },
+    {
+        "item": "Unopened food",
+        "quantity": 1
+    },
+    {
+        "item": "Opened food",
+        "quantity": 1
+    },
+    {
+        "item": "Food in containers",
+        "quantity": 1
+    },
+    {
+        "item": "Food in bags",
+        "quantity": 1
+    },
+    {
+        "item": "Food in jars",
+        "quantity": 1
+    },
+    {
+        "item": "Food in cans",
+        "quantity": 1
+    },
+    {
+        "item": "Food in bottles",
+        "quantity": 1
+    },
+    {
+        "item": "Food in boxes",
+        "quantity": 1
+    },
+    {
+        "item": "Food in packets",
+        "quantity": 1
+    },
+    {
+        "item": "Food in tubs",
+        "quantity": 1
+    },
+    {
+        "item": "Food in trays",
+        "quantity": 1
+    },
+    {
+        "item": "Food in bowls",
+        "
+"""

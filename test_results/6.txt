@@ -1,0 +1,196 @@
+
+****************** 6.txt ***********************
+~~~ Prompt:
+
+Identify the food items and quantities from this image in json format with no other text. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s2.qwant.com/thumbr/474x386/d/5/4cf501973975f75101dc4861cb70b73a979fd3d4e66d3ce517ea9a37a72ede/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.GVK-YnAcS0QC-ESITx3F-wHaGC%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3
+}, {
+    "item": "Milk",
+    "quantity": 1
+}, {
+    "item": "Ketchup",
+    "quantity": 1
+}, {
+    "item": "Mayonnaise",
+    "quantity": 1
+}, {
+    "item": "Mustard",
+    "quantity": 1
+}, {
+    "item": "Tomato sauce",
+    "quantity": 1
+}, {
+    "item": "Pickles",
+    "quantity": 1
+}, {
+    "item": "Olives",
+    "quantity": 1
+}, {
+    "item": "Cucumbers",
+    "quantity": 1
+}, {
+    "item": "Cheese",
+    "quantity": 1
+}, {
+    "item": "Ham",
+    "quantity": 1
+}, {
+    "item": "Peppers",
+    "quantity": 1
+}, {
+    "item": "Onions",
+    "quantity": 1
+}, {
+    "item": "Garlic",
+    "quantity": 1
+}, {
+    "item": "Tomatoes",
+    "quantity": 1
+}, {
+    "item": "Lettuce",
+    "quantity": 1
+}, {
+    "item": "Cabbage",
+    "quantity": 1
+}, {
+    "item": "Potatoes",
+    "quantity": 1
+}, {
+    "item": "Carrots",
+    "quantity": 1
+}, {
+    "item": "Oranges",
+    "quantity": 1
+}, {
+    "item": "Pineapple",
+    "quantity": 1
+}, {
+    "item": "Grapes",
+    "quantity": 1
+}, {
+    "item": "Strawberries",
+    "quantity": 1
+}, {
+    "item": "Watermelon",
+    "quantity": 1
+}, {
+    "item": "Bread",
+    "quantity": 1
+}, {
+    "item": "Butter",
+    "quantity": 1
+}, {
+    "item": "Jam",
+    "quantity": 1
+}, {
+    "item": "Honey",
+    "quantity": 1
+}, {
+    "item": "Sugar",
+    "quantity": 1
+}, {
+    "item": "Salt",
+    "quantity": 1
+}, {
+    "item": "Pepper",
+    "quantity": 1
+}, {
+    "item": "Olive oil",
+    "quantity": 1
+}, {
+    "item": "Vinegar",
+    "quantity": 1
+}, {
+    "item": "Baking soda",
+    "quantity": 1
+}, {
+    "item": "Flour",
+    "quantity": 1
+}, {
+    "item": "Eggs",
+    "quantity": 1
+}, {
+    "item": "Milk",
+    "quantity": 1
+}, {
+    "item": "Yogurt",
+    "quantity": 1
+}, {
+    "item": "Cottage cheese",
+    "quantity": 1
+}, {
+    "item": "Rice",
+    "quantity": 1
+}, {
+    "item": "Pasta",
+    "quantity": 1
+}, {
+    "item": "Canned beans",
+    "quantity": 1
+}, {
+    "item": "Canned tomatoes",
+    "quantity": 1
+}, {
+    "item": "Canned tuna",
+    "quantity": 1
+}, {
+    "item": "Canned salmon",
+    "quantity": 1
+}, {
+    "item": "Canned chicken",
+    "quantity": 1
+}, {
+    "item": "Canned soup",
+    "quantity": 1
+}, {
+    "item": "Canned vegetables",
+    "quantity": 1
+}, {
+    "item": "Canned fruits",
+    "quantity": 1
+}, {
+    "item": "Canned meat",
+    "quantity": 1
+}, {
+    "item": "Canned fish",
+    "quantity": 1
+}, {
+    "item": "Canned poultry",
+    "quantity": 1
+}, {
+    "item": "Canned seafood",
+    "quantity": 1
+}, {
+    "item": "Canned legumes",
+    "quantity": 1
+}, {
+    "item": "Canned grains",
+    "quantity": 1
+}, {
+    "item": "
+"""

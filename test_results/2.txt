@@ -1,0 +1,194 @@
+
+****************** 2.txt ***********************
+~~~ Prompt:
+
+Identify the food items and quantities from this image in json format with no other text. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x316/9/6/d72896c72955e1ae2291077d29d97818bf997a63428f8e10ac0f275150d626/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.h_GjdVuPrZ89d4lOTlWBfAHaE8%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3
+}, {
+    "item": "Milk",
+    "quantity": 1
+}, {
+    "item": "Butter",
+    "quantity": 2
+}, {
+    "item": "Eggs",
+    "quantity": 1
+}, {
+    "item": "Bread",
+    "quantity": 1
+}, {
+    "item": "Cheese",
+    "quantity": 1
+}, {
+    "item": "Tomatoes",
+    "quantity": 1
+}, {
+    "item": "Cucumbers",
+    "quantity": 1
+}, {
+    "item": "Carrots",
+    "quantity": 1
+}, {
+    "item": "Onions",
+    "quantity": 1
+}, {
+    "item": "Potatoes",
+    "quantity": 1
+}, {
+    "item": "Hot sauce",
+    "quantity": 3
+}, {
+    "item": "Ketchup",
+    "quantity": 1
+}, {
+    "item": "Mustard",
+    "quantity": 1
+}, {
+    "item": "Mayonnaise",
+    "quantity": 1
+}, {
+    "item": "Pickles",
+    "quantity": 1
+}, {
+    "item": "Relish",
+    "quantity": 1
+}, {
+    "item": "Salsa",
+    "quantity": 1
+}, {
+    "item": "Jelly",
+    "quantity": 1
+}, {
+    "item": "Jam",
+    "quantity": 1
+}, {
+    "item": "Honey",
+    "quantity": 1
+}, {
+    "item": "Maple syrup",
+    "quantity": 1
+}, {
+    "item": "Coffee",
+    "quantity": 1
+}, {
+    "item": "Tea",
+    "quantity": 1
+}, {
+    "item": "Sugar",
+    "quantity": 1
+}, {
+    "item": "Flour",
+    "quantity": 1
+}, {
+    "item": "Baking powder",
+    "quantity": 1
+}, {
+    "item": "Baking soda",
+    "quantity": 1
+}, {
+    "item": "Salt",
+    "quantity": 1
+}, {
+    "item": "Pepper",
+    "quantity": 1
+}, {
+    "item": "Olive oil",
+    "quantity": 1
+}, {
+    "item": "Vegetable oil",
+    "quantity": 1
+}, {
+    "item": "Butter",
+    "quantity": 1
+}, {
+    "item": "Cream cheese",
+    "quantity": 1
+}, {
+    "item": "Yogurt",
+    "quantity": 1
+}, {
+    "item": "Cottage cheese",
+    "quantity": 1
+}, {
+    "item": "Rice",
+    "quantity": 1
+}, {
+    "item": "Pasta",
+    "quantity": 1
+}, {
+    "item": "Canned beans",
+    "quantity": 1
+}, {
+    "item": "Canned tomatoes",
+    "quantity": 1
+}, {
+    "item": "Canned corn",
+    "quantity": 1
+}, {
+    "item": "Canned peas",
+    "quantity": 1
+}, {
+    "item": "Canned tuna",
+    "quantity": 1
+}, {
+    "item": "Canned salmon",
+    "quantity": 1
+}, {
+    "item": "Canned chicken",
+    "quantity": 1
+}, {
+    "item": "Canned beef",
+    "quantity": 1
+}, {
+    "item": "Canned pork",
+    "quantity": 1
+}, {
+    "item": "Canned ham",
+    "quantity": 1
+}, {
+    "item": "Canned turkey",
+    "quantity": 1
+}, {
+    "item": "Canned roast beef",
+    "quantity": 1
+}, {
+    "item": "Canned chicken noodle soup",
+    "quantity": 1
+}, {
+    "item": "Canned vegetable soup",
+    "quantity": 1
+}, {
+    "item": "Canned tomato soup",
+    "quantity": 1
+}, {
+    "item": "Canned cream of mushroom soup",
+    "quantity": 1
+}, {
+    "item": "Canned cream of chicken soup",
+    "
+"""
