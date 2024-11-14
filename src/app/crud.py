@@ -1,78 +1,49 @@
 '''
-<<<<<<< HEAD
 CRUD Operations \n
-=======
-CRUD Operations
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 This file contains the functions that interact with the database.
 '''
 
 from sqlalchemy.orm import Session
-<<<<<<< HEAD
 try:
     from app import models
 except ImportError:
     import models
-=======
-from . import models
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 from passlib.context import CryptContext
 
 ''' User Operations '''
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-<<<<<<< HEAD
 def get_user(db: Session, userId: int) -> (models.User | None):
     ''' Returns the user (User) with the given ID'''
     return db.query(models.User).filter(models.User.id == userId).first()
-=======
-def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
-<<<<<<< HEAD
 def create_user(db: Session, id: int, name: str, email:str, password: str, recipeId: int, pantryId: int, shoppingListId: int) -> (models.User | None):
     hashed_password = pwd_context.hash(password)
     dbUser = models.User(id=id, name=name, email=email, password=hashed_password, recipeId=recipeId, pantryId=pantryId, shoppingListId=shoppingListId)
-=======
-def create_user(db: Session, name: str, email:str, password: str):
-    hashed_password = pwd_context.hash(password)
-    dbUser = models.User(name=name, email=email, password=hashed_password)
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
     db.add(dbUser)
     db.commit()
     db.refresh(dbUser)
     return dbUser
 
 ''' Recipe Operations '''
-<<<<<<< HEAD
 def get_recipe(db: Session, userRecipeId: int, recipeId: int) -> (models.Recipe | None):
-=======
-def get_recipe(db: Session, userRecipeId: int, recipeId: int):
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
     return db.query(models.Recipe).filter(models.Recipe.id == recipeId, models.Recipe.ownerId == userRecipeId).first()
 
 def get_all_recipes(db: Session, userRecipeId: int):
     return db.query(models.Recipe).filter(models.Recipe.ownerId == userRecipeId).all()
 
-<<<<<<< HEAD
 def create_recipe(db: Session, id:int, ownerId: int, title: str, ingredients: str, instructions: str) -> (models.Recipe | None):
     dbRecipe = models.Recipe(id=id, ownerId=ownerId, title=title, ingredients=ingredients, instructions=instructions)
-=======
-def create_recipe(db: Session, ownerId: int, title: str, ingredients: str, instructions: str):
-    dbRecipe = models.Recipe(ownerId=ownerId, title=title, ingredients=ingredients, instructions=instructions)
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
     db.add(dbRecipe)
     db.commit()
     db.refresh(dbRecipe)
     return dbRecipe
 
 def delete_recipe(db: Session, userRecipeId: int, recipeId: int):
-<<<<<<< HEAD
     ''' Deletes a recipe with the given recipe ID '''
     db.query(models.Recipe).filter(models.Recipe.id == recipeId, models.Recipe.ownerId == userRecipeId).delete()
     db.commit()
@@ -95,8 +66,4 @@ def remove_from_pantry(db: Session, userPantryId: int, itemId: int):
     ''' Remove an item of the given item ID from the users pantry '''
     db.query(models.Pantry).filter(models.Pantry.id == itemId, models.Pantry.ownerId == userPantryId).delete()
     db.commit()
-=======
-    db.query(models.Recipe).filter(models.Recipe.id == recipeId, models.Recipe.ownerId == userRecipeId).delete()
-    db.commit()
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
     return

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 main.py
 
@@ -28,13 +27,6 @@ import random
 # # Create the database tables
 # models.Base.metadata.create_all(bind=engine)
 
-=======
-from fastapi import FastAPI, Depends
-from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-from . import crud, models, schemas
-from .database import SessionLocal, get_db
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -49,7 +41,6 @@ class RecipeCreate(BaseModel):
     ingredients: str
     instructions: str
 
-<<<<<<< HEAD
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:8000"], # Allow requests from the frontend TODO: Update this to the frontend URL
@@ -76,28 +67,6 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Proceed if email does not exist
     userDBID = random.randint(1, 100)
     return crud.create_user(db=db, id=len(db.query(models.User).all())+1, name=user.name, email=user.email, password=user.password, recipeId=userDBID, pantryId=userDBID, shoppingListId=userDBID) #TODO: Update for the new structure
-=======
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-''' User Commands '''
-@app.get("/users/{user_id}")
-def read_user(user_id: int, db: Session = Depends(get_db)):
-    return crud.get_user(db, user_id=user_id)
-
-@app.get("/users/")
-def read_users(db: Session = Depends(get_db)):
-    return db.query(models.User).all() # Return all users
-
-@app.post("/users/")
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    return crud.create_user(db=db, name=user.name, email=user.email, password=user.password)
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
 
 ''' Recipe Commands '''
 def get_recipe(userRecipeId: int, recipeId: int, db:Session = Depends(get_db)):
@@ -107,7 +76,6 @@ def get_all_recipes(userRecipeId: int, db:Session = Depends(get_db)):
     return crud.get_all_recipes(db, userRecipeId=userRecipeId)
 
 def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_db)):
-<<<<<<< HEAD
     return crud.create_recipe(db=db, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions)
 
 
@@ -122,6 +90,3 @@ if __name__ == "__main__":
     print(testRecipe.title)
 
     SessionLocal().close()
-=======
-    return crud.create_recipe(db=db, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions)
->>>>>>> 1e4e51053bb0c9abbc57529df946216cf930488e
