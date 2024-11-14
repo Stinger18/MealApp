@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
-# from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 # connection string that specifies SQLite as the database engine and test.db as the database file.
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db" 
@@ -28,5 +28,3 @@ def get_data_from_db(query_params):
         # Use parameterized queries to prevent SQL injection
         result = conn.execute(text("SELECT * FROM recipes WHERE ingredient = :ingredient"), {"ingredient": query_params})
         return result.fetchall()
-    
-# get_db()
