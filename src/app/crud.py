@@ -37,7 +37,7 @@ def create_user(db: Session, id: int, name: str, email:str, password: str, recip
 def get_recipe(db: Session, userRecipeId: int, recipeId: int) -> (models.Recipe | None):
     return db.query(models.Recipe).filter(models.Recipe.id == recipeId, models.Recipe.ownerId == userRecipeId).first()
 
-def get_all_recipes(db: Session, userRecipeId: int) -> list(models.Recipe):
+def get_all_recipes(db: Session, userRecipeId: int) -> list[models.Recipe]:
     return db.query(models.Recipe).filter(models.Recipe.ownerId == userRecipeId).all()
 
 def create_recipe(db: Session, id:int, ownerId: int, title: str, ingredients: str, instructions: str) -> (models.Recipe | None):
