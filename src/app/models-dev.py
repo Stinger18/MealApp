@@ -36,6 +36,8 @@ class Ingredient(Base):
 ''' Create recipe '''
 session = SessionLocal()
 
+# This is commented out because the recipe already exists in the database
+
 # # Create a new recipe
 # newRecipe = Recipe(name='Creamy Tuscan Chicken')
 # # Disctionary of ingredients and their quantities
@@ -58,6 +60,8 @@ session = SessionLocal()
 # session.add(newRecipe)
 # session.commit()
 
+# This is if you wanted to see the before changes
+
 # recipe = session.query(Recipe).options(joinedload(Recipe.recipe_ingredients).joinedload(RecipeIngredient.ingredient)).all()
 
 
@@ -66,6 +70,8 @@ session = SessionLocal()
 #     # print(ingredient.ingredient.name)
 #     ingredient = recipe_ingredient.ingredient
 #     print(f'Ingredient: {ingredient.name}, Quantity: {recipe_ingredient.quantity}, recipe_id: {recipe_ingredient.recipeId}, ingredient_id: {recipe_ingredient.ingredientId}')
+
+# This is how you would update the quantity of an ingredient in a recipe
 
 # recipe_ingredient = session.query(RecipeIngredient).filter_by(recipeId=1, ingredientId=2).first()
 # recipe_ingredient.quantity = '1 cup(s)'
