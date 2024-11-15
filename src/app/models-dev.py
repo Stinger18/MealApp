@@ -1,11 +1,11 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship, joinedload
-from database import Base, SessionLocal
+from database import Base, SessionLocal, engine
 
-# registry.configure()
+
 
 class Recipe(Base):
-    __tablename__ = 'recipes'
+    __tablename__ = 'recipes2'
     id = Column(Integer, primary_key=True, index=True)
     ownerId = Column(Integer, index=True)
     name = Column(String, nullable=False)
@@ -17,8 +17,8 @@ class Recipe(Base):
 
 class RecipeIngredient(Base):
     __tablename__ = 'recipe_ingredients'
-    recipeId = Column(Integer, ForeignKey('recipes.id'), primary_key=True)
-    ingredientId = Column(Integer, ForeignKey('ingredients.id'), primary_key=True)
+    recipeId = Column(Integer, ForeignKey('recipes2.id'), primary_key=True)
+    ingredientId = Column(Integer, ForeignKey('ingredients2.id'), primary_key=True)
     quantity = Column(String)  # e.g., '2 cups'
     
     # Relationships to Recipe and Ingredient tables
@@ -26,7 +26,7 @@ class RecipeIngredient(Base):
     ingredient = relationship('Ingredient', back_populates='recipe_ingredients')
 
 class Ingredient(Base):
-    __tablename__ = 'ingredients'
+    __tablename__ = 'ingredients2'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True, nullable=False)
 
@@ -35,24 +35,51 @@ class Ingredient(Base):
 
 ''' Create recipe '''
 session = SessionLocal()
-recipeName = Recipe(name='Creamy Tuscan Chicken')
-ingredient1 = Ingredient(name="Chicken")
-ingredient2 = Ingredient(name="Cream")
-ingredient3 = Ingredient(name="Parmesan Cheese")
 
-# Associate ingredients with the recipe through the RecipeIngredient table
-recipe_ingredient1 = RecipeIngredient(recipe=recipeName, ingredient=ingredient1, quantity="1 lbs")
-recipe_ingredient2 = RecipeIngredient(recipe=recipeName, ingredient=ingredient2, quantity="1 cup")
-recipe_ingredient3 = RecipeIngredient(recipe=recipeName, ingredient=ingredient3, quantity="1/2 cup")
+# # Create a new recipe
+# newRecipe = Recipe(name='Creamy Tuscan Chicken')
+# # Disctionary of ingredients and their quantities
+# ingredients = {'Chicken': '2 lbs', 'Cream': '2 cup'}
+# for ingredient, quantity in ingredients.items(): # For each ingredient in the dictionary
+#     # Check if the ingredient already exists in the database
+#     exsisting_ingredient = session.query(Ingredient).filter(Ingredient.name == ingredient).first()
 
-# Add to the session and commit
-session.add(recipeName)
-session.commit()
-recipe = session.query(Recipe).options(joinedload(Recipe.ingredients)).all()
+#     # If the ingredient does not exist, create a new ingredient
+#     if not exsisting_ingredient:
+#         ingredient = Ingredient(name=ingredient)
+#     else: # If the ingredient exists, use the exsisting ingredient
+#         ingredient = exsisting_ingredient
+    
+#     # Associate ingredients with the recipe through the RecipeIngredient table
+#     recipe_ingredient = RecipeIngredient(recipe=newRecipe, ingredient=ingredient, quantity=quantity)
+
+
+# # Add to the session and commit
+# session.add(newRecipe)
+# session.commit()
+
+# recipe = session.query(Recipe).options(joinedload(Recipe.recipe_ingredients).joinedload(RecipeIngredient.ingredient)).all()
+
+
+# print(f'Recipe name: {recipe[0].name}')
+# for recipe_ingredient in recipe[0].recipe_ingredients:
+#     # print(ingredient.ingredient.name)
+#     ingredient = recipe_ingredient.ingredient
+#     print(f'Ingredient: {ingredient.name}, Quantity: {recipe_ingredient.quantity}, recipe_id: {recipe_ingredient.recipeId}, ingredient_id: {recipe_ingredient.ingredientId}')
+
+# recipe_ingredient = session.query(RecipeIngredient).filter_by(recipeId=1, ingredientId=2).first()
+# recipe_ingredient.quantity = '1 cup(s)'
+# session.commit()
+
+
+recipe = session.query(Recipe).options(joinedload(Recipe.recipe_ingredients).joinedload(RecipeIngredient.ingredient)).all()
 
 
 print(f'Recipe name: {recipe[0].name}')
-for ingredient in recipe[0].ingredients:
-    print(f'Ingredient: {ingredient.name}, Quantity: {ingredient.recipe_ingredients[0].quantity}')
+for recipe_ingredient in recipe[0].recipe_ingredients:
+    # print(ingredient.ingredient.name)
+    ingredient = recipe_ingredient.ingredient
+    print(f'Ingredient: {ingredient.name}, Quantity: {recipe_ingredient.quantity}, recipe_id: {recipe_ingredient.recipeId}, ingredient_id: {recipe_ingredient.ingredientId}')
 
 session.close()
+# Base.metadata.create_all(bind=engine)
