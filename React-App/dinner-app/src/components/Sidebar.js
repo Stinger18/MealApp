@@ -1,6 +1,6 @@
 import "./SideBar.css";
 
-function Sidebar({ title, isActive = true, body, styles }) {
+function Sidebar({ title, isActive = true, styles, children }) {
   return (
     isActive && (
       <div className="sidebar-container" style={styles?.container}>
@@ -8,7 +8,7 @@ function Sidebar({ title, isActive = true, body, styles }) {
           {title}
         </div>
         <div className="sidebar-body" style={styles?.body}>
-          {body}
+          {children}
         </div>
       </div>
     )

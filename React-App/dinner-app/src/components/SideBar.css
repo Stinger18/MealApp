@@ -27,4 +27,6 @@
   font-size: 1rem;
   color: #ecdfcc;
   flex-grow: 1; /* Ensure the body takes up remaining space */
+  display: flex;
+  flex-direction: column;
 }
