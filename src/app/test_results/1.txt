@@ -1,0 +1,65 @@
+
+****************** 1.txt ***********************
+~~~ Prompt:
+
+Identify the most noticeable food items and quantities from this image in JSON format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://i.gyazo.com/2e000b21f07db24f56e546b1b4795fd5.jpg
+
+~~~ Temperature: 0.1
+
+"""
+[
+    {
+        "item": "Cucumbers",
+        "quantity": 5
+    },
+    {
+        "item": "Yellow bell peppers",
+        "quantity": 2
+    },
+    {
+        "item": "Lettuce",
+        "quantity": 1
+    },
+    {
+        "item": "Eggs",
+        "quantity": 1 tray
+    },
+    {
+        "item": "Milk",
+        "quantity": 2
+    },
+    {
+        "item": "Cheese",
+        "quantity": 1
+    },
+    {
+        "item": "Tomatoes",
+        "quantity": 1 bowl
+    },
+    {
+        "item": "Cauliflower",
+        "quantity": 1
+    },
+    {
+        "item": "Red cabbage",
+        "quantity": 1
+    },
+    {
+        "item": "Green onions",
+        "quantity": 1 bunch
+    }
+]
+"""
