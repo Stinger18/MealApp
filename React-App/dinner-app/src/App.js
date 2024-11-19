@@ -51,7 +51,11 @@ function App() {
       <div className="main-container">
         <Sidebar title="Pantry" />
         <RecipeBox />
-        <Sidebar title="Sous-Chef" isActive={ChefActive}>
+        <Sidebar
+          title="Sous-Chef"
+          isActive={ChefActive}
+          containerStyle={{ width: "30%" }}
+        >
           <Messages
             message={message}
             messages={messages}
