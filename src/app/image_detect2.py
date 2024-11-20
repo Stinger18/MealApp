@@ -70,9 +70,9 @@ def __gather_image_urls_from_directory(directory: str) -> list:
     return urls
 
 
-def __detect_ingredients(url: str, prompt: str) -> str:
+def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
     """Processes an image URL using Hugging Face API and returns the response."""
-    print("\n***** Detecting Image *****\n")
+    if (outputToConsole): print("\n***** Detecting Image *****\n")
     response_text = ""
     for message in client.chat_completion(
             model="meta-llama/Llama-3.2-11B-Vision-Instruct",
@@ -88,10 +88,10 @@ def __detect_ingredients(url: str, prompt: str) -> str:
             max_tokens=1000,
             stream=True,
             temperature=TEMPERATURE
-    ):
-        print(message.choices[0].delta.content, end="")  # Print to console
+    ):  
+        if (outputToConsole): print(message.choices[0].delta.content, end="")  # Print to console
         response_text += message.choices[0].delta.content  # Add tokens to string
-    print("\n***************\n")
+    if (outputToConsole): print("\n***************\n")
     return response_text
 
 
@@ -114,7 +114,7 @@ def __test_prompt(url: str, prompt: str, num: int):
     # Create result file
     result_file = f"test_results/{num}.txt"
     try:
-        prediction = __detect_ingredients(url, prompt)
+        prediction = __detect_ingredients(url, prompt, True)
         with open(result_file, "w") as f:
             f.write(f"\n****************** {num}.txt ***********************\n")
             f.write(f"~~~ Prompt:\n\n{prompt}\n")
@@ -146,14 +146,13 @@ def __to_python_dict(prediction: str):
     return dict
     
 
+#Multiple images??
 def get_ingredients(filepath: str):
     """Detects image contents and returns a python dict"""
-    print("hi")
-    #detects images and
+    print("Gathering image URLs from directory...")
+    urls = __gather_image_urls_from_directory(IMAGES_DIR)
+    print("Detecting ingredients...")
+    prediction = __detect_ingredients(urls[0], prompts[0], False) #change [0] to support multi image uploads?? (would have to concat dicts)
+    return __to_python_dict(prediction)
 
-# Main Execution
-print("Gathering image URLs from directory...")
-urls = __gather_image_urls_from_directory(IMAGES_DIR)
-print("\nStarting prompt tests...")
-__test_prompts(urls, prompts)
-
+get_ingredients("images")
