@@ -141,7 +141,11 @@ def __test_prompt(url: str, prompt: str, num: int):
 
 def __to_python_dict(prediction: str):
     """Converts the json output into a python dict"""
-    dict = (json.loads(prediction)[0])
+    dict = {}
+    try:
+        dict = (json.loads(prediction)[0])
+    except:
+        print("Error: converting image prediction text into dict failed")        
     return dict
     
 def add_dict(d1: dict, d2: dict):
