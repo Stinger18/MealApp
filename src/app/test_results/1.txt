@@ -2,64 +2,30 @@
 ****************** 1.txt ***********************
 ~~~ Prompt:
 
-Identify the most noticeable food items and quantities from this image in JSON format with no other text. Only identify items you are sure of. EX: [{
-    "item": "Orange juice",
-    "quantity": 1
-}, {
-    "item": "Apple",
-    "quantity": 2
-}, {
-    "item": "Lemons",
-    "quantity": 3"
-    ...
+Identify the most noticeable food items and quantities from this image in JSON format with no other text. Only identify items you are sure of. EX: 
+[{
+    "Orange juice": 1,
+    "Apple": 2,
+    "Lemons": 3
+}]
 
 ~~~ URL:
 
-https://i.gyazo.com/2e000b21f07db24f56e546b1b4795fd5.jpg
+https://i.gyazo.com/9a22097f3717e09987d7c873a7a01380.jpg
 
 ~~~ Temperature: 0.1
-
+~~~ JSON to python dict parsable: PASS
 """
-[
-    {
-        "item": "Cucumbers",
-        "quantity": 5
-    },
-    {
-        "item": "Yellow bell peppers",
-        "quantity": 2
-    },
-    {
-        "item": "Lettuce",
-        "quantity": 1
-    },
-    {
-        "item": "Eggs",
-        "quantity": 1 tray
-    },
-    {
-        "item": "Milk",
-        "quantity": 2
-    },
-    {
-        "item": "Cheese",
-        "quantity": 1
-    },
-    {
-        "item": "Tomatoes",
-        "quantity": 1 bowl
-    },
-    {
-        "item": "Cauliflower",
-        "quantity": 1
-    },
-    {
-        "item": "Red cabbage",
-        "quantity": 1
-    },
-    {
-        "item": "Green onions",
-        "quantity": 1 bunch
-    }
-]
+[{
+    "Carrots": 5,
+    "Eggs": 8,
+    "Limes": 2,
+    "Avocados": 2,
+    "Orange juice": 1,
+    "Lemons": 3,
+    "Tomatoes": 4,
+    "Cucumbers": 2,
+    "Zucchini": 2,
+    "Peppers": 2
+}]
 """

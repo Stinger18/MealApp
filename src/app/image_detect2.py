@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from PIL import Image
 import requests
 import os 
+import json
+
 
 ''' 
 This Program runs a testing suite on combinations of uploaded images and prompts. It scans a directory for images, 
@@ -26,16 +28,12 @@ TEMPERATURE = 0.1
 
 # Prompts for the AI
 prompts = [
-    """Identify the most noticeable food items and quantities from this image in JSON format with no other text. Only identify items you are sure of. EX: [{
-    "item": "Orange juice",
-    "quantity": 1
-}, {
-    "item": "Apple",
-    "quantity": 2
-}, {
-    "item": "Lemons",
-    "quantity": 3"
-    ...
+    """Identify the most noticeable food items and quantities from this image in JSON format with no other text. Only identify items you are sure of. EX: 
+[{
+    "Orange juice": 1,
+    "Apple": 2,
+    "Lemons": 3
+}]
 """
 ]
 
@@ -116,13 +114,20 @@ def test_prompt(url: str, prompt: str, num: int):
     # Create result file
     result_file = f"test_results/{num}.txt"
     try:
+        prediction = detect_ingredients(url, prompt)
         with open(result_file, "w") as f:
             f.write(f"\n****************** {num}.txt ***********************\n")
             f.write(f"~~~ Prompt:\n\n{prompt}\n")
             f.write(f"~~~ URL:\n\n{url}\n")
             f.write(f"\n~~~ Temperature: {TEMPERATURE}\n")
+            #Find out if prompt resulted in parsable response
+            try:
+                to_python_dict(prediction)
+                f.write("~~~ JSON to python dict parsable: PASS")
+            except:
+                f.write("~~~ JSON to python dict parsable: FAIL")
             f.write("\n\"\"\"\n")
-            f.write(detect_ingredients(url, prompt))
+            f.write(prediction)
             f.write("\n\"\"\"\n")
     except Exception as e:
         print(f"Error writing results for {url}: {e}")
@@ -135,9 +140,20 @@ def test_prompt(url: str, prompt: str, num: int):
     except Exception as e:
         print(f"Error saving image from {url}: {e}")
 
+def to_python_dict(prediction: str):
+    """Converts the json output into a python dict"""
+    dict = json.loads(prediction)
+    return dict
+    
 
 # Main Execution
 print("Gathering image URLs from directory...")
 urls = gather_image_urls_from_directory(IMAGES_DIR)
 print("\nStarting prompt tests...")
 test_prompts(urls, prompts)
+
+#Testing to_python_dict()
+# dict = to_python_dict(detect_ingredients(upload_to_gyazo('images/fridge_with_food.jpg'), prompts[0]))
+
+# print("NEW TESTING")
+# print(dict[0])
