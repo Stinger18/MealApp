@@ -142,7 +142,7 @@ def __test_prompt(url: str, prompt: str, num: int):
 
 def __to_python_dict(prediction: str):
     """Converts the json output into a python dict"""
-    dict = json.loads(prediction)
+    dict = (json.loads(prediction)[0])
     return dict
     
 
@@ -153,6 +153,9 @@ def get_ingredients(filepath: str):
     urls = __gather_image_urls_from_directory(IMAGES_DIR)
     print("Detecting ingredients...")
     prediction = __detect_ingredients(urls[0], prompts[0], False) #change [0] to support multi image uploads?? (would have to concat dicts)
+    print("Done")
     return __to_python_dict(prediction)
 
-get_ingredients("images")
+result = get_ingredients("images")
+
+print(result)
