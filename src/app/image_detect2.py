@@ -154,11 +154,11 @@ def add_dict(d1: dict, d2: dict):
     return d1
 
 #Method inteded for outside users
-def get_ingredients(filepath: str):
+def get_ingredients(imagesDirectory: str):
     """Detects image contents and returns a python dict"""
 
     print("Gathering image URLs from directory...")
-    urls = __gather_image_urls_from_directory(IMAGES_DIR)
+    urls = __gather_image_urls_from_directory(imagesDirectory)
     print("Detecting ingredients...")
 
     #Add results of all pictures into one dict
@@ -171,5 +171,4 @@ def get_ingredients(filepath: str):
     return prediction
 
 result = get_ingredients("images")
-
 print(result)
