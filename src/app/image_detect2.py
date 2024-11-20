@@ -41,7 +41,7 @@ prompts = [
 client = InferenceClient(api_key=os.getenv("hfKey"))
 
 
-def upload_to_gyazo(image_path: str) -> str:
+def __upload_to_gyazo(image_path: str) -> str:
     """Uploads an image to Gyazo and returns the public URL."""
     print(f"Uploading {image_path} to Gyazo...")
     with open(image_path, "rb") as img_file:
@@ -56,21 +56,21 @@ def upload_to_gyazo(image_path: str) -> str:
         return gyazo_url
 
 
-def gather_image_urls_from_directory(directory: str) -> list:
+def __gather_image_urls_from_directory(directory: str) -> list:
     """Iterates over a directory, uploads images to Gyazo, and returns their URLs."""
     urls = []
     for filename in os.listdir(directory):
         if filename.lower().endswith((".jpg", ".png", ".jpeg", ".gif")):
             image_path = os.path.join(directory, filename)
             try:
-                gyazo_url = upload_to_gyazo(image_path)
+                gyazo_url = __upload_to_gyazo(image_path)
                 urls.append(gyazo_url)
             except Exception as e:
                 print(f"Failed to upload {filename}: {e}")
     return urls
 
 
-def detect_ingredients(url: str, prompt: str) -> str:
+def __detect_ingredients(url: str, prompt: str) -> str:
     """Processes an image URL using Hugging Face API and returns the response."""
     print("\n***** Detecting Image *****\n")
     response_text = ""
@@ -95,7 +95,7 @@ def detect_ingredients(url: str, prompt: str) -> str:
     return response_text
 
 
-def test_prompts(urls: list[str], prompts: list[str]):
+def __test_prompts(urls: list[str], prompts: list[str]):
     """Tests prompts against all image URLs."""
     try:
         os.mkdir("test_results")
@@ -105,16 +105,16 @@ def test_prompts(urls: list[str], prompts: list[str]):
     cnt = 0
     for prompt in prompts:
         for url in urls:
-            test_prompt(url, prompt, cnt)
+            __test_prompt(url, prompt, cnt)
             cnt += 1
 
 
-def test_prompt(url: str, prompt: str, num: int):
+def __test_prompt(url: str, prompt: str, num: int):
     """Processes a single URL and saves the results."""
     # Create result file
     result_file = f"test_results/{num}.txt"
     try:
-        prediction = detect_ingredients(url, prompt)
+        prediction = __detect_ingredients(url, prompt)
         with open(result_file, "w") as f:
             f.write(f"\n****************** {num}.txt ***********************\n")
             f.write(f"~~~ Prompt:\n\n{prompt}\n")
@@ -122,7 +122,7 @@ def test_prompt(url: str, prompt: str, num: int):
             f.write(f"\n~~~ Temperature: {TEMPERATURE}\n")
             #Find out if prompt resulted in parsable response
             try:
-                to_python_dict(prediction)
+                __to_python_dict(prediction)
                 f.write("~~~ JSON to python dict parsable: PASS")
             except:
                 f.write("~~~ JSON to python dict parsable: FAIL")
@@ -140,20 +140,20 @@ def test_prompt(url: str, prompt: str, num: int):
     except Exception as e:
         print(f"Error saving image from {url}: {e}")
 
-def to_python_dict(prediction: str):
+def __to_python_dict(prediction: str):
     """Converts the json output into a python dict"""
     dict = json.loads(prediction)
     return dict
     
 
+def get_ingredients(filepath: str):
+    """Detects image contents and returns a python dict"""
+    print("hi")
+    #detects images and
+
 # Main Execution
 print("Gathering image URLs from directory...")
-urls = gather_image_urls_from_directory(IMAGES_DIR)
+urls = __gather_image_urls_from_directory(IMAGES_DIR)
 print("\nStarting prompt tests...")
-test_prompts(urls, prompts)
+__test_prompts(urls, prompts)
 
-#Testing to_python_dict()
-# dict = to_python_dict(detect_ingredients(upload_to_gyazo('images/fridge_with_food.jpg'), prompts[0]))
-
-# print("NEW TESTING")
-# print(dict[0])
