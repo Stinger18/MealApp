@@ -40,7 +40,6 @@ prompts = [
 # Initialize Hugging Face client
 client = InferenceClient(api_key=os.getenv("hfKey"))
 
-
 def __upload_to_gyazo(image_path: str) -> str:
     """Uploads an image to Gyazo and returns the public URL."""
     print(f"Uploading {image_path} to Gyazo...")
@@ -145,16 +144,31 @@ def __to_python_dict(prediction: str):
     dict = (json.loads(prediction)[0])
     return dict
     
+def add_dict(d1: dict, d2: dict):
+    """Adds all pairs from d2 to d1. If they have the same key the values are added (assummed as numbers)"""
+    for key, value in d2.items():
+        if key in d1:
+            d1[key] += value  
+        else:
+            d1[key] = value  
+    return d1
 
-#Multiple images??
+#Method inteded for outside users
 def get_ingredients(filepath: str):
     """Detects image contents and returns a python dict"""
+
     print("Gathering image URLs from directory...")
     urls = __gather_image_urls_from_directory(IMAGES_DIR)
     print("Detecting ingredients...")
-    prediction = __detect_ingredients(urls[0], prompts[0], False) #change [0] to support multi image uploads?? (would have to concat dicts)
+
+    #Add results of all pictures into one dict
+    prediction = {}
+    for url in urls:
+        result = __to_python_dict(__detect_ingredients(url, prompts[0], False) )
+        prediction = add_dict(prediction, result)
+
     print("Done")
-    return __to_python_dict(prediction)
+    return prediction
 
 result = get_ingredients("images")
 
