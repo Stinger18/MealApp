@@ -27,7 +27,7 @@ TEMPERATURE = 0.1
 # Prompts for the AI
 prompts = [
     """Identify the most noticeable food items and quantities from this image in JSON format with no other text. 
-    Only include unique, specific food items (no categories). Example:
+    Only include specific food items (no categories). Example:
     [
         { "item": "Orange juice", "quantity": 1 },
         { "item": "Apple", "quantity": 2 },
