@@ -48,7 +48,7 @@ class Ingredient(Base):
         return f'<Ingredient: Id: {self.id}, name: {self.name}>'
 
 
-def print_recipe(recipe, index: int = 0, advanced: bool = False) -> dict:
+def format_recipe(recipe, index: int = 0, advanced: bool = False) -> dict:
     ''' Formats the recipe for clean output that is ready to become JSON.
 
     `advanced`: If True, include the recipeId and ownerId. '''
@@ -109,7 +109,7 @@ session = SessionLocal()
 
 
 recipe = session.query(Recipe).options(joinedload(Recipe.recipe_ingredients).joinedload(RecipeIngredient.ingredient)).all()
-pprint.pprint(print_recipe(recipe, advanced=False))
+pprint.pprint(format_recipe(recipe, advanced=False))
 
 print(session.query(Recipe).all())
 print(session.query(RecipeIngredient).all())
