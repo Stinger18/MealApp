@@ -26,7 +26,6 @@ import random
 
 # Create the database tables
 # models.Base.metadata.create_all(bind=engine)
-
 from pydantic import BaseModel
 
 app = FastAPI()
