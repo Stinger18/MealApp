@@ -24,7 +24,7 @@ except ImportError:
 
 import random
 
-# # Create the database tables
+# Create the database tables
 # models.Base.metadata.create_all(bind=engine)
 
 from pydantic import BaseModel
@@ -38,8 +38,11 @@ class UserCreate(BaseModel):
 
 class RecipeCreate(BaseModel):
     title: str
-    ingredients: str
+    ingredients: dict
     instructions: str
+    servings: int
+    prepTime: str
+    cookTime: str
 
 app.add_middleware(
     CORSMiddleware,
@@ -69,14 +72,14 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db=db, id=len(db.query(models.User).all())+1, name=user.name, email=user.email, password=user.password, recipeId=userDBID, pantryId=userDBID, shoppingListId=userDBID) #TODO: Update for the new structure
 
 ''' Recipe Commands '''
-def get_recipe(userRecipeId: int, recipeId: int, db:Session = Depends(get_db)):
-    return crud.get_recipe(db, userRecipeId=userRecipeId, recipeId=recipeId)
+def get_recipe(userRecipeId: int, recipeId: int, advancedFormat: bool = False, db:Session = Depends(get_db)):
+    return crud.get_recipe(db, userRecipeId=userRecipeId, recipeId=recipeId, advancedFormat=advancedFormat)
 
 def get_all_recipes(userRecipeId: int, db:Session = Depends(get_db)):
     return crud.get_all_recipes(db, userRecipeId=userRecipeId)
 
 def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_db)):
-    return crud.create_recipe(db=db, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions)
+    return crud.create_recipe(db=db, id=len(db.query(models.Recipe).all())+1, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions, servings=recipe.servings, prepTime=recipe.prepTime, cookTime=recipe.cookTime)
 
 
 if __name__ == "__main__":
@@ -85,8 +88,8 @@ if __name__ == "__main__":
     # testUser = get_user(1, db=SessionLocal())
     # print(testUser.name)
 
-    # crud.create_recipe(db=SessionLocal(), id=1, ownerId=1, title="Creamy Tuscan Chicken", ingredients="chicken, garlic, spinach, sun-dried tomatoes, heavy cream, parmesan cheese", instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.")
-    testRecipe = get_recipe(1, 1, db=SessionLocal())
-    print(testRecipe.title)
+    # crud.create_recipe(db=SessionLocal(), id=2, ownerId=1, name='Creamy Tuscan Chicken', ingredients={'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}, instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.", servings=4, prepTime='10 minutes', cookTime='20 minutes')
+    # testRecipe = get_recipe(1, 1, db=SessionLocal())
+    # print(testRecipe.title)
 
     SessionLocal().close()

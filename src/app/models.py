@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy.orm import relationship
 try:
     from app.database import Base
 except ImportError:
@@ -31,28 +32,52 @@ class User(Base):
     def __str__(self):
         return f'<User: ID: {self.id}, Name: {self.name}, Recipe Id: {self.recipeId}, Pantry Id: {self.pantryId}, Shopping List Id: {self.shoppingListId}>'
 
-class Recipe(Base):
-    __tablename__ = "recipes"
 
-    id = Column(Integer, primary_key=True, index=True)
-    ownerId = Column(Integer, index=True)
-    title = Column(String, index=True)
-    ingredients = Column(Text)
+class Recipe(Base):
+    ''' This class is the recipe and is the top of the stack. '''
+    __tablename__ = 'recipes'
+    id = Column(Integer, primary_key=True, index=True, nullable=False)
+    ownerId = Column(Integer, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    description = Column(Text)
+    servings = Column(Integer)
+    prepTime = Column(String)
+    cookTime = Column(String)
     instructions = Column(Text)
-    '''
-    Other column ideas: 
-    category: Categorizes recipes (like “breakfast” or “dinner”) to make filtering easier.
-    prep_time and cook_time: Holds the preparation and cooking times, respectively, in minutes.
-    servings: Number of servings the recipe makes, helpful for meal planning.
-    author_id: If your app allows users to add recipes, this could be a foreign key reference to a users table.
-    created_at and updated_at: Timestamps for when the recipe was created or last updated, useful for sorting or tracking recipe edits.
-    img_url: A URL to an image of the finished dish, if you want to display images in the app.
-    '''
-    def __repr__(self):
-        return f'<Recipe: {self.id}, {self.ownerId}, {self.title}, {self.ingredients}, {self.instructions}>'
+
+    # Relationship with RecipeIngredient table
+    recipe_ingredients = relationship('RecipeIngredient', back_populates='recipe')
+
+    def __repr__(self): # Output for debugging
+        return f'<Recipe: Id: {self.id}, ownerId: {self.ownerId}, name: {self.name}, description: {self.description}, instructions: {self.instructions}>'
+
+
+class RecipeIngredient(Base):
+    ''' This class connects the recipe and the ingredients while provided new information that IS recipe specific like the quantity. '''
+    __tablename__ = 'recipe_ingredients'
+    recipeId = Column(Integer, ForeignKey('recipes.id'), primary_key=True)
+    ingredientId = Column(Integer, ForeignKey('ingredients.id'), primary_key=True)
+    quantity = Column(String)  # e.g., '2 cups'
+    # unit = Column(String)  # e.g., 'cups' #TODO: May add this later
     
-    def __str__(self):
-        return f'<Recipe: ID: {self.id}, Owner ID: {self.ownerId}, Title: {self.title}, Ingredients: {self.ingredients}, Instructions: {self.instructions}>'
+    # Relationships to Recipe and Ingredient tables
+    recipe = relationship('Recipe', back_populates='recipe_ingredients')
+    ingredient = relationship('Ingredient', back_populates='recipe_ingredients')
+
+    def __repr__(self): # Output for debugging
+        return f'<RecipeIngredient: recipeId: {self.recipeId}, ingredientId: {self.ingredientId}, quantity: {self.quantity}>'
+
+class Ingredient(Base):
+    ''' This class is the ingredients and it's seperated from the recipes. '''
+    __tablename__ = 'ingredients'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True, nullable=False)
+
+    # Relationship with RecipeIngredient table
+    recipe_ingredients = relationship('RecipeIngredient', back_populates='ingredient')
+
+    def __repr__(self): # Output for debugging
+        return f'<Ingredient: Id: {self.id}, name: {self.name}>'
 
 class Pantry(Base):
     __tablename__ = 'pantry'
