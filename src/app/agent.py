@@ -21,6 +21,7 @@ import os
 import time
 import sys
 
+import pprint
 
 # Load environment variables
 load_dotenv()
@@ -63,7 +64,7 @@ class SousChef:
                                                     f"My Info: {self.user}"),
                                 HumanMessage(content=message)]
         else:
-            initial_message = [SystemMessage(content="You are a personal sous-chef assistant named Sous-Chef. Help users find recipes, manage their pantry, and answer cooking questions."),
+            initial_message = [SystemMessage(content="You are a personal sous-chef assistant named Sous-Chef. Help users find excisting or search new recipes, manage their pantry, and answer cooking questions."),
                                 HumanMessage(content=message)]
         
         # Invoke model with the initial system message
@@ -112,7 +113,10 @@ class SousChef:
 @tool
 def searchWeb(query: str): # Travily Search
     '''Search the web to return new recipes to the human '''
-    search = TavilySearchResults(max_results=3)
+    search = TavilySearchResults(
+        max_results=5,
+        search_depth="advanced",
+        include_raw_content=True,)
     return search.invoke(query)
 
 @tool
