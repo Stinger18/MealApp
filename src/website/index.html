@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's for Dinner?</title>
+</head>
+<body>
+    <h1>What's for Dinner?</h1>
+    <form id="userForm" method="POST">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Create User</button>
+    </form>
+    <form id="findUser">
+        <input type="text" id="userName" placeholder="Name" required />
+        <button type="submit" onclick="fetchUserData()">Find User</button>
+    </form>
+    <div id="user-details"></div>
+
+    <button id="usersData" onclick="fetchUsers()">Get Users</button>
+    <div id="users-list"></div> <!--This div will display the list of users-->
+
+    <script>
+        const backendUrl = "http://127.0.0.1:8000";
+
+        document.getElementById('userForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch(`${backendUrl}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password }),
+            }).then(response => {
+                if (!response.ok) {
+                    return response.json().then(error => {
+                        throw new Error(error.detail);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("User created: ", data);
+            })
+            .catch(error => {
+                alert(error.message)
+            });
+        });
+
+        async function fetchUserData(name) {
+            fetch(`${backendUrl}/users/${name}`)
+            .then(response => response.json())
+            .then(user => {
+                const userDiv = document.getElementById('user-details');
+                userDiv.innerHTML = ''; // clear previous entries
+                userDiv.textContent = `ID: ${user.id}, Name: ${user.name}, Email: ${user.email}, Password: ${user.password}, Recipe Id: ${user.recipeId}, Pantry Id: ${user.pantryId}, Shopping List Id: ${user.shoppingListId}`;
+            })
+            .catch(error => console.error('Error fetching user: ', error));
+        };
+
+        async function fetchUsers() {
+            fetch(`${backendUrl}/users`)
+            .then(response => response.json())
+            .then(users => {
+                const usersListDiv = document.getElementById('users-list');
+                usersListDiv.innerHTML = ''; // clear previous entries
+
+                users.forEach(user => {
+                    // Display each user
+                    const userItem = document.createElement('div');
+                    userItem.textContent = `ID: ${user.id}, Name: ${user.name}, Email: ${user.email}, Password: ${user.password}, Recipe Id: ${user.recipeId}, Pantry Id: ${user.pantryId}, Shopping List Id: ${user.shoppingListId}`;
+                    usersListDiv.appendChild(userItem);
+                    
+                });
+            })
+            .catch(error => console.error('Error fetching users: ', error));
+        };
+        
+    </script>
+</body>
+</html>
