@@ -1,0 +1,15 @@
+/* Background */
+
+.background {
+  padding: 10px;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #fcfaee;
+}
+
+/* Main container  */
+.main-container {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+}

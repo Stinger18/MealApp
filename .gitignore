@@ -1,1 +1,3 @@
 .env
+/React-App/node_modules
+/src/website/react-app/node_modules

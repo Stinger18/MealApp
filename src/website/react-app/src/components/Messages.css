@@ -1,0 +1,78 @@
+/* Need to fix long messages */
+
+.chat-box {
+  flex-grow: 1;
+  width: 80%;
+  margin: 0 auto 20px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 300px;
+  overflow-y: auto;
+  color: #e0e0e0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 16px;
+  color: #000;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.message.you {
+  background-color: #b5c69d;
+}
+
+.message.other {
+  background-color: #fff;
+}
+
+.message-form {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  max-width: 600px;
+}
+
+.input-field {
+  width: 80%;
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #555;
+  border-radius: 20px;
+  font-size: 1rem;
+  background-color: #b5c69d;
+  color: #000;
+}
+
+.input-field::placeholder {
+  color: #555;
+}
+
+.input-field:focus {
+  background-color: #c5d6ad;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+  padding: 12px 20px;
+  background-color: #b5c69d;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #c5d6ad;
+}
