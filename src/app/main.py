@@ -45,7 +45,7 @@ class RecipeCreate(BaseModel):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8000"], # Allow requests from the frontend TODO: Update this to the frontend URL
+    allow_origins=["http://localhost:3000"], # Allow requests from the frontend TODO: Update this to the frontend URL
     # allow_credentials=True,
     allow_methods=["POST", "GET"], # Allow POST and GET requests
     allow_headers=["*"], # Allow all headers

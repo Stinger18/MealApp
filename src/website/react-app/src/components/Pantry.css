@@ -1,0 +1,92 @@
+/* Need to fix long messages */
+
+.message-form {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  max-width: 600px;
+}
+
+.input-field {
+  width: 80%;
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #555;
+  border-radius: 20px;
+  font-size: 1rem;
+  background-color: #b5c69d;
+  color: #000;
+}
+
+.input-field::placeholder {
+  color: #555;
+}
+
+.input-field:focus {
+  background-color: #c5d6ad;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+  padding: 12px 20px;
+  background-color: #b5c69d;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #c5d6ad;
+}
+
+/* #################### */
+
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  color: #000;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  background-color: red;
+  background-color: #c5d6ad;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: #c5d6ad;
+}

@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import RecipeBox from "./components/RecipeBox";
 import ChefSVG from "./components/ChefSVG";
 import Messages from "./components/Messages";
+import Pantry from "./components/Pantry";
 
 function App() {
   const [message, setMessage] = useState(""); // Store current input message
@@ -36,6 +37,8 @@ function App() {
 
   //##############################################
   const [ChefActive, setChefActive] = useState(true);
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
 
   function handleChefClick() {
     setChefActive((curr) => !curr);
@@ -49,7 +52,14 @@ function App() {
         SVG={<ChefSVG state={ChefActive} onClick={handleChefClick} />}
       />
       <div className="main-container">
-        <Sidebar title="Pantry" />
+        <Sidebar title="Pantry">
+          <Pantry
+            tasks={tasks}
+            setTasks={setTasks}
+            newTask={newTask}
+            setNewTask={setNewTask}
+          />
+        </Sidebar>
         <RecipeBox />
         <Sidebar
           title="Sous-Chef"
