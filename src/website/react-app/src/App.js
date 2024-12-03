@@ -17,21 +17,41 @@ function App() {
   };
 
   // Handle message submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (message.trim() !== "") {
       // Add current user's message
       setMessages([...messages, { text: message, sender: "You" }]);
       setMessage(""); // Clear input field
 
-      // Simulate "Other" user response with delay
-      setTimeout(() => {
-        const response = `Response to: "${message}"`; // Automatic response logic
+      const query = message;
+      const simple = true;
+
+      try {
+        const response = await fetch(
+          `http://localhost:8000/agent/${query}?simple=${simple}`
+        );
+        const data = await response.json();
+        console.log(data.messages[data.messages.length - 1].content);
+
+        const last_message = data.messages[data.messages.length - 1].content;
+        // Add the response message
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: response, sender: "Other" },
+          { text: last_message, sender: "Other" },
         ]);
-      }, 1000); // Simulate a delay of 1 second for the "Other" user to respond
+      } catch (error) {
+        console.error("Error:", error);
+      }
+      //
+      // // Simulate "Other" user response with delay
+      // setTimeout(() => {
+      //   const response = `${data}`; // Automatic response logic
+      //   setMessages((prevMessages) => [
+      //     ...prevMessages,
+      //     { text: response, sender: "Other" },
+      //   ]);
+      // }, 1000); // Simulate a delay of 1 second for the "Other" user to respond
     }
   };
 

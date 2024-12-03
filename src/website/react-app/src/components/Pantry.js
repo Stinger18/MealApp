@@ -20,12 +20,12 @@ function Pantry({ tasks, setTasks, newTask, setNewTask }) {
         {/* Input field for a new task */}
         <input
           type="text"
-          placeholder="Enter a task"
+          placeholder="Enter an ingredient..."
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
         {/* Button to add task */}
-        <button onClick={addTask}>Add Task</button>
+        <button onClick={addTask}>Add ingredient</button>
       </div>
 
       {/* List of tasks */}
