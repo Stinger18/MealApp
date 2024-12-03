@@ -1,0 +1,196 @@
+
+****************** 2.txt ***********************
+~~~ Prompt:
+
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x316/9/6/d72896c72955e1ae2291077d29d97818bf997a63428f8e10ac0f275150d626/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.h_GjdVuPrZ89d4lOTlWBfAHaE8%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3
+}, {
+    "item": "Milk",
+    "quantity": 1
+}, {
+    "item": "Butter",
+    "quantity": 2
+}, {
+    "item": "Bottled water",
+    "quantity": 3
+}, {
+    "item": "Soda",
+    "quantity": 4
+}, {
+    "item": "Hot sauce",
+    "quantity": 3
+}, {
+    "item": "Mayonnaise",
+    "quantity": 2
+}, {
+    "item": "Mustard",
+    "quantity": 2
+}, {
+    "item": "Ketchup",
+    "quantity": 1
+}, {
+    "item": "Relish",
+    "quantity": 1
+}, {
+    "item": "Pickles",
+    "quantity": 1
+}, {
+    "item": "Jelly",
+    "quantity": 2
+}, {
+    "item": "Jam",
+    "quantity": 2
+}, {
+    "item": "Honey",
+    "quantity": 1
+}, {
+    "item": "Yogurt",
+    "quantity": 1
+}, {
+    "item": "Cheese",
+    "quantity": 1
+}, {
+    "item": "Eggs",
+    "quantity": 1
+}, {
+    "item": "Carrots",
+    "quantity": 1
+}, {
+    "item": "Lettuce",
+    "quantity": 1
+}, {
+    "item": "Tomatoes",
+    "quantity": 1
+}, {
+    "item": "Onions",
+    "quantity": 1
+}, {
+    "item": "Potatoes",
+    "quantity": 1
+}, {
+    "item": "Cucumbers",
+    "quantity": 1
+}, {
+    "item": "Bell peppers",
+    "quantity": 1
+}, {
+    "item": "Cabbage",
+    "quantity": 1
+}, {
+    "item": "Broccoli",
+    "quantity": 1
+}, {
+    "item": "Corn",
+    "quantity": 1
+}, {
+    "item": "Green beans",
+    "quantity": 1
+}, {
+    "item": "Peas",
+    "quantity": 1
+}, {
+    "item": "Spinach",
+    "quantity": 1
+}, {
+    "item": "Asparagus",
+    "quantity": 1
+}, {
+    "item": "Mushrooms",
+    "quantity": 1
+}, {
+    "item": "Zucchini",
+    "quantity": 1
+}, {
+    "item": "Yellow squash",
+    "quantity": 1
+}, {
+    "item": "Red bell pepper",
+    "quantity": 1
+}, {
+    "item": "Orange bell pepper",
+    "quantity": 1
+}, {
+    "item": "Yellow bell pepper",
+    "quantity": 1
+}, {
+    "item": "Green bell pepper",
+    "quantity": 1
+}, {
+    "item": "Purple bell pepper",
+    "quantity": 1
+}, {
+    "item": "Banana",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 1
+}, {
+    "item": "Grapes",
+    "quantity": 1
+}, {
+    "item": "Strawberries",
+    "quantity": 1
+}, {
+    "item": "Blueberries",
+    "quantity": 1
+}, {
+    "item": "Raspberries",
+    "quantity": 1
+}, {
+    "item": "Blackberries",
+    "quantity": 1
+}, {
+    "item": "Pineapple",
+    "quantity": 1
+}, {
+    "item": "Peaches",
+    "quantity": 1
+}, {
+    "item": "Plums",
+    "quantity": 1
+}, {
+    "item": "Nectarines",
+    "quantity": 1
+}, {
+    "item": "Apricots",
+    "quantity": 1
+}, {
+    "item": "Pears",
+    "quantity": 1
+}, {
+    "item": "Pomegranate",
+    "quantity": 1
+}, {
+    "item": "Watermelon",
+    "quantity": 1
+}, {
+    "item": "Cantaloupe",
+    "quantity": 1
+}, {
+    "item": "Honeyd
+"""

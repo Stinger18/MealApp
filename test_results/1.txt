@@ -1,0 +1,310 @@
+
+****************** 1.txt ***********************
+~~~ Prompt:
+
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x316/2/b/6227a4c72e9145fbb6a2307f162e4c68d55852c7e372a00707f6f6e0d28538/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.GU6SQ77Cyb7DBMcvu9j6KgHaE8%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+{
+  "item": "Apples",
+  "quantity": 4
+}
+
+{
+  "item": "Oranges",
+  "quantity": 2
+}
+
+{
+  "item": "Lemons",
+  "quantity": 3
+}
+
+{
+  "item": "Bread",
+  "quantity": 1
+}
+
+{
+  "item": "Cheese",
+  "quantity": 1
+}
+
+{
+  "item": "Yogurt",
+  "quantity": 1
+}
+
+{
+  "item": "Eggs",
+  "quantity": 6
+}
+
+{
+  "item": "Milk",
+  "quantity": 1
+}
+
+{
+  "item": "Butter",
+  "quantity": 1
+}
+
+{
+  "item": "Bacon",
+  "quantity": 1
+}
+
+{
+  "item": "Chicken",
+  "quantity": 1
+}
+
+{
+  "item": "Tomatoes",
+  "quantity": 1
+}
+
+{
+  "item": "Onions",
+  "quantity": 1
+}
+
+{
+  "item": "Carrots",
+  "quantity": 1
+}
+
+{
+  "item": "Cucumber",
+  "quantity": 1
+}
+
+{
+  "item": "Potatoes",
+  "quantity": 1
+}
+
+{
+  "item": "Garlic",
+  "quantity": 1
+}
+
+{
+  "item": "Cabbage",
+  "quantity": 1
+}
+
+{
+  "item": "Broccoli",
+  "quantity": 1
+}
+
+{
+  "item": "Pears",
+  "quantity": 2
+}
+
+{
+  "item": "Grapes",
+  "quantity": 1
+}
+
+{
+  "item": "Watermelon",
+  "quantity": 1
+}
+
+{
+  "item": "Pineapple",
+  "quantity": 1
+}
+
+{
+  "item": "Bananas",
+  "quantity": 1
+}
+
+{
+  "item": "Peaches",
+  "quantity": 1
+}
+
+{
+  "item": "Plums",
+  "quantity": 1
+}
+
+{
+  "item": "Strawberries",
+  "quantity": 1
+}
+
+{
+  "item": "Blueberries",
+  "quantity": 1
+}
+
+{
+  "item": "Raspberries",
+  "quantity": 1
+}
+
+{
+  "item": "Kiwi",
+  "quantity": 1
+}
+
+{
+  "item": "Pomegranate",
+  "quantity": 1
+}
+
+{
+  "item": "Avocado",
+  "quantity": 1
+}
+
+{
+  "item": "Walnuts",
+  "quantity": 1
+}
+
+{
+  "item": "Almonds",
+  "quantity": 1
+}
+
+{
+  "item": "Peanuts",
+  "quantity": 1
+}
+
+{
+  "item": "Pecans",
+  "quantity": 1
+}
+
+{
+  "item": "Cashews",
+  "quantity": 1
+}
+
+{
+  "item": "Hazelnuts",
+  "quantity": 1
+}
+
+{
+  "item": "Pistachios",
+  "quantity": 1
+}
+
+{
+  "item": "Sunflower seeds",
+  "quantity": 1
+}
+
+{
+  "item": "Pumpkin seeds",
+  "quantity": 1
+}
+
+{
+  "item": "Chia seeds",
+  "quantity": 1
+}
+
+{
+  "item": "Flaxseeds",
+  "quantity": 1
+}
+
+{
+  "item": "Oats",
+  "quantity": 1
+}
+
+{
+  "item": "Quinoa",
+  "quantity": 1
+}
+
+{
+  "item": "Brown rice",
+  "quantity": 1
+}
+
+{
+  "item": "White rice",
+  "quantity": 1
+}
+
+{
+  "item": "Whole wheat bread",
+  "quantity": 1
+}
+
+{
+  "item": "Whole grain pasta",
+  "quantity": 1
+}
+
+{
+  "item": "Granola",
+  "quantity": 1
+}
+
+{
+  "item": "Trail mix",
+  "quantity": 1
+}
+
+{
+  "item": "Energy bars",
+  "quantity": 1
+}
+
+{
+  "item": "Protein powder",
+  "quantity": 1
+}
+
+{
+  "item": "Whey protein",
+  "quantity": 1
+}
+
+{
+  "item": "Casein protein",
+  "quantity": 1
+}
+
+{
+  "item": "Egg whites",
+  "quantity": 1
+}
+
+{
+  "item": "Greek yogurt",
+  "quantity": 1
+}
+
+{
+  "item": "
+"""

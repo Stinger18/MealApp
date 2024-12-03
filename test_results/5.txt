@@ -1,0 +1,181 @@
+
+****************** 5.txt ***********************
+~~~ Prompt:
+
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s2.qwant.com/thumbr/474x711/6/d/4045f69b7f9ccac2ec0abf1cf999dd4da797051741435d6f18547f7cd49d36/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.Y85UVva4QJ_9ENgIsMBKnAHaLH%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+{
+    "item": "Water bottles",
+    "quantity": 6
+}, {
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3
+}, {
+    "item": "Tomatoes",
+    "quantity": 2
+}, {
+    "item": "Cucumbers",
+    "quantity": 1
+}, {
+    "item": "Cheese",
+    "quantity": 1
+}, {
+    "item": "Crackers",
+    "quantity": 1
+}, {
+    "item": "Cookies",
+    "quantity": 1
+}, {
+    "item": "Salami",
+    "quantity": 1
+}, {
+    "item": "Bottles of hot sauce",
+    "quantity": 2
+}, {
+    "item": "Bottles of ketchup",
+    "quantity": 2
+}, {
+    "item": "Bottles of mustard",
+    "quantity": 2
+}, {
+    "item": "Bottles of relish",
+    "quantity": 2
+}, {
+    "item": "Bottles of mayonnaise",
+    "quantity": 2
+}, {
+    "item": "Bottles of salad dressing",
+    "quantity": 2
+}, {
+    "item": "Bottles of oil",
+    "quantity": 2
+}, {
+    "item": "Bottles of vinegar",
+    "quantity": 2
+}, {
+    "item": "Bottles of soda",
+    "quantity": 2
+}, {
+    "item": "Cans of soda",
+    "quantity": 2
+}, {
+    "item": "Cans of beer",
+    "quantity": 2
+}, {
+    "item": "Cans of soup",
+    "quantity": 2
+}, {
+    "item": "Cans of vegetables",
+    "quantity": 2
+}, {
+    "item": "Cans of fruits",
+    "quantity": 2
+}, {
+    "item": "Cans of meat",
+    "quantity": 2
+}, {
+    "item": "Cans of fish",
+    "quantity": 2
+}, {
+    "item": "Cans of beans",
+    "quantity": 2
+}, {
+    "item": "Cans of legumes",
+    "quantity": 2
+}, {
+    "item": "Cans of grains",
+    "quantity": 2
+}, {
+    "item": "Cans of pasta",
+    "quantity": 2
+}, {
+    "item": "Cans of rice",
+    "quantity": 2
+}, {
+    "item": "Cans of cereal",
+    "quantity": 2
+}, {
+    "item": "Cans of snacks",
+    "quantity": 2
+}, {
+    "item": "Cans of nuts",
+    "quantity": 2
+}, {
+    "item": "Cans of seeds",
+    "quantity": 2
+}, {
+    "item": "Cans of spices",
+    "quantity": 2
+}, {
+    "item": "Cans of herbs",
+    "quantity": 2
+}, {
+    "item": "Cans of seasonings",
+    "quantity": 2
+}, {
+    "item": "Cans of condiments",
+    "quantity": 2
+}, {
+    "item": "Cans of sauces",
+    "quantity": 2
+}, {
+    "item": "Cans of marinades",
+    "quantity": 2
+}, {
+    "item": "Cans of dressings",
+    "quantity": 2
+}, {
+    "item": "Cans of toppings",
+    "quantity": 2
+}, {
+    "item": "Cans of fillings",
+    "quantity": 2
+}, {
+    "item": "Cans of spreads",
+    "quantity": 2
+}, {
+    "item": "Cans of dips",
+    "quantity": 2
+}, {
+    "item": "Cans of salsas",
+    "quantity": 2
+}, {
+    "item": "Cans of guacamole",
+    "quantity": 2
+}, {
+    "item": "Cans of hummus",
+    "quantity": 2
+}, {
+    "item": "Cans of falafel",
+    "quantity": 2
+}, {
+    "item": "Cans of tabbouleh",
+    "quantity": 2
+}, {
+    "item": "Cans of quinoa",
+    "quantity": 2
+}, {
+
+"""

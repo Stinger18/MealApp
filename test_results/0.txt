@@ -1,0 +1,103 @@
+
+****************** 0.txt ***********************
+~~~ Prompt:
+
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x653/1/8/0badc5abb0852264a2cb394dd9c6a57fd451384393e62b94fb77480a054013/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.XKV1IuS9-G5POEfJhsLfewHaKN%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+{
+    "item": "Orange juice",
+    "quantity": 1
+},
+{
+    "item": "Apple",
+    "quantity": 2
+},
+{
+    "item": "Lemons",
+    "quantity": 3
+},
+{
+    "item": "Grapes",
+    "quantity": 1
+},
+{
+    "item": "Milk",
+    "quantity": 2
+},
+{
+    "item": "Strawberries",
+    "quantity": 1
+},
+{
+    "item": "Cantaloupe",
+    "quantity": 1
+},
+{
+    "item": "Cheese",
+    "quantity": 1
+},
+{
+    "item": "Ham",
+    "quantity": 1
+},
+{
+    "item": "Cabbage",
+    "quantity": 1
+},
+{
+    "item": "Peppers",
+    "quantity": 3
+},
+{
+    "item": "Potatoes",
+    "quantity": 2
+},
+{
+    "item": "Mushrooms",
+    "quantity": 1
+},
+{
+    "item": "Tomatoes",
+    "quantity": 1
+},
+{
+    "item": "Garlic",
+    "quantity": 1
+},
+{
+    "item": "Bottled water",
+    "quantity": 1
+},
+{
+    "item": "Bottled juice",
+    "quantity": 3
+},
+{
+    "item": "Bottled soda",
+    "quantity": 2
+},
+{
+    "item": "Bottled wine",
+    "quantity": 1
+},
+{
+    "item": "Bottled champagne",
+    "quantity": 1
+}
+"""

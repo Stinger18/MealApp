@@ -1,0 +1,22 @@
+
+****************** 8.txt ***********************
+~~~ Prompt:
+
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x710/3/4/be8c2baa1de6beac3e6e5f880f532b5aff716f9ce904d0b5d3f8c0b525ac59/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.-XtKmAjjhJbDwq5y1UyHaQHaLG%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""

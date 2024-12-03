@@ -1,0 +1,219 @@
+
+****************** 7.txt ***********************
+~~~ Prompt:
+
+Identify the most noticable food items and quantities from this image in json format with no other text. Only identify items you are sure of. EX: [{
+    "item": "Orange juice",
+    "quantity": 1
+}, {
+    "item": "Apple",
+    "quantity": 2
+}, {
+    "item": "Lemons",
+    "quantity": 3"
+    ...
+
+~~~ URL:
+
+https://s1.qwant.com/thumbr/474x500/a/9/50e07b729e6273180a44bc94c1bfaec329aef3f6097efacc0edfe81b0cf5a8/th.jpg?u=https://tse.mm.bing.net/th?id%3DOIP.2oD8uxGIpiAQlCTGgdBCcwHaH0%26pid%3DApi&q=0&b=1&p=0&a=0
+
+~~~ Temperature: 0.1
+
+"""
+[
+    {
+        "item": "Orange juice",
+        "quantity": 1
+    },
+    {
+        "item": "Apple",
+        "quantity": 2
+    },
+    {
+        "item": "Lemons",
+        "quantity": 3
+    },
+    {
+        "item": "Milk",
+        "quantity": 2
+    },
+    {
+        "item": "Bottled water",
+        "quantity": 1
+    },
+    {
+        "item": "Butter",
+        "quantity": 1
+    },
+    {
+        "item": "Eggs",
+        "quantity": 1
+    },
+    {
+        "item": "Canned tuna",
+        "quantity": 2
+    },
+    {
+        "item": "Canned beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned corn",
+        "quantity": 1
+    },
+    {
+        "item": "Canned peaches",
+        "quantity": 1
+    },
+    {
+        "item": "Canned pineapple",
+        "quantity": 1
+    },
+    {
+        "item": "Canned tomatoes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned soup",
+        "quantity": 1
+    },
+    {
+        "item": "Canned vegetables",
+        "quantity": 1
+    },
+    {
+        "item": "Canned fruit",
+        "quantity": 1
+    },
+    {
+        "item": "Canned meat",
+        "quantity": 1
+    },
+    {
+        "item": "Canned fish",
+        "quantity": 1
+    },
+    {
+        "item": "Canned poultry",
+        "quantity": 1
+    },
+    {
+        "item": "Canned seafood",
+        "quantity": 1
+    },
+    {
+        "item": "Canned legumes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned grains",
+        "quantity": 1
+    },
+    {
+        "item": "Canned pasta",
+        "quantity": 1
+    },
+    {
+        "item": "Canned rice",
+        "quantity": 1
+    },
+    {
+        "item": "Canned noodles",
+        "quantity": 1
+    },
+    {
+        "item": "Canned potatoes",
+        "quantity": 1
+    },
+    {
+        "item": "Canned yams",
+        "quantity": 1
+    },
+    {
+        "item": "Canned squash",
+        "quantity": 1
+    },
+    {
+        "item": "Canned carrots",
+        "quantity": 1
+    },
+    {
+        "item": "Canned peas",
+        "quantity": 1
+    },
+    {
+        "item": "Canned green beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned corn",
+        "quantity": 1
+    },
+    {
+        "item": "Canned lima beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned kidney beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned black beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned pinto beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned garbanzo beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned chickpeas",
+        "quantity": 1
+    },
+    {
+        "item": "Canned lentils",
+        "quantity": 1
+    },
+    {
+        "item": "Canned split peas",
+        "quantity": 1
+    },
+    {
+        "item": "Canned navy beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned cannellini beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned Great Northern beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned red beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned white beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned black-eyed peas",
+        "quantity": 1
+    },
+    {
+        "item": "Canned kidney beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned pinto beans",
+        "quantity": 1
+    },
+    {
+        "item": "Canned black beans",
+        "
+"""
