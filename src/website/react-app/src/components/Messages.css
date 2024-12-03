@@ -29,8 +29,12 @@ ul {
   background-color: #b5c69d;
 }
 
-.message.other {
+.message.chef {
   background-color: #fff;
+}
+
+.message.error {
+  background-color: #ff5d5d;
 }
 
 .message-form {
@@ -40,6 +44,16 @@ ul {
   align-items: center;
   margin-top: 10px;
   max-width: 600px;
+}
+
+.form-inactive {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  max-width: 600px;
+  background-color: #ff5d5d;
 }
 
 .input-field {

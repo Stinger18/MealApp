@@ -38,20 +38,15 @@ function App() {
         // Add the response message
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: last_message, sender: "Other" },
+          { text: last_message, sender: "Chef" },
         ]);
       } catch (error) {
         console.error("Error:", error);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: error, sender: "Error" },
+        ]);
       }
-      //
-      // // Simulate "Other" user response with delay
-      // setTimeout(() => {
-      //   const response = `${data}`; // Automatic response logic
-      //   setMessages((prevMessages) => [
-      //     ...prevMessages,
-      //     { text: response, sender: "Other" },
-      //   ]);
-      // }, 1000); // Simulate a delay of 1 second for the "Other" user to respond
     }
   };
 

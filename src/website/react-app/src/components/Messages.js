@@ -14,7 +14,10 @@ function Messages({ message, messages, handleInputChange, handleSubmit }) {
         </ul>
       </div>
 
-      <form onSubmit={handleSubmit} className="message-form">
+      <form
+        onSubmit={handleSubmit}
+        className={"message-form"} //form-inactive class
+      >
         <input
           type="text"
           value={message}
