@@ -28,7 +28,8 @@ TEMPERATURE = 0.1
 
 # Prompts for the AI
 prompts = [
-    """Identify the most noticeable food items and quantities from this image in JSON format with no other text. Only identify items you are sure of. EX: 
+    """ Identify the most noticeable food items and quantities from this image in JSON format with no other text. 
+        Only identify items you are sure of. EX: 
 [{
     "Orange juice": 1,
     "Apple": 2,
@@ -54,6 +55,34 @@ def __upload_to_gyazo(image_path: str) -> str:
         print(f"Uploaded to Gyazo: {gyazo_url}")
         return gyazo_url
 
+def __delete_from_gyazo(image_url: str):
+    """Deletes an image from Gyazo using its image ID and logs detailed response."""
+    try:
+        #get id from url
+        image_id = image_url.split("/")[-1].split(".")[0]
+        delete_url = f"https://api.gyazo.com/api/images/{image_id}"
+
+        #send DELETE request so it doesnt get in your captures and you can re-run the code with no errors
+        response = requests.delete(
+            delete_url,
+            headers={"Authorization": f"Bearer {GYAZO_ACCESS_TOKEN}"}
+        )
+        
+        if response.status_code == 204:
+            print(f"Successfully deleted image: {image_url}")
+        elif response.status_code == 200:
+            print(f"Possible successful deletion with status 200 for image: {image_url}")
+        else:
+            print(f"Failed to delete image: {image_url}, Status Code: {response.status_code}")
+            print(f"Response Body: {response.text}")  # Log the response body for debugging
+    except Exception as e:
+        print(f"Error deleting image {image_url}: {e}")
+
+def __delete_all_images(urls: list[str]):
+    """Deletes all uploaded images from Gyazo."""
+    print("\nDeleting all uploaded images...")
+    for url in urls:
+        __delete_from_gyazo(url)
 
 def __gather_image_urls_from_directory(directory: str) -> list:
     """Iterates over a directory, uploads images to Gyazo, and returns their URLs."""
@@ -71,7 +100,7 @@ def __gather_image_urls_from_directory(directory: str) -> list:
 
 def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
     """Processes an image URL using Hugging Face API and returns the response."""
-    if (outputToConsole): print("\n***** Detecting Image *****\n")
+    if (outputToConsole): print("\n***** Model Detecting Image *****\n")
     response_text = ""
     for message in client.chat_completion(
             model="meta-llama/Llama-3.2-11B-Vision-Instruct",
@@ -148,7 +177,7 @@ def __to_python_dict(prediction: str):
         print("Error: converting image prediction text into dict failed")        
     return dict
     
-def add_dict(d1: dict, d2: dict):
+def __add_dict(d1: dict, d2: dict):
     """Adds all pairs from d2 to d1. If they have the same key the values are added (assummed as numbers)"""
     for key, value in d2.items():
         if key in d1:
@@ -168,11 +197,11 @@ def get_ingredients(imagesDirectory: str):
     #Add results of all pictures into one dict
     prediction = {}
     for url in urls:
-        result = __to_python_dict(__detect_ingredients(url, prompts[0], False) )
-        prediction = add_dict(prediction, result)
+        result = __to_python_dict(__detect_ingredients(url, prompts[0], True) )
+        prediction = __add_dict(prediction, result)
 
-    print("Done")
-    return prediction
+    #Delete all images from gyazo to prevent erros
+    # __delete_all_images(urls)
+    return json.dumps(prediction, indent=4) #convert to json obj before returning
 
-result = get_ingredients("images")  
-print(result)
+print(get_ingredients("desktop/workspace/whats-for-dinner/src/app/images"))
