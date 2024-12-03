@@ -1,6 +1,14 @@
 import "./Pantry.css";
 import { useState } from "react";
 
+const tempPantry = [
+  { item: "flour", qty: 5 },
+  { item: "eggs", qty: 11 },
+  { item: "butter", qty: 1 },
+  { item: "sugar", qty: 3 },
+  { item: "milk", qty: 2 },
+];
+
 function EntryForm({ newTask, setNewTask, handleSubmit }) {
   return (
     <form className="input-form" onSubmit={handleSubmit}>
@@ -61,10 +69,7 @@ function UploadPicture({ uploadPicture }) {
 function Pantry() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-
-  function uploadPicture() {
-    console.log("upload Picture");
-  }
+  const [pantry, setPantry] = useState(tempPantry); //setting pantry to initial dummy pantry
 
   // Handle pantry submission
   const handlePantrySubmit = (e) => {
@@ -79,12 +84,26 @@ function Pantry() {
     setTasks(tasks.filter((_, i) => i !== index));
   };
 
+  function uploadPicture() {
+    console.log("upload Picture");
+  }
+
   function getDB() {
     console.log("Get DB");
+    pantry.forEach((dict) =>
+      setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
+    );
   }
 
   function confirmDB() {
     console.log("Confirm DB");
+    setPantry(
+      tasks.map((item) => {
+        const [ingredient, qty] = item.split(", ");
+        return { item: ingredient, qty: parseInt(qty) };
+      })
+    );
+    setTasks([]);
   }
 
   return (
