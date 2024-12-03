@@ -1,6 +1,20 @@
 /* Need to fix long messages */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-.message-form {
+li {
+  color: #000;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-form {
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -44,49 +58,17 @@
   background-color: #c5d6ad;
 }
 
-/* #################### */
-
-.App {
-  text-align: center;
-  margin-top: 50px;
-}
-
-input {
-  padding: 10px;
-  margin: 10px;
-  font-size: 16px;
-}
-
-button {
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  color: #000;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-button {
-  background-color: red;
-  background-color: #c5d6ad;
+.del-btn {
+  padding: 12px 20px;
+  background-color: #ff4646;
   color: #000;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.submit-btn:hover {
-  background-color: #c5d6ad;
+.del-btn:hover {
+  background-color: #ff6868;
 }

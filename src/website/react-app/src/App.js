@@ -10,6 +10,29 @@ import Pantry from "./components/Pantry";
 function App() {
   const [message, setMessage] = useState(""); // Store current input message
   const [messages, setMessages] = useState([]); // Store the list of messages
+  const [ChefActive, setChefActive] = useState(true);
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+
+  // Handle chef hat click
+  function handleChefClick() {
+    setChefActive((curr) => !curr);
+  }
+
+  // const handle
+
+  // Handle pantry submission
+  const handlePantrySubmit = (e) => {
+    e.preventDefault();
+    if (newTask.trim() !== "") {
+      setTasks([...tasks, newTask]);
+      setNewTask("");
+    }
+  };
+
+  const handleRemoveItem = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
 
   // Handle input change for message
   const handleInputChange = (e) => {
@@ -50,15 +73,6 @@ function App() {
     }
   };
 
-  //##############################################
-  const [ChefActive, setChefActive] = useState(true);
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
-
-  function handleChefClick() {
-    setChefActive((curr) => !curr);
-  }
-
   return (
     <div className="background">
       <TitleBar
@@ -70,9 +84,10 @@ function App() {
         <Sidebar title="Pantry">
           <Pantry
             tasks={tasks}
-            setTasks={setTasks}
             newTask={newTask}
             setNewTask={setNewTask}
+            handleSubmit={handlePantrySubmit}
+            handleRemoveItem={handleRemoveItem}
           />
         </Sidebar>
         <RecipeBox />
