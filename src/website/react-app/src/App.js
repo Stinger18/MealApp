@@ -9,21 +9,28 @@ import Pantry from "./components/Pantry";
 
 function App() {
   const [ChefActive, setChefActive] = useState(true);
+  const [PantryActive, setPantryActive] = useState(true);
 
   // Handle chef hat click
   function handleChefClick() {
     setChefActive((curr) => !curr);
   }
 
+  // Handle logo click
+  function handleLogoClick() {
+    setPantryActive((curr) => !curr);
+  }
+
   return (
     <div className="background">
       <TitleBar
         logoURL="./tempLogo.png"
+        handleLogoClick={handleLogoClick}
         title="What's For Dinner?"
         SVG={<ChefSVG state={ChefActive} onClick={handleChefClick} />}
       />
       <div className="main-container">
-        <Sidebar title="Pantry">
+        <Sidebar title="Pantry" isActive={PantryActive}>
           <Pantry />
         </Sidebar>
         <RecipeBox />

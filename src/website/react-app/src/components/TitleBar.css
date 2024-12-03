@@ -16,6 +16,7 @@
 .logo {
   width: 100px; /* Set logo size */
   height: auto;
+  cursor: pointer;
 }
 
 /* Title styles */

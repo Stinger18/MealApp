@@ -1,3 +1,7 @@
 .chef-svg :hover {
   background-color: black;
 }
+
+.chef-svg {
+  cursor: pointer;
+}
