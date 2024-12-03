@@ -72,3 +72,50 @@ li {
 .del-btn:hover {
   background-color: #ff6868;
 }
+
+.update-db {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* flex-direction: column; */
+}
+
+.db-btn {
+  margin: 0 12px;
+  padding: 12px 20px;
+  width: fit-content;
+  background-color: #ed8262;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.db-btn:hover {
+  background-color: #fd9f7f;
+}
+
+.pic-btn {
+  margin: 0 12px 5px 0;
+  padding: 12px 20px;
+  width: fit-content;
+  background-color: #ed8262;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pic-btn:hover {
+  background-color: #fd9f7f;
+}
+
+.upload-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
