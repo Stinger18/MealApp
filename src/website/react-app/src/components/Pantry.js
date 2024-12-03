@@ -35,13 +35,13 @@ function PantryList({ tasks, handleRemoveItem }) {
   );
 }
 
-function UpdateDatabase() {
+function UpdateDatabase({ getDB, confirmDB }) {
   return (
     <div className="update-db">
-      <button className="db-btn" onClick={() => console.log("Get Pantry")}>
+      <button className="db-btn" onClick={getDB}>
         Get Current Pantry
       </button>
-      <button className="db-btn" onClick={() => console.log("Confirm Pantry")}>
+      <button className="db-btn" onClick={confirmDB}>
         Confirm Pantry
       </button>
     </div>
@@ -79,10 +79,18 @@ function Pantry() {
     setTasks(tasks.filter((_, i) => i !== index));
   };
 
+  function getDB() {
+    console.log("Get DB");
+  }
+
+  function confirmDB() {
+    console.log("Confirm DB");
+  }
+
   return (
     <>
       <UploadPicture uploadPicture={uploadPicture} />
-      <UpdateDatabase />
+      <UpdateDatabase getDB={getDB} confirmDB={confirmDB} />
       <EntryForm
         newTask={newTask}
         setNewTask={setNewTask}
