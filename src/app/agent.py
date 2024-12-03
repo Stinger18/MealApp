@@ -106,8 +106,8 @@ class SousChef:
         # This compiles it into a LangChain Runnable,
         # meaning you can use it as you would any other runnable.
         # Note that we're (optionally) passing the memory when compiling the graph
-        sousChef = workflow.compile(checkpointer=checkpointer)
-        return sousChef
+        self.sousChef = workflow.compile(checkpointer=checkpointer)
+        return self.sousChef
 
 ## Build the Agents tools
 @tool

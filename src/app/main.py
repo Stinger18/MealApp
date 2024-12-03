@@ -13,14 +13,18 @@ You can stop it with ctrl+c.
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from langgraph.graph.state import CompiledStateGraph # Used for typing
+from langchain_core.messages import HumanMessage # Used for typing
 try:
     from app.errorHandling import EmailAlreadyExists
     from app import models, crud
     from app.database import SessionLocal, get_db, engine
+    from app.agent import buildSousChef
 except ImportError:
     from errorHandling import EmailAlreadyExists
     import models, crud
     from database import SessionLocal, get_db, engine
+    from agent import buildSousChef
 
 import random
 
@@ -51,10 +55,16 @@ app.add_middleware(
     allow_headers=["*"], # Allow all headers
 )
 
+''' Create the agent instance '''
+# For testing purposes
+#TODO: Update this to use the active users information
+user: (models.User | None) = crud.get_user_by_id(db=SessionLocal(), userId=1)
+sousChef: CompiledStateGraph = buildSousChef(userInfo=user) # Create the agent with the test users data
+
 ''' User Commands '''
 @app.get("/users/{userId}")
-def get_user(userId: int, db: Session = Depends(get_db)):
-    return crud.get_user(db, userId=userId)
+def get_user(userId: int, db: Session = Depends(get_db)): # TODO: Update to get user by name or id
+    return crud.get_user_by_id(db, userId=userId)
 
 @app.get("/users")
 def get_all_users(db: Session = Depends(get_db)):
@@ -70,6 +80,18 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     userDBID = random.randint(1, 100)
     return crud.create_user(db=db, id=len(db.query(models.User).all())+1, name=user.name, email=user.email, password=user.password, recipeId=userDBID, pantryId=userDBID, shoppingListId=userDBID) #TODO: Update for the new structure
 
+''' Agent Commands '''
+
+@app.get("/agent/{query}")
+def query_agent(query: str, simple: bool = False):
+    ''' Query the agent with the given query '''
+    if simple: # Return only the last response
+        return sousChef.invoke({"messages": [HumanMessage(content=query)]},
+                config={"configurable": {"thread_id": 42}})["messages"][-1]["content"]
+    else: # Return all responses
+        return sousChef.invoke({"messages": [HumanMessage(content=query)]},
+                config={"configurable": {"thread_id": 42}})
+
 ''' Recipe Commands '''
 def get_recipe(userRecipeId: int, recipeId: int, advancedFormat: bool = False, db:Session = Depends(get_db)):
     return crud.get_recipe(db, userRecipeId=userRecipeId, recipeId=recipeId, advancedFormat=advancedFormat)
@@ -84,8 +106,8 @@ def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_
 if __name__ == "__main__":
     ''' Use this to create a test data from here '''
     # crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
-    # testUser = get_user(1, db=SessionLocal())
-    # print(testUser.name)
+    testUser = crud.get_user_by_id(db=SessionLocal(), userId=1) 
+    print(testUser.name)
 
     # crud.create_recipe(db=SessionLocal(), id=2, ownerId=1, name='Creamy Tuscan Chicken', ingredients={'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}, instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.", servings=4, prepTime='10 minutes', cookTime='20 minutes')
     # testRecipe = get_recipe(1, 1, db=SessionLocal())
