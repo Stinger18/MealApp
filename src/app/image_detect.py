@@ -31,9 +31,9 @@ prompts = [
     """ Identify the most noticeable food items and quantities from this image in JSON format with no other text. 
         Only identify items you are sure of. EX: 
 [{
-    "Orange juice": 1,
-    "Apple": 2,
-    "Lemons": 3
+    item: "Orange juice", qty: 1,
+    item: "Apple", qty: 2,
+    item: "Lemons", qty: 3
 }]
 """
 ]
@@ -108,10 +108,11 @@ def __gather_image_from_path(file_path: str) -> str:
     return url
 
 
-def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
+def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> list[dict]:
     """Processes an image URL using Hugging Face API and returns the response."""
     if (outputToConsole): print("\n***** Model Detecting Image *****\n")
     response_text = ""
+    response_dicts = []
     for message in client.chat_completion(
             model="meta-llama/Llama-3.2-11B-Vision-Instruct",
             messages=[
@@ -128,9 +129,11 @@ def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
             temperature=TEMPERATURE
     ):  
         if (outputToConsole): print(message.choices[0].delta.content, end="")  # Print to console
-        response_text += message.choices[0].delta.content  # Add tokens to string
+        response_text += message.choices[0].delta.content.strip()  # Add tokens to string
+        print(f"responce message {message.choices[0].delta.content.strip()}")
+        response_dicts.append((response_text))
     if (outputToConsole): print("\n***************\n")
-    return response_text
+    return response_dicts
 
 
 def __test_prompts(urls: list[str], prompts: list[str]):
@@ -207,11 +210,11 @@ def get_ingredients(fileName: str):
     url = __gather_image_from_path(file_path)
     print("Detecting ingredients...")
     
-    result = __to_python_dict(__detect_ingredients(url, prompts[0], True) )
+    result = __detect_ingredients(url, prompts[0], True)
 
     #Delete all images from gyazo to prevent erros
     __delete_from_gyazo(url)
-    return json.dumps(result, indent=4) #convert to json obj before returning
+    return json.dumps(result, indent=0) #convert to json obj before returning
 
 
 

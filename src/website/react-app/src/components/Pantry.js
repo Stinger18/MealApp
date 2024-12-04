@@ -101,6 +101,13 @@ function Pantry() {
       const response = await fetch(`http://localhost:8000/image/${file.name}`);
       const data = await response.json();
       console.log(data);
+      for (const dic in data) {
+        console.log(dic);
+      }
+
+      // for ( data.keys()) {
+      //   // setTasks((prevItems) => [`${key}, ${data[key]}`, ...prevItems]);      }
+      // }
     } catch (error) {
       console.error("Error:", error);
     }
