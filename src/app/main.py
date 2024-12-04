@@ -89,7 +89,7 @@ def query_agent(query: str, simple: bool = False):
     ''' Query the agent with the given query '''
     if simple: # Return only the last response
         return sousChef.invoke({"messages": [HumanMessage(content=query)]},
-                config={"configurable": {"thread_id": 42}})["messages"]["content"] # Ocationally fails with a Indexing Type error
+                config={"configurable": {"thread_id": 42}})["messages"][-1].content
     else: # Return all responses
         return sousChef.invoke({"messages": [HumanMessage(content=query)]},
                 config={"configurable": {"thread_id": 42}})
