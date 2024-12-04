@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import as_declarative
 try:
     from app.database import Base
 except ImportError:
@@ -15,6 +16,7 @@ except ImportError:
     The __str__ method should return a human-readable string representation of the object, which is useful for displaying the object in the API response.
     The __str__ method is also need for the agent to understand the object and the relationship between information from the object.
 '''
+
 class User(Base):
     __tablename__ = "users"
 
@@ -85,7 +87,7 @@ class Pantry(Base):
     id = Column(Integer, primary_key=True, index=True) 
     ownerId = Column(Integer, index=True)
     item = Column(String)
-    quantity = Column(Integer)
+    quantity = Column(String)
     date_added = Column(String)
 
     def __repr__(self):
@@ -101,3 +103,23 @@ class Shopping_list(Base):
     ownerId = Column(Integer, index=True)
     item = Column(String)
     quantity = Column(Integer)
+
+
+
+from sqlalchemy.ext.declarative import DeclarativeMeta
+import json
+
+class AlchemyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj.__class__, DeclarativeMeta):
+            # Convert SQLAlchemy model to dictionary
+            fields = {}
+            for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
+                data = obj.__getattribute__(field)
+                try:
+                    json.dumps(data)
+                    fields[field] = data
+                except TypeError:
+                    fields[field] = None
+            return fields
+        return json.JSONEncoder.default(self, obj)

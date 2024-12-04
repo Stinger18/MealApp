@@ -113,16 +113,33 @@ function Pantry() {
     //   setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
     // );
     const pantryId = 1;
-    fetch(`${BACKEND_URL}/pantry/${pantryId}`)
-    .then(response => response.json())
-    .then(data => {
-      console.log(`Data: ` + data);
-      data.forEach(item => {
-        console.log(item);
-        setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
-      });
+    // fetch(`${BACKEND_URL}/pantry/${pantryId}`)
+    // .then(response => {
+    //   console.log(`Response: ` + Object.keys(response));
+    //   response.json()
+    // })
+    // // .then(data => {
+    // //   console.log(`Data: ` + data);
+    // //   data.forEach(item => {
+    // //     console.log(item);
+    // //     setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
+    // //   });
+    // })
+    // .catch(error => console.error("Error fetching users pantry: ", error));
+
+    const response = await fetch(`${BACKEND_URL}/pantry/${pantryId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch(error => console.error("Error fetching users pantry: ", error));
+    // console.log(response);
+    const data = await response.json();
+    console.log(data);
+    // data.forEach(item => {
+    //   console.log(item);
+    //   setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
+    // });
 }
 
   function confirmDB() {

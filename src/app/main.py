@@ -10,29 +10,30 @@ You can stop it with ctrl+c.
 3) Navigate to `http://localhost:8000` or whatever the url will be in a web browser to see the frontend.
 """
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session, class_mapper
 from langgraph.graph.state import CompiledStateGraph # Used for typing
 from langchain_core.messages import HumanMessage # Used for typing
 try:
-    print("Importing from app")
     from app.errorHandling import EmailAlreadyExists
-    from app import models, crud
+    from app import models, crud, schemas
     from app.database import SessionLocal, get_db, engine
     from app.agent import buildSousChef
     from app.image_detect import get_ingredients
-    print("Imported from app")
 except ImportError:
-    print("Importing from main")
     from errorHandling import EmailAlreadyExists
-    import models, crud
+    import models, crud, schemas
     from database import SessionLocal, get_db, engine
     from agent import buildSousChef
-    from image_detect import get_ingredients
+    # from image_detect import get_ingredients
 
 import random
 from datetime import date
+import json
+import pprint
+from typing import List, Dict
 
 # Create the database tables
 # models.Base.metadata.create_all(bind=engine)
@@ -56,8 +57,8 @@ class RecipeCreate(BaseModel):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"], # Allow requests from the frontend TODO: Update this to the frontend URL
-    # allow_credentials=True,
-    allow_methods=["POST", "GET"], # Allow POST and GET requests
+    allow_credentials=True,
+    allow_methods=["*"], # Allow POST and GET requests
     allow_headers=["*"], # Allow all headers
 )
 
@@ -93,7 +94,7 @@ def query_agent(query: str, simple: bool = False):
     ''' Query the agent with the given query '''
     if simple: # Return only the last response
         return sousChef.invoke({"messages": [HumanMessage(content=query)]},
-                config={"configurable": {"thread_id": 42}})["messages"][-1].content
+                config={"configurable": {"thread_id": 42}})["messages"]["content"]
     else: # Return all responses
         return sousChef.invoke({"messages": [HumanMessage(content=query)]},
                 config={"configurable": {"thread_id": 42}})
@@ -112,25 +113,32 @@ def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_
     return crud.create_recipe(db=db, id=len(db.query(models.Recipe).all())+1, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions, servings=recipe.servings, prepTime=recipe.prepTime, cookTime=recipe.cookTime)
 
 ''' Pantry Commands '''
+# @app.get("/pantry/{pantryId}", response_model=List[schemas.PantryItem])
+# def get_pantry(pantryId: int, db: Session = Depends(get_db)):
+#     allPantry = crud.get_pantry(db=db, userPantryId=pantryId)
+#     # allPantry = db.query(models.Pantry).all()
+#     return [schemas.PantryItem(id=pantry.id, ownerId=pantry.ownerId, name=pantry.item, quantity=pantry.quantity, date_added=pantry.date_added) for pantry in allPantry]
+
 @app.get("/pantry/{pantryId}")
 def get_pantry(pantryId: int, db: Session = Depends(get_db)):
-    return crud.get_pantry(db, userPantryId=pantryId)
+    allPantry = crud.get_pantry(db=db, pantryId=pantryId)
+    return json.dumps(allPantry, cls=models.AlchemyEncoder)
 
 @app.post("/pantry/{pantryId}/add")
 def add_to_pantry(pantryId: int, ingredients: dict, db: Session = Depends(get_db)):
     for key, value in ingredients.items():
-        crud.add_to_pantry(db, id=len(crud.get_pantry(db, userPantryId=pantryId))+1, ownerId=pantryId, item=key, quantity=value, date_added=date.today())
+        crud.add_to_pantry(db=db, id=len(crud.get_pantry(db, pantryId=pantryId))+1, pantryId=pantryId, item=key, quantity=value, date_added="Today")
     return {"message": "Ingredients added to pantry"}
 
 @app.post("/pantry/{pantryId}/remove")
 def remove_from_pantry(pantryId: int, itemId: int, db: Session = Depends(get_db)):
-    crud.remove_from_pantry(db, ownerId=pantryId, itemId=itemId)
+    crud.remove_from_pantry(db=db, pantryId=pantryId, itemId=itemId)
     return {"message": "Ingredient removed from pantry"}
 
 '''Image Detection Commands'''
-@app.get("/image/{url}")
-def detect_image(url: str):
-    return get_ingredients(url)
+# @app.get("/image/{url}")
+# def detect_image(url: str):
+#     return get_ingredients(url)
 
 
 if __name__ == "__main__":
@@ -138,10 +146,12 @@ if __name__ == "__main__":
     # crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
     # testUser = crud.get_user_by_id(db=SessionLocal(), userId=1) 
     # print(testUser)
-    # itemsToAdd = {'Cream of Chicken Soup': '2', 'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}
+    # itemsToAdd = {'Cream of Chicken Soup': '2', 'Cream': '2 cup'}
     # add_to_pantry(db=SessionLocal(), pantryId=1, ingredients=itemsToAdd)
-    testPantry = crud.get_pantry(db=SessionLocal(), userPantryId=1)
-    print(f'Pantry: {testPantry}')
+    # crud.remove_from_pantry(db=SessionLocal(), pantryId=1, itemId=2)
+    testPantry = get_pantry(db=SessionLocal(), pantryId=1)
+    print(testPantry)
+    # print(type(testPantry[0]))
 
     # crud.create_recipe(db=SessionLocal(), id=2, ownerId=1, name='Creamy Tuscan Chicken', ingredients={'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}, instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.", servings=4, prepTime='10 minutes', cookTime='20 minutes')
     # testRecipe = get_recipe(1, 1, db=SessionLocal())

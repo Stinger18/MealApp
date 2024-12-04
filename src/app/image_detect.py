@@ -205,7 +205,7 @@ def get_ingredients(imagesDirectory: str):
     return json.dumps(prediction, indent=4) #convert to json obj before returning
 
 # Get the absolute path of the current directory
-script_dir = os.path.dirname(os.path.abspath(__file__))
-# Construct the path to the images directory
-file_path = os.path.join(script_dir, IMAGES_DIR)
-print(get_ingredients(file_path))
+# script_dir = os.path.dirname(os.path.abspath(__file__))
+# # Construct the path to the images directory
+# file_path = os.path.join(script_dir, IMAGES_DIR)
+# print(get_ingredients(file_path))

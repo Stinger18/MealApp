@@ -101,20 +101,20 @@ def format_recipe(recipe, index: int = 0, advanced: bool = False) -> dict:
         return recipeDict
 
 ''' Pantry Operations '''
-def get_pantry(db: Session, userPantryId: int) -> (models.Pantry | None):
+def get_pantry(db: Session, pantryId: int) -> (list[models.Pantry] | None):
     ''' Returns each item in the users pantry '''
-    return db.query(models.Pantry).filter(models.Pantry.ownerId == userPantryId).all()
+    return db.query(models.Pantry).filter(models.Pantry.ownerId == pantryId).all()
 
-def add_to_pantry(db: Session, id: int, ownerId: int, item: str, quantity: int, date_added: str) -> (models.Pantry | None):
+def add_to_pantry(db: Session, id: int, pantryId: int, item: str, quantity: int, date_added: str) -> (models.Pantry | None):
     ''' Adds a item to the users pantry '''
-    dbPantry = models.Pantry(id=id, ownerId=ownerId, item=item, quantity=quantity, date_added=date_added)
+    dbPantry = models.Pantry(id=id, ownerId=pantryId, item=item, quantity=quantity, date_added=date_added)
     db.add(dbPantry)
     db.commit()
     db.refresh(dbPantry)
     return dbPantry
 
-def remove_from_pantry(db: Session, userPantryId: int, itemId: int):
+def remove_from_pantry(db: Session, pantryId: int, itemId: int):
     ''' Remove an item of the given item ID from the users pantry '''
-    db.query(models.Pantry).filter(models.Pantry.id == itemId, models.Pantry.ownerId == userPantryId).delete()
+    db.query(models.Pantry).filter(models.Pantry.id == itemId, models.Pantry.ownerId == pantryId).delete()
     db.commit()
     return
