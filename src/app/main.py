@@ -16,12 +16,15 @@ from sqlalchemy.orm import Session
 from langgraph.graph.state import CompiledStateGraph # Used for typing
 from langchain_core.messages import HumanMessage # Used for typing
 try:
+    print("Importing from app")
     from app.errorHandling import EmailAlreadyExists
     from app import models, crud
     from app.database import SessionLocal, get_db, engine
     from app.agent import buildSousChef
     from app.image_detect import get_ingredients
+    print("Imported from app")
 except ImportError:
+    print("Importing from main")
     from errorHandling import EmailAlreadyExists
     import models, crud
     from database import SessionLocal, get_db, engine
@@ -29,6 +32,7 @@ except ImportError:
     from image_detect import get_ingredients
 
 import random
+from datetime import date
 
 # Create the database tables
 # models.Base.metadata.create_all(bind=engine)
@@ -95,15 +99,33 @@ def query_agent(query: str, simple: bool = False):
                 config={"configurable": {"thread_id": 42}})
 
 ''' Recipe Commands '''
+@app.get("/recipes/{userRecipeId}/{recipeId}")
 def get_recipe(userRecipeId: int, recipeId: int, advancedFormat: bool = False, db:Session = Depends(get_db)):
     return crud.get_recipe(db, userRecipeId=userRecipeId, recipeId=recipeId, advancedFormat=advancedFormat)
 
+@app.get("/recipes/{userRecipeId}")
 def get_all_recipes(userRecipeId: int, db:Session = Depends(get_db)):
     return crud.get_all_recipes(db, userRecipeId=userRecipeId)
 
+@app.post("/recipes/{ownerId}")
 def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_db)):
     return crud.create_recipe(db=db, id=len(db.query(models.Recipe).all())+1, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions, servings=recipe.servings, prepTime=recipe.prepTime, cookTime=recipe.cookTime)
 
+''' Pantry Commands '''
+@app.get("/pantry/{pantryId}")
+def get_pantry(pantryId: int, db: Session = Depends(get_db)):
+    return crud.get_pantry(db, userPantryId=pantryId)
+
+@app.post("/pantry/{pantryId}/add")
+def add_to_pantry(pantryId: int, ingredients: dict, db: Session = Depends(get_db)):
+    for key, value in ingredients.items():
+        crud.add_to_pantry(db, id=len(crud.get_pantry(db, userPantryId=pantryId))+1, ownerId=pantryId, item=key, quantity=value, date_added=date.today())
+    return {"message": "Ingredients added to pantry"}
+
+@app.post("/pantry/{pantryId}/remove")
+def remove_from_pantry(pantryId: int, itemId: int, db: Session = Depends(get_db)):
+    crud.remove_from_pantry(db, ownerId=pantryId, itemId=itemId)
+    return {"message": "Ingredient removed from pantry"}
 
 '''Image Detection Commands'''
 @app.get("/image/{url}")
@@ -114,8 +136,12 @@ def detect_image(url: str):
 if __name__ == "__main__":
     ''' Use this to create a test data from here '''
     # crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
-    testUser = crud.get_user_by_id(db=SessionLocal(), userId=1) 
-    print(testUser.name)
+    # testUser = crud.get_user_by_id(db=SessionLocal(), userId=1) 
+    # print(testUser)
+    # itemsToAdd = {'Cream of Chicken Soup': '2', 'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}
+    # add_to_pantry(db=SessionLocal(), pantryId=1, ingredients=itemsToAdd)
+    testPantry = crud.get_pantry(db=SessionLocal(), userPantryId=1)
+    print(f'Pantry: {testPantry}')
 
     # crud.create_recipe(db=SessionLocal(), id=2, ownerId=1, name='Creamy Tuscan Chicken', ingredients={'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}, instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.", servings=4, prepTime='10 minutes', cookTime='20 minutes')
     # testRecipe = get_recipe(1, 1, db=SessionLocal())

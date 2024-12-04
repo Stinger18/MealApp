@@ -89,7 +89,7 @@ class Pantry(Base):
     date_added = Column(String)
 
     def __repr__(self):
-        return f'<Pantry: {self.id}, {self.ownerId}, {self.item}, {self.quantity}, {self.date_added}>'
+        return f'<Pantry: ID: {self.id}, Owner ID: {self.ownerId}, Item: {self.item}, Quantity: {self.quantity}, Date Added: {self.date_added}>'
     
     def __str__(self):
         return f'<Pantry: ID: {self.id}, Owner ID: {self.ownerId}, Item: {self.item}, Quantity: {self.quantity}, Date Added: {self.date_added}>'

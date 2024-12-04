@@ -204,4 +204,8 @@ def get_ingredients(imagesDirectory: str):
     # __delete_all_images(urls)
     return json.dumps(prediction, indent=4) #convert to json obj before returning
 
-print(get_ingredients("desktop/workspace/whats-for-dinner/src/app/images"))
+# Get the absolute path of the current directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Construct the path to the images directory
+file_path = os.path.join(script_dir, IMAGES_DIR)
+print(get_ingredients(file_path))

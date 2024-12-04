@@ -9,6 +9,8 @@ const tempPantry = [
   { item: "milk", qty: 2 },
 ];
 
+const BACKEND_URL = "http://127.0.0.1:8000";
+
 function EntryForm({ newTask, setNewTask, handleSubmit }) {
   return (
     <form className="input-form" onSubmit={handleSubmit}>
@@ -105,12 +107,23 @@ function Pantry() {
     }
   }
 
-  function getDB() {
+  async function getDB() { //TODO: add pantryId
     console.log("Get DB");
-    pantry.forEach((dict) =>
-      setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
-    );
-  }
+    // pantry.forEach((dict) =>
+    //   setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
+    // );
+    const pantryId = 1;
+    fetch(`${BACKEND_URL}/pantry/${pantryId}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Data: ` + data);
+      data.forEach(item => {
+        console.log(item);
+        setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
+      });
+    })
+    .catch(error => console.error("Error fetching users pantry: ", error));
+}
 
   function confirmDB() {
     console.log("Confirm DB");
