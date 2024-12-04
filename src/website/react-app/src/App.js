@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="background">
       <TitleBar
-        logoURL="./tempLogo.png"
+        logoURL="./WFD-logo.png"
         title="What's For Dinner?"
         SVG={<ChefSVG state={ChefActive} onClick={handleChefClick} />}
       />
