@@ -95,7 +95,6 @@ function Pantry() {
   };
 
   async function uploadPicture(file) {
-    // const url = URL.createObjectURL(file);
     console.log(`uploaded: ${file.name}`);
 
     try {

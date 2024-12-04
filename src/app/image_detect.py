@@ -97,6 +97,16 @@ def __gather_image_urls_from_directory(directory: str) -> list:
                 print(f"Failed to upload {filename}: {e}")
     return urls
 
+def __gather_image_from_path(file_path: str) -> str:
+    url = ""
+    if file_path.endswith((".jpg", ".png", ".jpeg", ".gif")):
+        try:
+            gyazo_url = __upload_to_gyazo(file_path)
+            url = gyazo_url
+        except Exception as e:
+            print(f"Failed to upload {file_path}: {e}")
+    return url
+
 
 def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
     """Processes an image URL using Hugging Face API and returns the response."""
@@ -187,25 +197,28 @@ def __add_dict(d1: dict, d2: dict):
     return d1
 
 #Method inteded for outside users
-def get_ingredients(imagesDirectory: str):
+def get_ingredients(fileName: str):
     """Detects image contents and returns a python dict (combines results from all files in imagesDirectory)"""
-
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, f"images\\{fileName}")
     print("Gathering image URLs from directory...")
-    urls = __gather_image_urls_from_directory(imagesDirectory)
+    print(file_path)
+    print(f"file path exists? {os.path.exists(file_path)}")
+    url = __gather_image_from_path(file_path)
     print("Detecting ingredients...")
-
-    #Add results of all pictures into one dict
-    prediction = {}
-    for url in urls:
-        result = __to_python_dict(__detect_ingredients(url, prompts[0], True) )
-        prediction = __add_dict(prediction, result)
+    
+    result = __to_python_dict(__detect_ingredients(file_path, prompts[0], True) )
+    prediction = __add_dict(prediction, result)
 
     #Delete all images from gyazo to prevent erros
-    # __delete_all_images(urls)
+    __delete_all_images(url)
     return json.dumps(prediction, indent=4) #convert to json obj before returning
 
-# Get the absolute path of the current directory
-script_dir = os.path.dirname(os.path.abspath(__file__))
-# Construct the path to the images directory
-file_path = os.path.join(script_dir, IMAGES_DIR)
-print(get_ingredients(file_path))
+
+
+# # Get the absolute path of the current directory
+# script_dir = os.path.dirname(os.path.abspath(__file__))
+# # Construct the path to the images directory
+# # file_path = os.path.join(script_dir, IMAGES_DIR)
+# file_path = os.path.join(script_dir, "images")
+# print(get_ingredients(file_path))
