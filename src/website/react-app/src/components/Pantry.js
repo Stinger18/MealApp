@@ -32,9 +32,9 @@ function EntryForm({ newTask, setNewTask, handleSubmit }) {
 
 function PantryList({ tasks, handleRemoveItem }) {
   return (
-    <ul>
+    <ul className="pantry-list">
       {tasks.map((task, index) => (
-        <li key={index}>
+        <li key={index} className="pantry-item">
           {task}
           <button onClick={() => handleRemoveItem(index)} className="del-btn">
             Delete
@@ -107,23 +107,24 @@ function Pantry() {
     }
   }
 
-  async function getDB() { //TODO: add pantryId
+  async function getDB() {
+    //TODO: add pantryId
     console.log("Get DB");
-    // pantry.forEach((dict) =>
-    //   setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
-    // );
-    const pantryId = 1;
-    fetch(`${BACKEND_URL}/pantry/${pantryId}`)
-    .then(response => response.json())
-    .then(data => {
-      console.log(`Data: ` + data);
-      data.forEach(item => {
-        console.log(item);
-        setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
-      });
-    })
-    .catch(error => console.error("Error fetching users pantry: ", error));
-}
+    pantry.forEach((dict) =>
+      setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
+    );
+    // const pantryId = 1;
+    // fetch(`${BACKEND_URL}/pantry/${pantryId}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(`Data: ` + data);
+    //     data.forEach((item) => {
+    //       console.log(item);
+    //       setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
+    //     });
+    //   })
+    //   .catch((error) => console.error("Error fetching users pantry: ", error));
+  }
 
   function confirmDB() {
     console.log("Confirm DB");

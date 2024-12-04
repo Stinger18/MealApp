@@ -59,7 +59,7 @@ function Messages() {
 
       <form
         onSubmit={handleSubmit}
-        className={"message-form"} //form-inactive class
+        className="message-form" //form-inactive class
       >
         <input
           type="text"
