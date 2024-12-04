@@ -136,25 +136,23 @@ def remove_from_pantry(pantryId: int, itemId: int, db: Session = Depends(get_db)
     return {"message": "Ingredient removed from pantry"}
 
 '''Image Detection Commands'''
-# @app.get("/image/{url}")
-# def detect_image(url: str):
-#     return get_ingredients(url)
+@app.get("/image/{url}")
+def detect_image(url: str):
+    return get_ingredients(url)
 
 
 if __name__ == "__main__":
     ''' Use this to create a test data from here '''
-    # crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
-    # testUser = crud.get_user_by_id(db=SessionLocal(), userId=1) 
+    crud.create_user(db=SessionLocal(), id=1, name="Test User", email="email@gmail.com", password="password", recipeId=1, pantryId=1, shoppingListId=1)
+    testUser = crud.get_user_by_id(db=SessionLocal(), userId=1) 
     # print(testUser)
     # itemsToAdd = {'Cream of Chicken Soup': '2', 'Cream': '2 cup'}
     # add_to_pantry(db=SessionLocal(), pantryId=1, ingredients=itemsToAdd)
-    # crud.remove_from_pantry(db=SessionLocal(), pantryId=1, itemId=2)
-    testPantry = get_pantry(db=SessionLocal(), pantryId=1)
-    print(testPantry)
-    # print(type(testPantry[0]))
+    # testPantry = crud.get_pantry(db=SessionLocal(), userPantryId=1)
+    # print(f'Pantry: {testPantry}')
 
     # crud.create_recipe(db=SessionLocal(), id=2, ownerId=1, name='Creamy Tuscan Chicken', ingredients={'Chicken': '2 lbs', 'Cream': '2 cup', 'Spinach': '1 cup'}, instructions="1. Season the chicken with salt and pepper. 2. Heat the oil in a large skillet over medium-high heat. 3. Add the chicken and cook until golden brown on both sides. 4. Remove the chicken from the skillet and set aside. 5. Add the garlic to the skillet and cook until fragrant. 6. Add the spinach and sun-dried tomatoes and cook until the spinach is wilted. 7. Add the heavy cream and parmesan cheese and bring to a simmer. 8. Return the chicken to the skillet and cook until the sauce has thickened. 9. Serve the chicken with the sauce.", servings=4, prepTime='10 minutes', cookTime='20 minutes')
     # testRecipe = get_recipe(1, 1, db=SessionLocal())
     # print(testRecipe.title)
 
-    SessionLocal().close()
+    # SessionLocal().close()

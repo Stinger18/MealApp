@@ -30,14 +30,11 @@ TEMPERATURE = 0.1
 prompts = [
     """ Identify the most noticeable food items and quantities from this image in JSON format with no other text. 
         Only identify items you are sure of. EX: 
-[{
-    item: "Orange juice", qty: 1,
-    item: "Apple", qty: 2,
-    item: "Lemons", qty: 3
-}]
+        '[{"item": "banana", "qty": 4}, {"item": "soup", "qty": 3}]'
+
 """
 ]
-
+'''[{ item: 'Orange juice', 'qty': 1 }, {'item': 'Apple', 'qty': 2}, {'item': 'Lemons', 'qty': 3}]'''
 # Initialize Hugging Face client
 client = InferenceClient(api_key=os.getenv("hfKey"))
 
@@ -112,7 +109,6 @@ def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> list[d
     """Processes an image URL using Hugging Face API and returns the response."""
     if (outputToConsole): print("\n***** Model Detecting Image *****\n")
     response_text = ""
-    response_dicts = []
     for message in client.chat_completion(
             model="meta-llama/Llama-3.2-11B-Vision-Instruct",
             messages=[
@@ -129,11 +125,11 @@ def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> list[d
             temperature=TEMPERATURE
     ):  
         if (outputToConsole): print(message.choices[0].delta.content, end="")  # Print to console
-        response_text += message.choices[0].delta.content.strip()  # Add tokens to string
-        print(f"responce message {message.choices[0].delta.content.strip()}")
-        response_dicts.append((response_text))
+        response_text += message.choices[0].delta.content  # Add tokens to string
     if (outputToConsole): print("\n***************\n")
-    return response_dicts
+
+    response_text= response_text.replace("\n", "")  # Remove newlines
+    return response_text
 
 
 def __test_prompts(urls: list[str], prompts: list[str]):

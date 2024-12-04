@@ -100,14 +100,18 @@ function Pantry() {
     try {
       const response = await fetch(`http://localhost:8000/image/${file.name}`);
       const data = await response.json();
-      console.log(data);
-      for (const dic in data) {
-        console.log(dic);
-      }
+      const parsed = JSON.parse(data);
+      const again = JSON.parse(parsed);
+      console.log(typeof again);
 
-      // for ( data.keys()) {
-      //   // setTasks((prevItems) => [`${key}, ${data[key]}`, ...prevItems]);      }
+      // console.log(typeof date);
+      // for (const [key, value] of Object.entries(parsed)) {
+      //   setTasks((prevItems) => [`${key}, ${value}`, ...prevItems]);
       // }
+
+      again.forEach((dict) =>
+        setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
+      );
     } catch (error) {
       console.error("Error:", error);
     }
