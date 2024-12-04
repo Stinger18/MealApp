@@ -32,9 +32,9 @@ function EntryForm({ newTask, setNewTask, handleSubmit }) {
 
 function PantryList({ tasks, handleRemoveItem }) {
   return (
-    <ul>
+    <ul className="pantry-list">
       {tasks.map((task, index) => (
-        <li key={index}>
+        <li key={index} className="pantry-item">
           {task}
           <button onClick={() => handleRemoveItem(index)} className="del-btn">
             Delete
@@ -95,52 +95,42 @@ function Pantry() {
   };
 
   async function uploadPicture(file) {
-    // const url = URL.createObjectURL(file);
     console.log(`uploaded: ${file.name}`);
 
     try {
       const response = await fetch(`http://localhost:8000/image/${file.name}`);
       const data = await response.json();
       console.log(data);
+      for (const dic in data) {
+        console.log(dic);
+      }
+
+      // for ( data.keys()) {
+      //   // setTasks((prevItems) => [`${key}, ${data[key]}`, ...prevItems]);      }
+      // }
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
-  async function getDB() { //TODO: add pantryId
+  async function getDB() {
+    //TODO: add pantryId
     console.log("Get DB");
-    // pantry.forEach((dict) =>
-    //   setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
-    // );
-    const pantryId = 1;
+    pantry.forEach((dict) =>
+      setTasks((prevItems) => [`${dict.item}, ${dict.qty}`, ...prevItems])
+    );
+    // const pantryId = 1;
     // fetch(`${BACKEND_URL}/pantry/${pantryId}`)
-    // .then(response => {
-    //   console.log(`Response: ` + Object.keys(response));
-    //   response.json()
-    // })
-    // // .then(data => {
-    // //   console.log(`Data: ` + data);
-    // //   data.forEach(item => {
-    // //     console.log(item);
-    // //     setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
-    // //   });
-    // })
-    // .catch(error => console.error("Error fetching users pantry: ", error));
-
-    const response = await fetch(`${BACKEND_URL}/pantry/${pantryId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    // console.log(response);
-    const data = await response.json();
-    console.log(data);
-    // data.forEach(item => {
-    //   console.log(item);
-    //   setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
-    // });
-}
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(`Data: ` + data);
+    //     data.forEach((item) => {
+    //       console.log(item);
+    //       setTasks((prevItems) => [`${item.item}, ${item.qty}`, ...prevItems]);
+    //     });
+    //   })
+    //   .catch((error) => console.error("Error fetching users pantry: ", error));
+  }
 
   function confirmDB() {
     console.log("Confirm DB");

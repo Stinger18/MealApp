@@ -31,9 +31,9 @@ prompts = [
     """ Identify the most noticeable food items and quantities from this image in JSON format with no other text. 
         Only identify items you are sure of. EX: 
 [{
-    "Orange juice": 1,
-    "Apple": 2,
-    "Lemons": 3
+    item: "Orange juice", qty: 1,
+    item: "Apple", qty: 2,
+    item: "Lemons", qty: 3
 }]
 """
 ]
@@ -97,11 +97,22 @@ def __gather_image_urls_from_directory(directory: str) -> list:
                 print(f"Failed to upload {filename}: {e}")
     return urls
 
+def __gather_image_from_path(file_path: str) -> str:
+    url = ""
+    if file_path.endswith((".jpg", ".png", ".jpeg", ".gif")):
+        try:
+            gyazo_url = __upload_to_gyazo(file_path)
+            url = gyazo_url
+        except Exception as e:
+            print(f"Failed to upload {file_path}: {e}")
+    return url
 
-def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
+
+def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> list[dict]:
     """Processes an image URL using Hugging Face API and returns the response."""
     if (outputToConsole): print("\n***** Model Detecting Image *****\n")
     response_text = ""
+    response_dicts = []
     for message in client.chat_completion(
             model="meta-llama/Llama-3.2-11B-Vision-Instruct",
             messages=[
@@ -118,9 +129,11 @@ def __detect_ingredients(url: str, prompt: str, outputToConsole: bool) -> str:
             temperature=TEMPERATURE
     ):  
         if (outputToConsole): print(message.choices[0].delta.content, end="")  # Print to console
-        response_text += message.choices[0].delta.content  # Add tokens to string
+        response_text += message.choices[0].delta.content.strip()  # Add tokens to string
+        print(f"responce message {message.choices[0].delta.content.strip()}")
+        response_dicts.append((response_text))
     if (outputToConsole): print("\n***************\n")
-    return response_text
+    return response_dicts
 
 
 def __test_prompts(urls: list[str], prompts: list[str]):
@@ -187,25 +200,28 @@ def __add_dict(d1: dict, d2: dict):
     return d1
 
 #Method inteded for outside users
-def get_ingredients(imagesDirectory: str):
+def get_ingredients(fileName: str):
     """Detects image contents and returns a python dict (combines results from all files in imagesDirectory)"""
-
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, f"images\\{fileName}")
     print("Gathering image URLs from directory...")
-    urls = __gather_image_urls_from_directory(imagesDirectory)
+    print(file_path)
+    print(f"file path exists? {os.path.exists(file_path)}")
+    url = __gather_image_from_path(file_path)
     print("Detecting ingredients...")
-
-    #Add results of all pictures into one dict
-    prediction = {}
-    for url in urls:
-        result = __to_python_dict(__detect_ingredients(url, prompts[0], True) )
-        prediction = __add_dict(prediction, result)
+    
+    result = __detect_ingredients(url, prompts[0], True)
 
     #Delete all images from gyazo to prevent erros
-    # __delete_all_images(urls)
-    return json.dumps(prediction, indent=4) #convert to json obj before returning
+    __delete_from_gyazo(url)
+    return json.dumps(result, indent=0) #convert to json obj before returning
 
-# Get the absolute path of the current directory
+
+
+# # Get the absolute path of the current directory
 # script_dir = os.path.dirname(os.path.abspath(__file__))
 # # Construct the path to the images directory
-# file_path = os.path.join(script_dir, IMAGES_DIR)
+# # file_path = os.path.join(script_dir, IMAGES_DIR)
+# file_path = os.path.join(script_dir, "images")
 # print(get_ingredients(file_path))
+# print(get_ingredients("2nd_fridge.jpg"))
