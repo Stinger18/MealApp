@@ -207,8 +207,8 @@ def get_ingredients(fileName: str):
     url = __gather_image_from_path(file_path)
     print("Detecting ingredients...")
     
-    result = __to_python_dict(__detect_ingredients(file_path, prompts[0], True) )
-    prediction = __add_dict(prediction, result)
+    result = __to_python_dict(__detect_ingredients(url, prompts[0], True) )
+    prediction = __add_dict(result)
 
     #Delete all images from gyazo to prevent erros
     __delete_all_images(url)
@@ -222,3 +222,4 @@ def get_ingredients(fileName: str):
 # # file_path = os.path.join(script_dir, IMAGES_DIR)
 # file_path = os.path.join(script_dir, "images")
 # print(get_ingredients(file_path))
+print(get_ingredients("2nd_fridge.jpg"))
