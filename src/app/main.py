@@ -20,11 +20,13 @@ try:
     from app import models, crud
     from app.database import SessionLocal, get_db, engine
     from app.agent import buildSousChef
+    from app.image_detect import get_ingredients
 except ImportError:
     from errorHandling import EmailAlreadyExists
     import models, crud
     from database import SessionLocal, get_db, engine
     from agent import buildSousChef
+    from image_detect import get_ingredients
 
 import random
 
@@ -101,6 +103,12 @@ def get_all_recipes(userRecipeId: int, db:Session = Depends(get_db)):
 
 def create_recipe(recipe: RecipeCreate, ownerId: int, db: Session = Depends(get_db)):
     return crud.create_recipe(db=db, id=len(db.query(models.Recipe).all())+1, ownerId=ownerId, title=recipe.title, ingredients=recipe.ingredients, instructions=recipe.instructions, servings=recipe.servings, prepTime=recipe.prepTime, cookTime=recipe.cookTime)
+
+
+'''Image Detection Commands'''
+@app.get("/image/{url}")
+def detect_image(url: str):
+    return get_ingredients(url)
 
 
 if __name__ == "__main__":

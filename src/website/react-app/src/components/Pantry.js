@@ -59,9 +59,16 @@ function UpdateDatabase({ getDB, confirmDB }) {
 function UploadPicture({ uploadPicture }) {
   return (
     <div className="upload-pic">
-      <button className="pic-btn" onClick={uploadPicture}>
+      <label htmlFor="file_upload" className="pic-btn">
         Upload Picture
-      </button>
+      </label>
+      <input
+        type="file"
+        onChange={uploadPicture}
+        className="pic-input"
+        accept="image/*"
+        id="file_upload"
+      />
     </div>
   );
 }
@@ -70,6 +77,7 @@ function Pantry() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [pantry, setPantry] = useState(tempPantry); //setting pantry to initial dummy pantry
+  const [fileName, setFileName] = useState("");
 
   // Handle pantry submission
   const handlePantrySubmit = (e) => {
@@ -84,8 +92,17 @@ function Pantry() {
     setTasks(tasks.filter((_, i) => i !== index));
   };
 
-  function uploadPicture() {
-    console.log("upload Picture");
+  async function uploadPicture(file) {
+    // const url = URL.createObjectURL(file);
+    console.log(`uploaded: ${file.name}`);
+
+    try {
+      const response = await fetch(`http://localhost:8000/image/${file.name}`);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 
   function getDB() {
@@ -106,9 +123,17 @@ function Pantry() {
     setTasks([]);
   }
 
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      setFileName(file.name);
+      uploadPicture(file);
+    }
+  };
+
   return (
     <>
-      <UploadPicture uploadPicture={uploadPicture} />
+      <UploadPicture uploadPicture={handleFileChange} />
       <UpdateDatabase getDB={getDB} confirmDB={confirmDB} />
       <EntryForm
         newTask={newTask}

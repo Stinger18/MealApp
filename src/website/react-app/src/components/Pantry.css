@@ -122,3 +122,7 @@ li {
   justify-content: center;
   align-items: center;
 }
+
+.pic-input {
+  display: none;
+}
