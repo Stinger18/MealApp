@@ -155,4 +155,4 @@ if __name__ == "__main__":
     # testRecipe = get_recipe(1, 1, db=SessionLocal())
     # print(testRecipe.title)
 
-    # SessionLocal().close()
+    SessionLocal().close()
